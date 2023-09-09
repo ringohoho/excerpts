@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ExcerptsView.swift
 //  excerpts
 //
 //  Created by Richard on 2023/9/9.
@@ -7,18 +7,17 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct ExcerptsView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
+            Image(systemName: "note.text")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Text("Excerpts!")
         }
-        .padding()
     }
 }
 
 #Preview {
-    MainView()
+    ExcerptsView()
 }
