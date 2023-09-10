@@ -14,39 +14,36 @@ let excerpts = [
 ]
 
 struct ExcerptsView: View {
-    @State private var showNewExcerptSheet: Bool = false
+    @State private var showNewExcerptSheet = false
 
     var body: some View {
-        NavigationStack {
-            List {
-                Button(LocalizedStringKey("New Excerpt")) {
-                    self.showNewExcerptSheet = true
-                }
-                .sheet(isPresented: $showNewExcerptSheet) {
-                    NewExcerptSheetView()
-                }
+        List {
+            Button(LocalizedStringKey("New Excerpt")) {
+                self.showNewExcerptSheet = true
+            }
+            .sheet(isPresented: $showNewExcerptSheet) {
+                NewExcerptSheetView()
+            }
 
-                ForEach(excerpts, id: \.self) { excerpt in
+            ForEach(excerpts, id: \.self) { excerpt in
+                NavigationLink(value: excerpt) {
+                    Text(excerpt)
+                        .lineLimit(3)
+                        .truncationMode(.tail)
+                }
+                .contextMenu {
                     NavigationLink(value: excerpt) {
-                        Text(excerpt)
-                            .lineLimit(3)
-                            .truncationMode(.tail)
+                        Text(LocalizedStringKey("Open"))
                     }
-                    .contextMenu {
-                        NavigationLink(value: excerpt) {
-                            Text(LocalizedStringKey("Open"))
-                        }
-                        Button(LocalizedStringKey("Edit")) {}
-                        Button(LocalizedStringKey("Share")) {}
-                    }
+                    Button(LocalizedStringKey("Edit")) {}
+                    Button(LocalizedStringKey("Share")) {}
                 }
             }
-            .navigationTitle(LocalizedStringKey("Excerpts"))
-            .navigationDestination(for: String.self) { excerpt in
-                ExcerptDetailView(excerpt)
-                    .navigationTitle(excerpt.prefix(8) + "...")
-                    .navigationBarTitleDisplayMode(.inline)
-            }
+        }
+        .navigationDestination(for: String.self) { excerpt in
+            ExcerptDetailView(excerpt)
+                .navigationTitle(excerpt.prefix(8) + "...")
+                .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

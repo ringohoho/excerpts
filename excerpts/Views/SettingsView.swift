@@ -10,10 +10,9 @@ import SwiftUI
 struct SettingsView: View {
     var body: some View {
         VStack {
-            Image(systemName: "gearshape")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Settings!")
+            List {
+                Text(LocalizedStringKey("Just a test!"))
+            }
         }
     }
 }

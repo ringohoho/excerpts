@@ -7,17 +7,40 @@
 
 import SwiftUI
 
+enum TabSelection {
+    case excerpts
+    case settings
+}
+
+func tabToTitle(_ tabSelection: TabSelection) -> LocalizedStringKey {
+    switch tabSelection {
+    case .excerpts: LocalizedStringKey("Excerpts")
+    case .settings: LocalizedStringKey("Settings")
+    }
+}
+
 struct MainView: View {
+    @State private var selection: TabSelection = .excerpts
+
+    var navTitle: LocalizedStringKey {
+        tabToTitle(self.selection)
+    }
+
     var body: some View {
-        TabView {
-            ExcerptsView()
-                .tabItem {
-                    Label(LocalizedStringKey("Excerpts"), systemImage: "note.text")
-                }
-            SettingsView()
-                .tabItem {
-                    Label(LocalizedStringKey("Settings"), systemImage: "gearshape.fill")
-                }
+        NavigationStack {
+            TabView(selection: self.$selection) {
+                ExcerptsView()
+                    .tabItem {
+                        Label(tabToTitle(.excerpts), systemImage: "note.text")
+                    }
+                    .tag(TabSelection.excerpts)
+                SettingsView()
+                    .tabItem {
+                        Label(tabToTitle(.settings), systemImage: "gearshape.fill")
+                    }
+                    .tag(TabSelection.settings)
+            }
+            .navigationTitle(self.navTitle)
         }
     }
 }
