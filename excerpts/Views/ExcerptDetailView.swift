@@ -17,8 +17,10 @@ struct ExcerptDetailView: View {
     var body: some View {
         VStack {
             Text(self.excerpt.content)
+                .font(.custom("SourceHanSerifSC-Regular", size: 18))
             Spacer()
         }
+        .padding()
     }
 }
 

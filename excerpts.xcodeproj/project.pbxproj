@@ -16,6 +16,7 @@
 		794569B82AACCD690095DCBA /* ExcerptDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569B72AACCD690095DCBA /* ExcerptDetailView.swift */; };
 		794569BA2AACCF050095DCBA /* NewExcerptSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569B92AACCF050095DCBA /* NewExcerptSheetView.swift */; };
 		794A86302AAE1C2F00CE8969 /* Excerpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794A862F2AAE1C2F00CE8969 /* Excerpt.swift */; };
+		794A86342AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,8 @@
 		794569B72AACCD690095DCBA /* ExcerptDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerptDetailView.swift; sourceTree = "<group>"; };
 		794569B92AACCF050095DCBA /* NewExcerptSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExcerptSheetView.swift; sourceTree = "<group>"; };
 		794A862F2AAE1C2F00CE8969 /* Excerpt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Excerpt.swift; sourceTree = "<group>"; };
+		794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "font_SourceHanSerifSC-Regular.otf"; sourceTree = "<group>"; };
+		794A86352AAE2DEC00CE8969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,9 +64,11 @@
 		794569A32AACB3860095DCBA /* excerpts */ = {
 			isa = PBXGroup;
 			children = (
+				794A86352AAE2DEC00CE8969 /* Info.plist */,
 				794569A42AACB3860095DCBA /* App.swift */,
 				794569B42AACBBB50095DCBA /* Views */,
 				794A862E2AAE1C2000CE8969 /* Models */,
+				794A86312AAE2D6200CE8969 /* Resources */,
 				794569A82AACB3870095DCBA /* Assets.xcassets */,
 				794569AA2AACB3870095DCBA /* Preview Content */,
 			);
@@ -96,6 +101,22 @@
 				794A862F2AAE1C2F00CE8969 /* Excerpt.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		794A86312AAE2D6200CE8969 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				794A86322AAE2D6D00CE8969 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		794A86322AAE2D6D00CE8969 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +179,7 @@
 			files = (
 				794569AC2AACB3870095DCBA /* Preview Assets.xcassets in Resources */,
 				794569A92AACB3870095DCBA /* Assets.xcassets in Resources */,
+				794A86342AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +333,7 @@
 				DEVELOPMENT_TEAM = UWR2H46NK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = excerpts/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -341,6 +364,7 @@
 				DEVELOPMENT_TEAM = UWR2H46NK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = excerpts/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
