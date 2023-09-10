@@ -8,20 +8,20 @@
 import SwiftUI
 
 struct ExcerptDetailView: View {
-    var excerpt: String
+    var excerpt: Excerpt
 
-    init(_ excerpt: String) {
+    init(_ excerpt: Excerpt) {
         self.excerpt = excerpt
     }
 
     var body: some View {
         VStack {
-            Text(self.excerpt)
+            Text(self.excerpt.content)
             Spacer()
         }
     }
 }
 
 #Preview {
-    ExcerptDetailView("Test")
+    ExcerptDetailView(excerpts[0])
 }
