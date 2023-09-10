@@ -42,7 +42,7 @@ struct ExcerptsView: View {
         }
         .navigationDestination(for: Excerpt.self) { excerpt in
             ExcerptDetailView(excerpt)
-                .navigationTitle(excerpt.content.prefix(8) + "...")
+                //                .navigationTitle(excerpt.content.prefix(8) + "...")
                 .navigationBarTitleDisplayMode(.inline)
         }
     }
