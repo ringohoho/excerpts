@@ -11,7 +11,7 @@ import SwiftUI
 struct ExcerptsApp: App {
     var body: some Scene {
         WindowGroup {
-            MainView()
+            SimpleMainView()
         }
     }
 }

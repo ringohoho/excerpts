@@ -16,6 +16,7 @@
 		794569BA2AACCF050095DCBA /* NewExcerptSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569B92AACCF050095DCBA /* NewExcerptSheetView.swift */; };
 		794A86302AAE1C2F00CE8969 /* Excerpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794A862F2AAE1C2F00CE8969 /* Excerpt.swift */; };
 		794A86342AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */; };
+		794A86372AAF4B7E00CE8969 /* SimpleMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794A86362AAF4B7E00CE8969 /* SimpleMainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		794A862F2AAE1C2F00CE8969 /* Excerpt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Excerpt.swift; sourceTree = "<group>"; };
 		794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "font_SourceHanSerifSC-Regular.otf"; sourceTree = "<group>"; };
 		794A86352AAE2DEC00CE8969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		794A86362AAF4B7E00CE8969 /* SimpleMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 		794569B42AACBBB50095DCBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				794A86362AAF4B7E00CE8969 /* SimpleMainView.swift */,
 				794569A62AACB3860095DCBA /* MainView.swift */,
 				794569B22AACBB800095DCBA /* ExcerptsView.swift */,
 				794569B72AACCD690095DCBA /* ExcerptDetailView.swift */,
@@ -190,6 +193,7 @@
 				794569A72AACB3860095DCBA /* MainView.swift in Sources */,
 				794569B82AACCD690095DCBA /* ExcerptDetailView.swift in Sources */,
 				794569A52AACB3860095DCBA /* App.swift in Sources */,
+				794A86372AAF4B7E00CE8969 /* SimpleMainView.swift in Sources */,
 				794569B32AACBB800095DCBA /* ExcerptsView.swift in Sources */,
 				794569BA2AACCF050095DCBA /* NewExcerptSheetView.swift in Sources */,
 				794A86302AAE1C2F00CE8969 /* Excerpt.swift in Sources */,
