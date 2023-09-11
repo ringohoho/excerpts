@@ -8,7 +8,7 @@
 import SwiftUI
 
 let animationDuration: CGFloat = 0.2
-let backgroundBlurRadius: CGFloat = 20
+let backgroundBlurRadius: CGFloat = 30
 
 let booksExcerptTplt = /^“([\S\s]*)”\s*摘录来自\n([^\n]+)\n([^\n]+)\n此材料受版权保护。$/
 
@@ -48,6 +48,8 @@ struct PasteSheetView: View {
 struct ShareView: View {
     @Binding var isPresented: Bool
 
+    var excerpt: Excerpt
+
     func dismiss() {
         withAnimation(.easeInOut(duration: animationDuration)) {
             self.isPresented = false
@@ -59,30 +61,46 @@ struct ShareView: View {
             VStack(spacing: 0) {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
-                        Text("Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!Hello, World!")
-                            .background(Color.red)
-                            .onTapGesture {
-                                self.dismiss()
+                        VStack(alignment: .trailing) {
+                            Text(self.excerpt.content)
+                                .font(.custom("SourceHanSerifSC-Regular", size: 18))
+                                .padding(.bottom, 10)
+
+                            if !self.excerpt.book.isEmpty {
+                                Text(self.excerpt.book)
+                                    .font(.custom("SourceHanSerifSC-Regular", size: 18))
                             }
+                            if !self.excerpt.author.isEmpty {
+                                Text(self.excerpt.author)
+                                    .font(.custom("SourceHanSerifSC-Regular", size: 18))
+                            }
+                        }
+                        .padding(20)
                     }
-                    .padding([.leading, .trailing], 10)
+                    .background(Color.white)
+                    .foregroundStyle(.black)
+                    .padding([.leading, .trailing], 15)
+//                    .padding(15)
                     .frame(width: geometry.size.width)
-                    .frame(minHeight: geometry.size.height - 40)
+                    .frame(minHeight: geometry.size.height)
+                    .onTapGesture {
+                        self.dismiss()
+                    }
                 }
 //                .background(Color.blue)
                 .onTapGesture {
                     self.dismiss()
                 }
 
-                HStack {
-                    Text("Btn1")
-                        .background(Color.purple)
-
-                    Text("Btn2")
-                        .background(Color.yellow)
-                }
-                .frame(width: geometry.size.width, height: 40)
-                .background(Color.green)
+//                HStack {
+//                    Text("Btn1")
+//                        .background(Color.purple)
+//
+//                    Text("Btn2")
+//                        .background(Color.yellow)
+//                }
+//                .frame(width: geometry.size.width, height: 40)
+//                .background(Color.green)
             }
             .padding(0)
         }
@@ -100,9 +118,8 @@ struct SimpleMainView: View {
     @State private var pasted = ""
     @State private var showBadPasteAlert = false
 
-    @State private var content = ""
-    @State private var book = ""
-    @State private var author = ""
+//    @State private var excerpt = excerpts[0]
+    @State private var excerpt = Excerpt(id: UUID(), content: "", book: "", author: "")
 
     @State private var showShareView = false
 
@@ -116,9 +133,9 @@ struct SimpleMainView: View {
         print("Pasted: \(pasted)")
 
         if let match = pasted.wholeMatch(of: booksExcerptTplt) {
-            self.content = String(match.1)
-            self.book = String(match.2)
-            self.author = String(match.3)
+            self.excerpt.content = String(match.1)
+            self.excerpt.book = String(match.2)
+            self.excerpt.author = String(match.3)
         } else {
             self.showBadPasteAlert = true
         }
@@ -140,14 +157,14 @@ struct SimpleMainView: View {
                     }
 
                     Section(header: Text(LocalizedStringKey("Content"))) {
-                        TextField(LocalizedStringKey("Please enter excerpt content here."), text: self.$content, axis: .vertical)
+                        TextField(LocalizedStringKey("Please enter excerpt content here."), text: self.$excerpt.content, axis: .vertical)
                             .lineLimit(6 ... .max)
                     }
                     Section(header: Text(LocalizedStringKey("Book"))) {
-                        TextField(LocalizedStringKey("Please enter the book name here."), text: self.$book, axis: .vertical)
+                        TextField(LocalizedStringKey("Please enter the book name here."), text: self.$excerpt.book, axis: .vertical)
                     }
                     Section(header: Text(LocalizedStringKey("Author"))) {
-                        TextField(LocalizedStringKey("Please enter the author name here."), text: self.$author, axis: .vertical)
+                        TextField(LocalizedStringKey("Please enter the author name here."), text: self.$excerpt.author, axis: .vertical)
                     }
 
                     Button(LocalizedStringKey("Share")) {
@@ -155,6 +172,7 @@ struct SimpleMainView: View {
                             self.showShareView = true
                         }
                     }
+                    .disabled(self.excerpt.content.isEmpty)
                 }
                 .scrollDismissesKeyboard(.interactively)
                 .navigationTitle(LocalizedStringKey("Excerpt"))
@@ -169,7 +187,7 @@ struct SimpleMainView: View {
             .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
 
             if self.showShareView {
-                ShareView(isPresented: self.$showShareView)
+                ShareView(isPresented: self.$showShareView, excerpt: self.excerpt)
                     .zIndex(1) // to fix animation: https://sarunw.com/posts/how-to-fix-zstack-transition-animation-in-swiftui/
                     .transition(.shareViewTrans)
             }
