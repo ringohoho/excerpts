@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		794569A12AACB3860095DCBA /* excerpts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = excerpts.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		794569A12AACB3860095DCBA /* excerpt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = excerpt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794569A42AACB3860095DCBA /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		794569A62AACB3860095DCBA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		794569A82AACB3870095DCBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -48,7 +48,7 @@
 		794569982AACB3860095DCBA = {
 			isa = PBXGroup;
 			children = (
-				794569A32AACB3860095DCBA /* excerpts */,
+				794569A32AACB3860095DCBA /* excerpt */,
 				794569A22AACB3860095DCBA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,12 +56,12 @@
 		794569A22AACB3860095DCBA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				794569A12AACB3860095DCBA /* excerpts.app */,
+				794569A12AACB3860095DCBA /* excerpt.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		794569A32AACB3860095DCBA /* excerpts */ = {
+		794569A32AACB3860095DCBA /* excerpt */ = {
 			isa = PBXGroup;
 			children = (
 				794A86352AAE2DEC00CE8969 /* Info.plist */,
@@ -72,7 +72,7 @@
 				794569A82AACB3870095DCBA /* Assets.xcassets */,
 				794569AA2AACB3870095DCBA /* Preview Content */,
 			);
-			path = excerpts;
+			path = excerpt;
 			sourceTree = "<group>";
 		};
 		794569AA2AACB3870095DCBA /* Preview Content */ = {
@@ -122,9 +122,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		794569A02AACB3860095DCBA /* excerpts */ = {
+		794569A02AACB3860095DCBA /* excerpt */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 794569AF2AACB3870095DCBA /* Build configuration list for PBXNativeTarget "excerpts" */;
+			buildConfigurationList = 794569AF2AACB3870095DCBA /* Build configuration list for PBXNativeTarget "excerpt" */;
 			buildPhases = (
 				7945699D2AACB3860095DCBA /* Sources */,
 				7945699E2AACB3860095DCBA /* Frameworks */,
@@ -134,9 +134,9 @@
 			);
 			dependencies = (
 			);
-			name = excerpts;
+			name = excerpt;
 			productName = excerpts;
-			productReference = 794569A12AACB3860095DCBA /* excerpts.app */;
+			productReference = 794569A12AACB3860095DCBA /* excerpt.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -154,7 +154,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7945699C2AACB3860095DCBA /* Build configuration list for PBXProject "excerpts" */;
+			buildConfigurationList = 7945699C2AACB3860095DCBA /* Build configuration list for PBXProject "excerpt" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -167,7 +167,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				794569A02AACB3860095DCBA /* excerpts */,
+				794569A02AACB3860095DCBA /* excerpt */,
 			);
 		};
 /* End PBXProject section */
@@ -329,11 +329,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"excerpts/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"excerpt/Preview Content\"";
 				DEVELOPMENT_TEAM = UWR2H46NK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = excerpts/Info.plist;
+				INFOPLIST_FILE = excerpt/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Excerpt;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -345,7 +346,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cc.stdrc.app.excerpts;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.stdrc.app.excerpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -360,11 +361,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"excerpts/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"excerpt/Preview Content\"";
 				DEVELOPMENT_TEAM = UWR2H46NK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = excerpts/Info.plist;
+				INFOPLIST_FILE = excerpt/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Excerpt;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -376,7 +378,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cc.stdrc.app.excerpts;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.stdrc.app.excerpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -387,7 +389,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7945699C2AACB3860095DCBA /* Build configuration list for PBXProject "excerpts" */ = {
+		7945699C2AACB3860095DCBA /* Build configuration list for PBXProject "excerpt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				794569AD2AACB3870095DCBA /* Debug */,
@@ -396,7 +398,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		794569AF2AACB3870095DCBA /* Build configuration list for PBXNativeTarget "excerpts" */ = {
+		794569AF2AACB3870095DCBA /* Build configuration list for PBXNativeTarget "excerpt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				794569B02AACB3870095DCBA /* Debug */,
