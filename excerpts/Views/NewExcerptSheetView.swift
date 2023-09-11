@@ -26,11 +26,11 @@ struct NewExcerptSheetView: View {
                     TextField(LocalizedStringKey("Please enter excerpt content here."), text: $content, axis: .vertical)
                         .lineLimit(6 ... .max)
                 }
-                Section(header: Text(LocalizedStringKey("Author"))) {
-                    TextField(LocalizedStringKey("Please enter the author name here."), text: $author, axis: .vertical)
-                }
                 Section(header: Text(LocalizedStringKey("Book"))) {
                     TextField(LocalizedStringKey("Please enter the book name here."), text: $book, axis: .vertical)
+                }
+                Section(header: Text(LocalizedStringKey("Author"))) {
+                    TextField(LocalizedStringKey("Please enter the author name here."), text: $author, axis: .vertical)
                 }
             }
             .scrollDismissesKeyboard(.interactively)

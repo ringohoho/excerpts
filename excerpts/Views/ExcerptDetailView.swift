@@ -30,5 +30,7 @@ struct ExcerptDetailView: View {
 }
 
 #Preview {
-    ExcerptDetailView(excerpts[0])
+    NavigationStack {
+        ExcerptDetailView(excerpts[0])
+    }
 }
