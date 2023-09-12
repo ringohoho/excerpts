@@ -21,10 +21,12 @@ struct PasteSheetView: View {
     var body: some View {
         NavigationStack {
             Form {
-                TextField(LocalizedStringKey("Please paste excerpt here."), text: self.$pasted, axis: .vertical)
-                    .focused(self.$focused)
-                    .lineLimit(10 ... .max)
-                    .frame(maxHeight: .infinity)
+                Section {
+                    TextField(LocalizedStringKey("Please paste excerpt here."), text: self.$pasted, axis: .vertical)
+                        .focused(self.$focused)
+                        .lineLimit(10 ... .max)
+                        .frame(maxHeight: .infinity)
+                }
             }
             .navigationTitle(LocalizedStringKey("Paste from Books"))
             .navigationBarTitleDisplayMode(.inline)
@@ -173,15 +175,17 @@ struct SimpleMainView: View {
         ZStack {
             NavigationStack {
                 Form {
-                    Button(LocalizedStringKey("Paste from Books")) {
-                        self.pasted = ""
-                        self.showPasteSheet = true
-                    }
-                    .sheet(isPresented: self.$showPasteSheet, onDismiss: self.handlePasted) {
-                        PasteSheetView(pasted: self.$pasted)
-                    }
-                    .alert(LocalizedStringKey("Not a valid excerpt from Books."), isPresented: self.$showBadPasteAlert) {
-                        Button(LocalizedStringKey("OK"), role: .cancel) {}
+                    Section {
+                        Button(LocalizedStringKey("Paste from Books")) {
+                            self.pasted = ""
+                            self.showPasteSheet = true
+                        }
+                        .sheet(isPresented: self.$showPasteSheet, onDismiss: self.handlePasted) {
+                            PasteSheetView(pasted: self.$pasted)
+                        }
+                        .alert(LocalizedStringKey("Not a valid excerpt from Books."), isPresented: self.$showBadPasteAlert) {
+                            Button(LocalizedStringKey("OK"), role: .cancel) {}
+                        }
                     }
 
                     Section(header: Text(LocalizedStringKey("Content"))) {
@@ -198,10 +202,12 @@ struct SimpleMainView: View {
                             .focused(self.$focusedFormField, equals: .author)
                     }
 
-                    Button(LocalizedStringKey("Share")) {
-                        self.showShareView = true
+                    Section {
+                        Button(LocalizedStringKey("Share")) {
+                            self.showShareView = true
+                        }
+                        .disabled(self.excerpt.content.isEmpty)
                     }
-                    .disabled(self.excerpt.content.isEmpty)
                 }
                 .navigationTitle(LocalizedStringKey("Excerpt"))
                 .scrollDismissesKeyboard(.interactively)
