@@ -51,9 +51,7 @@ struct ShareView: View {
     var excerpt: Excerpt
 
     func dismiss() {
-        withAnimation(.easeInOut(duration: animationDuration)) {
-            self.isPresented = false
-        }
+        self.isPresented = false
     }
 
     var body: some View {
@@ -168,9 +166,7 @@ struct SimpleMainView: View {
                     }
 
                     Button(LocalizedStringKey("Share")) {
-                        withAnimation(.easeInOut(duration: animationDuration)) {
-                            self.showShareView = true
-                        }
+                        self.showShareView = true
                     }
                     .disabled(self.excerpt.content.isEmpty)
                 }
@@ -192,6 +188,7 @@ struct SimpleMainView: View {
                     .transition(.shareViewTrans)
             }
         }
+        .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
     }
 }
 
