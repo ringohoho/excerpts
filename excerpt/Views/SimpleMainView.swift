@@ -116,10 +116,17 @@ struct SimpleMainView: View {
     @State private var pasted = ""
     @State private var showBadPasteAlert = false
 
-//    @State private var excerpt = excerpts[0]
-    @State private var excerpt = Excerpt(id: UUID(), content: "", book: "", author: "")
+    @State private var excerpt: Excerpt
 
     @State private var showShareView = false
+
+    init() {
+        _excerpt = State(initialValue: Excerpt(id: UUID(), content: "", book: "", author: ""))
+    }
+
+    init(_ initialExcerpt: Excerpt) {
+        _excerpt = State(initialValue: initialExcerpt)
+    }
 
     func handlePasted() {
         let pasted = self.pasted
@@ -192,6 +199,10 @@ struct SimpleMainView: View {
     }
 }
 
-#Preview {
+#Preview("Empty") {
     SimpleMainView()
+}
+
+#Preview("With Content") {
+    SimpleMainView(excerpts[0])
 }
