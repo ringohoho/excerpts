@@ -182,11 +182,7 @@ struct SimpleMainView: View {
             }
             .allowsHitTesting(!self.showShareView)
             // another way to blur: https://stackoverflow.com/a/59111492
-            .blur(radius: { if self.showShareView {
-                backgroundBlurRadius
-            } else {
-                0
-            } }())
+            .blur(radius: self.showShareView ? backgroundBlurRadius : 0)
             .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
 
             if self.showShareView {
