@@ -149,8 +149,9 @@ struct SimpleMainView: View {
         _excerpt = State(initialValue: Excerpt(id: UUID(), content: "", book: "", author: ""))
     }
 
-    init(_ initialExcerpt: Excerpt) {
+    init(_ initialExcerpt: Excerpt, sharing: Bool) {
         _excerpt = State(initialValue: initialExcerpt)
+        _showShareView = State(initialValue: sharing)
     }
 
     func handlePasted() {
@@ -238,5 +239,9 @@ struct SimpleMainView: View {
 }
 
 #Preview("With Content") {
-    SimpleMainView(excerpts[0])
+    SimpleMainView(excerpts[0], sharing: false)
+}
+
+#Preview("Share") {
+    SimpleMainView(excerpts[0], sharing: true)
 }
