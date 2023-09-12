@@ -16,14 +16,16 @@ struct PasteSheetView: View {
     @Environment(\.dismiss) var dismiss
     @Binding var pasted: String
 
+    @FocusState private var focused: Bool
+
     var body: some View {
         NavigationStack {
             Form {
                 TextField(LocalizedStringKey("Please paste excerpt here."), text: self.$pasted, axis: .vertical)
+                    .focused(self.$focused)
                     .lineLimit(10 ... .max)
                     .frame(maxHeight: .infinity)
             }
-            .scrollDismissesKeyboard(.interactively)
             .navigationTitle(LocalizedStringKey("Paste from Books"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -40,9 +42,23 @@ struct PasteSheetView: View {
                     .disabled(self.pasted.isEmpty)
                 }
             }
+            .scrollDismissesKeyboard(.interactively)
+            .onAppear {
+                self.focused = true
+            }
         }
         .interactiveDismissDisabled()
     }
+}
+
+#Preview("Paste") {
+    struct PreviewView: View {
+        @State var pasted = ""
+        var body: some View {
+            PasteSheetView(pasted: self.$pasted)
+        }
+    }
+    return PreviewView()
 }
 
 struct ShareView: View {
@@ -78,7 +94,6 @@ struct ShareView: View {
                     .background(Color.white)
                     .foregroundStyle(.black)
                     .padding([.leading, .trailing], 15)
-//                    .padding(15)
                     .frame(width: geometry.size.width)
                     .frame(minHeight: geometry.size.height)
                     .onTapGesture {
@@ -117,6 +132,14 @@ struct SimpleMainView: View {
     @State private var showBadPasteAlert = false
 
     @State private var excerpt: Excerpt
+
+    enum ExcerptFormField {
+        case content
+        case book
+        case author
+    }
+
+    @FocusState private var focusedFormField: ExcerptFormField?
 
     @State private var showShareView = false
 
@@ -163,13 +186,16 @@ struct SimpleMainView: View {
 
                     Section(header: Text(LocalizedStringKey("Content"))) {
                         TextField(LocalizedStringKey("Please enter excerpt content here."), text: self.$excerpt.content, axis: .vertical)
+                            .focused(self.$focusedFormField, equals: .content)
                             .lineLimit(6 ... .max)
                     }
                     Section(header: Text(LocalizedStringKey("Book"))) {
                         TextField(LocalizedStringKey("Please enter the book name here."), text: self.$excerpt.book, axis: .vertical)
+                            .focused(self.$focusedFormField, equals: .book)
                     }
                     Section(header: Text(LocalizedStringKey("Author"))) {
                         TextField(LocalizedStringKey("Please enter the author name here."), text: self.$excerpt.author, axis: .vertical)
+                            .focused(self.$focusedFormField, equals: .author)
                     }
 
                     Button(LocalizedStringKey("Share")) {
@@ -177,8 +203,14 @@ struct SimpleMainView: View {
                     }
                     .disabled(self.excerpt.content.isEmpty)
                 }
-                .scrollDismissesKeyboard(.interactively)
                 .navigationTitle(LocalizedStringKey("Excerpt"))
+                .scrollDismissesKeyboard(.interactively)
+                .onAppear {
+                    self.focusedFormField = .content
+                }
+//                .onTapGesture {
+//                    self.focusedFormField = nil
+//                }
             }
             .allowsHitTesting(!self.showShareView)
             // another way to blur: https://stackoverflow.com/a/59111492
