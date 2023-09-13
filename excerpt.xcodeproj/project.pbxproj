@@ -23,12 +23,8 @@
 /* Begin PBXFileReference section */
 		794569A12AACB3860095DCBA /* excerpt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = excerpt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794569A42AACB3860095DCBA /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
-		794569A62AACB3860095DCBA /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		794569A82AACB3870095DCBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		794569AB2AACB3870095DCBA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		794569B22AACBB800095DCBA /* ExcerptsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerptsView.swift; sourceTree = "<group>"; };
-		794569B72AACCD690095DCBA /* ExcerptDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerptDetailView.swift; sourceTree = "<group>"; };
-		794569B92AACCF050095DCBA /* NewExcerptSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewExcerptSheetView.swift; sourceTree = "<group>"; };
 		794A862F2AAE1C2F00CE8969 /* Excerpt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Excerpt.swift; sourceTree = "<group>"; };
 		794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "font_SourceHanSerifSC-Regular.otf"; sourceTree = "<group>"; };
 		794A86352AAE2DEC00CE8969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -78,7 +74,6 @@
 				794A86312AAE2D6200CE8969 /* Resources */,
 				794569A82AACB3870095DCBA /* Assets.xcassets */,
 				794569AA2AACB3870095DCBA /* Preview Content */,
-				7993A3C52AB0BEE60050EAB3 /* NotUsed */,
 			);
 			path = excerpt;
 			sourceTree = "<group>";
@@ -126,17 +121,6 @@
 				794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		7993A3C52AB0BEE60050EAB3 /* NotUsed */ = {
-			isa = PBXGroup;
-			children = (
-				794569A62AACB3860095DCBA /* MainView.swift */,
-				794569B22AACBB800095DCBA /* ExcerptsView.swift */,
-				794569B72AACCD690095DCBA /* ExcerptDetailView.swift */,
-				794569B92AACCF050095DCBA /* NewExcerptSheetView.swift */,
-			);
-			path = NotUsed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
