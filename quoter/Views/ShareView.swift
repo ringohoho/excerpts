@@ -57,7 +57,7 @@ struct Card: View {
             HStack {
                 VStack(spacing: self.contentVertOuterPadding) {
                     VStack(spacing: self.fontSizeContent) {
-                        ForEach(self.quoteContent.components(separatedBy: "\n"), id: \.self) { paragraph in
+                        ForEach(Array(self.quoteContent.components(separatedBy: "\n").enumerated()), id: \.offset) { _, paragraph in
                             let p = paragraph.trimmingCharacters(in: .whitespaces)
                             if !p.isEmpty {
                                 Text(p)
