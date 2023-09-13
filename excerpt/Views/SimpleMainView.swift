@@ -1,6 +1,6 @@
 //
 //  SimpleMainView.swift
-//  excerpts
+//  excerpt
 //
 //  Created by Richard on 2023/9/11.
 //

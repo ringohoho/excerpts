@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  excerpts
+//  excerpt
 //
 //  Created by Richard on 2023/9/9.
 //
