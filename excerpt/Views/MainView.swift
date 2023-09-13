@@ -8,7 +8,7 @@
 import SwiftUI
 
 let animationDuration: CGFloat = 0.2
-let backgroundBlurRadius: CGFloat = 30
+let backgroundBlurRadius: CGFloat = 20
 
 let booksExcerptTplt = /^“([\S\s]*)”\s*摘录来自\n([^\n]+)\n([^\n]+)\n此材料受版权保护。$/
 
@@ -107,6 +107,7 @@ struct MainView: View {
             .allowsHitTesting(!self.showShareView)
             // another way to blur: https://stackoverflow.com/a/59111492
             .blur(radius: self.showShareView ? backgroundBlurRadius : 0)
+            .overlay(self.showShareView ? Color.gray.opacity(0.1) : Color.clear)
             .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
 
             if self.showShareView {
