@@ -37,29 +37,52 @@ struct Card: View {
         (self.rectInnerWidth - self.contentWidth) / 2
     }
 
+    private var quoteContent: String {
+        self.quote.content.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var quoteAuthor: String {
+        self.quote.author
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacing("\n", with: " ")
+    }
+
+    private var quoteBook: String {
+        self.quote.book.trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacing("\n", with: " ")
+    }
+
     var body: some View {
         VStack {
             HStack {
-                VStack {
-                    Text(self.quote.content)
-                        .font(.custom(self.fontName, size: self.fontSizeContent))
-                        .foregroundColor(self.colorContent)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.bottom, self.fontSizeContent)
-
-                    if !self.quote.author.isEmpty {
-                        Text("— \(self.quote.author)")
-                            .font(.custom(self.fontName, size: self.fontSizeFrom))
-                            .foregroundColor(self.colorFrom)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .multilineTextAlignment(.trailing)
+                VStack(spacing: self.contentVertOuterPadding) {
+                    VStack(spacing: self.fontSizeContent) {
+                        ForEach(self.quoteContent.components(separatedBy: "\n"), id: \.self) { paragraph in
+                            let p = paragraph.trimmingCharacters(in: .whitespaces)
+                            if !p.isEmpty {
+                                Text(p)
+                                    .font(.custom(self.fontName, size: self.fontSizeContent))
+                                    .foregroundColor(self.colorContent)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            }
+                        }
                     }
-                    if !self.quote.book.isEmpty {
-                        Text(self.quote.book)
-                            .font(.custom(self.fontName, size: self.fontSizeFrom))
-                            .foregroundColor(self.colorFrom)
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .multilineTextAlignment(.trailing)
+
+                    VStack(spacing: self.fontSizeFrom / 4) {
+                        if !self.quoteAuthor.isEmpty {
+                            Text("— \(self.quote.author)")
+                                .font(.custom(self.fontName, size: self.fontSizeFrom))
+                                .foregroundColor(self.colorFrom)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .multilineTextAlignment(.trailing)
+                        }
+                        if !self.quoteBook.isEmpty {
+                            Text(self.quote.book)
+                                .font(.custom(self.fontName, size: self.fontSizeFrom))
+                                .foregroundColor(self.colorFrom)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                .multilineTextAlignment(.trailing)
+                        }
                     }
                 }
                 .padding([.leading, .trailing], self.contentVertOuterPadding)
