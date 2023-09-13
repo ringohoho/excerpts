@@ -22,23 +22,23 @@ struct PasteSheetView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Please paste excerpt here.", text: self.$pasted, axis: .vertical)
+                    TextField("PASTE_VIEW_TEXT_PLACEHOLDER", text: self.$pasted, axis: .vertical)
                         .focused(self.$focused)
                         .lineLimit(10 ... .max)
                         .frame(maxHeight: .infinity)
                 }
             }
-            .navigationTitle("Paste from Books")
+            .navigationTitle("PASTE_VIEW_TITLE")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
+                    Button("A_CANCEL") {
                         self.pasted = ""
                         self.dismiss()
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Done") {
+                    Button("A_DONE") {
                         self.dismiss()
                     }
                     .disabled(self.pasted.isEmpty)
@@ -177,40 +177,40 @@ struct SimpleMainView: View {
             NavigationStack {
                 Form {
                     Section {
-                        Button("Paste from Books") {
+                        Button("BTN_PASTE_FROM_APPLE_BOOKS") {
                             self.pasted = ""
                             self.showPasteSheet = true
                         }
                         .sheet(isPresented: self.$showPasteSheet, onDismiss: self.handlePasted) {
                             PasteSheetView(pasted: self.$pasted)
                         }
-                        .alert("Not a valid excerpt from Books.", isPresented: self.$showBadPasteAlert) {
-                            Button("OK", role: .cancel) {}
+                        .alert("ALRT_INVALID_APPLE_BOOKS_EXCERPT", isPresented: self.$showBadPasteAlert) {
+                            Button("A_OK", role: .cancel) {}
                         }
                     }
 
-                    Section(header: Text("Content")) {
-                        TextField("Please enter excerpt content here.", text: self.$excerpt.content, axis: .vertical)
+                    Section(header: Text("EXCERPT_CONTENT")) {
+                        TextField("FORM_CONTENT_PLACEHOLDER", text: self.$excerpt.content, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .content)
                             .lineLimit(6 ... .max)
                     }
-                    Section(header: Text("Book")) {
-                        TextField("Please enter the book name here.", text: self.$excerpt.book, axis: .vertical)
+                    Section(header: Text("EXCERPT_BOOK")) {
+                        TextField("FORM_BOOK_PLACEHOLDER", text: self.$excerpt.book, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .book)
                     }
-                    Section(header: Text("Author")) {
-                        TextField("Please enter the author name here.", text: self.$excerpt.author, axis: .vertical)
+                    Section(header: Text("EXCERPT_AUTHOR")) {
+                        TextField("FORM_AUTHOR_PLACEHOLDER", text: self.$excerpt.author, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .author)
                     }
 
                     Section {
-                        Button("Share") {
+                        Button("A_Share") {
                             self.showShareView = true
                         }
                         .disabled(self.excerpt.content.isEmpty)
                     }
                 }
-                .navigationTitle("Excerpt")
+                .navigationTitle("MAIN_VIEW_TITLE")
                 .scrollDismissesKeyboard(.interactively)
                 .onAppear {
                     self.focusedFormField = .content

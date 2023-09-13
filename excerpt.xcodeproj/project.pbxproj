@@ -3,20 +3,18 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		794569A52AACB3860095DCBA /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569A42AACB3860095DCBA /* App.swift */; };
-		794569A72AACB3860095DCBA /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569A62AACB3860095DCBA /* MainView.swift */; };
 		794569A92AACB3870095DCBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794569A82AACB3870095DCBA /* Assets.xcassets */; };
 		794569AC2AACB3870095DCBA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794569AB2AACB3870095DCBA /* Preview Assets.xcassets */; };
-		794569B32AACBB800095DCBA /* ExcerptsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569B22AACBB800095DCBA /* ExcerptsView.swift */; };
-		794569B82AACCD690095DCBA /* ExcerptDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569B72AACCD690095DCBA /* ExcerptDetailView.swift */; };
-		794569BA2AACCF050095DCBA /* NewExcerptSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569B92AACCF050095DCBA /* NewExcerptSheetView.swift */; };
 		794A86302AAE1C2F00CE8969 /* Excerpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794A862F2AAE1C2F00CE8969 /* Excerpt.swift */; };
 		794A86342AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */; };
 		794A86372AAF4B7E00CE8969 /* SimpleMainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794A86362AAF4B7E00CE8969 /* SimpleMainView.swift */; };
+		7993A3C92AB1ACEF0050EAB3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7993A3C82AB1ACEF0050EAB3 /* Localizable.xcstrings */; };
+		7993A3CD2AB1B8AF0050EAB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7993A3CF2AB1B8AF0050EAB3 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +30,9 @@
 		794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "font_SourceHanSerifSC-Regular.otf"; sourceTree = "<group>"; };
 		794A86352AAE2DEC00CE8969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		794A86362AAF4B7E00CE8969 /* SimpleMainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMainView.swift; sourceTree = "<group>"; };
+		7993A3C82AB1ACEF0050EAB3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		7993A3CE2AB1B8AF0050EAB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7993A3D02AB1B8B30050EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +66,8 @@
 			isa = PBXGroup;
 			children = (
 				794A86352AAE2DEC00CE8969 /* Info.plist */,
+				7993A3CF2AB1B8AF0050EAB3 /* InfoPlist.strings */,
+				7993A3C82AB1ACEF0050EAB3 /* Localizable.xcstrings */,
 				794569A42AACB3860095DCBA /* App.swift */,
 				794569B42AACBBB50095DCBA /* Views */,
 				794A862E2AAE1C2000CE8969 /* Models */,
@@ -163,12 +166,13 @@
 				};
 			};
 			buildConfigurationList = 7945699C2AACB3860095DCBA /* Build configuration list for PBXProject "excerpt" */;
-			compatibilityVersion = "Xcode 14.0";
+			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 794569982AACB3860095DCBA;
 			productRefGroup = 794569A22AACB3860095DCBA /* Products */;
@@ -186,7 +190,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				794569AC2AACB3870095DCBA /* Preview Assets.xcassets in Resources */,
+				7993A3CD2AB1B8AF0050EAB3 /* InfoPlist.strings in Resources */,
 				794569A92AACB3870095DCBA /* Assets.xcassets in Resources */,
+				7993A3C92AB1ACEF0050EAB3 /* Localizable.xcstrings in Resources */,
 				794A86342AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -198,17 +204,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				794569A72AACB3860095DCBA /* MainView.swift in Sources */,
-				794569B82AACCD690095DCBA /* ExcerptDetailView.swift in Sources */,
 				794569A52AACB3860095DCBA /* App.swift in Sources */,
 				794A86372AAF4B7E00CE8969 /* SimpleMainView.swift in Sources */,
-				794569B32AACBB800095DCBA /* ExcerptsView.swift in Sources */,
-				794569BA2AACCF050095DCBA /* NewExcerptSheetView.swift in Sources */,
 				794A86302AAE1C2F00CE8969 /* Excerpt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		7993A3CF2AB1B8AF0050EAB3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7993A3CE2AB1B8AF0050EAB3 /* en */,
+				7993A3D02AB1B8B30050EAB3 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		794569AD2AACB3870095DCBA /* Debug */ = {
