@@ -80,18 +80,42 @@ struct ShareView: View {
                         VStack(alignment: .trailing) {
                             Text(self.excerpt.content)
                                 .font(.custom("SourceHanSerifSC-Regular", size: 18))
+                                .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.bottom, 10)
 
                             if !self.excerpt.book.isEmpty {
                                 Text(self.excerpt.book)
                                     .font(.custom("SourceHanSerifSC-Regular", size: 18))
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                             if !self.excerpt.author.isEmpty {
                                 Text(self.excerpt.author)
                                     .font(.custom("SourceHanSerifSC-Regular", size: 18))
+                                    .padding(.trailing, 2)
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
                             }
+
+//                            HStack(spacing: 0) {
+//                                Spacer()
+//
+//                                Text("——")
+//                                    .font(.custom("SourceHanSerifSC-Regular", size: 18))
+//                                    .padding(.trailing, 6)
+//
+//                                if !self.excerpt.author.isEmpty {
+//                                    Text(self.excerpt.author)
+//                                        .font(.custom("SourceHanSerifSC-Regular", size: 18))
+//                                        .padding(.trailing, 2)
+//                                }
+//                                if !self.excerpt.book.isEmpty {
+//                                    Text("《\(self.excerpt.book)》")
+//                                        .font(.custom("SourceHanSerifSC-Regular", size: 18))
+//                                }
+//                            }
+//                            .frame(maxWidth: .infinity)
                         }
-                        .padding(20)
+                        .frame(maxWidth: .infinity)
+                        .padding(18)
                     }
                     .background(Color.white)
                     .foregroundStyle(.black)
@@ -180,6 +204,7 @@ struct SimpleMainView: View {
                         Button("BTN_PASTE_FROM_APPLE_BOOKS") {
                             self.pasted = ""
                             self.showPasteSheet = true
+                            self.focusedFormField = nil
                         }
                         .sheet(isPresented: self.$showPasteSheet, onDismiss: self.handlePasted) {
                             PasteSheetView(pasted: self.$pasted)
@@ -212,12 +237,6 @@ struct SimpleMainView: View {
                 }
                 .navigationTitle("MAIN_VIEW_TITLE")
                 .scrollDismissesKeyboard(.interactively)
-                .onAppear {
-                    self.focusedFormField = .content
-                }
-//                .onTapGesture {
-//                    self.focusedFormField = nil
-//                }
             }
             .allowsHitTesting(!self.showShareView)
             // another way to blur: https://stackoverflow.com/a/59111492
@@ -244,4 +263,12 @@ struct SimpleMainView: View {
 
 #Preview("Share") {
     SimpleMainView(excerpts[0], sharing: true)
+}
+
+#Preview("Share Short") {
+    SimpleMainView(Excerpt(id: UUID(), content: "你好。", book: "一本书", author: "谁"), sharing: true)
+}
+
+#Preview("Share Long") {
+    SimpleMainView(Excerpt(id: UUID(), content: "你好。", book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name"), sharing: true)
 }
