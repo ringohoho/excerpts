@@ -92,13 +92,21 @@ struct ShareView: View {
 
 #Preview("Share Dark") {
     MainView(excerpts[0], sharing: true)
+        .environment(\.locale, .init(identifier: "zh-Hans"))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Share Short Light") {
     MainView(Excerpt(id: UUID(), content: "你好。", book: "一本书", author: "谁"), sharing: true)
+        .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
 #Preview("Share Long") {
-    MainView(Excerpt(id: UUID(), content: excerpts[0].content + "\n" + excerpts[0].content, book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name"), sharing: true)
+    MainView(Excerpt(id: UUID(), content: excerpts[0].content + "\n" + excerpts[0].content, book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多"), sharing: true)
+        .environment(\.locale, .init(identifier: "zh-Hans"))
+}
+
+#Preview("Share English") {
+    MainView(Excerpt(id: UUID(), content: "Do not feel envious of the happiness of those who live in a fool's paradise, for only a fool will think that it is happiness.", book: "The Ten Commandments", author: "Bertrand Russell"), sharing: true)
+        .environment(\.locale, .init(identifier: "en"))
 }

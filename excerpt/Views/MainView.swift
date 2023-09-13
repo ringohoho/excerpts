@@ -39,7 +39,7 @@ struct MainView: View {
         _excerpt = State(initialValue: Excerpt(id: UUID(), content: "", book: "", author: ""))
     }
 
-    init(_ initialExcerpt: Excerpt, sharing: Bool) {
+    init(_ initialExcerpt: Excerpt, sharing: Bool = false) {
         _excerpt = State(initialValue: initialExcerpt)
         _showShareView = State(initialValue: sharing)
     }
@@ -125,5 +125,5 @@ struct MainView: View {
 }
 
 #Preview("With Content") {
-    MainView(excerpts[0], sharing: false)
+    MainView(excerpts[0])
 }
