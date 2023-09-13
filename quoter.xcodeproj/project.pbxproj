@@ -10,7 +10,7 @@
 		794569A52AACB3860095DCBA /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569A42AACB3860095DCBA /* App.swift */; };
 		794569A92AACB3870095DCBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794569A82AACB3870095DCBA /* Assets.xcassets */; };
 		794569AC2AACB3870095DCBA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794569AB2AACB3870095DCBA /* Preview Assets.xcassets */; };
-		794A86302AAE1C2F00CE8969 /* Excerpt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794A862F2AAE1C2F00CE8969 /* Excerpt.swift */; };
+		794A86302AAE1C2F00CE8969 /* Quote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794A862F2AAE1C2F00CE8969 /* Quote.swift */; };
 		794A86342AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */; };
 		794A86372AAF4B7E00CE8969 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794A86362AAF4B7E00CE8969 /* MainView.swift */; };
 		7988C2D22AB1F9EC00F20252 /* PasteSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988C2D12AB1F9EC00F20252 /* PasteSheetView.swift */; };
@@ -21,11 +21,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		794569A12AACB3860095DCBA /* excerpt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = excerpt.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		794569A12AACB3860095DCBA /* quoter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = quoter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794569A42AACB3860095DCBA /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		794569A82AACB3870095DCBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		794569AB2AACB3870095DCBA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		794A862F2AAE1C2F00CE8969 /* Excerpt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Excerpt.swift; sourceTree = "<group>"; };
+		794A862F2AAE1C2F00CE8969 /* Quote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quote.swift; sourceTree = "<group>"; };
 		794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "font_SourceHanSerifSC-Regular.otf"; sourceTree = "<group>"; };
 		794A86352AAE2DEC00CE8969 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		794A86362AAF4B7E00CE8969 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -51,7 +51,7 @@
 		794569982AACB3860095DCBA = {
 			isa = PBXGroup;
 			children = (
-				794569A32AACB3860095DCBA /* excerpt */,
+				794569A32AACB3860095DCBA /* quoter */,
 				794569A22AACB3860095DCBA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -59,12 +59,12 @@
 		794569A22AACB3860095DCBA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				794569A12AACB3860095DCBA /* excerpt.app */,
+				794569A12AACB3860095DCBA /* quoter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		794569A32AACB3860095DCBA /* excerpt */ = {
+		794569A32AACB3860095DCBA /* quoter */ = {
 			isa = PBXGroup;
 			children = (
 				794A86352AAE2DEC00CE8969 /* Info.plist */,
@@ -75,7 +75,7 @@
 				794569A82AACB3870095DCBA /* Assets.xcassets */,
 				794569AA2AACB3870095DCBA /* Preview Content */,
 			);
-			path = excerpt;
+			path = quoter;
 			sourceTree = "<group>";
 		};
 		794569AA2AACB3870095DCBA /* Preview Content */ = {
@@ -100,7 +100,7 @@
 		794A862E2AAE1C2000CE8969 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				794A862F2AAE1C2F00CE8969 /* Excerpt.swift */,
+				794A862F2AAE1C2F00CE8969 /* Quote.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -126,9 +126,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		794569A02AACB3860095DCBA /* excerpt */ = {
+		794569A02AACB3860095DCBA /* quoter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 794569AF2AACB3870095DCBA /* Build configuration list for PBXNativeTarget "excerpt" */;
+			buildConfigurationList = 794569AF2AACB3870095DCBA /* Build configuration list for PBXNativeTarget "quoter" */;
 			buildPhases = (
 				7945699D2AACB3860095DCBA /* Sources */,
 				7945699E2AACB3860095DCBA /* Frameworks */,
@@ -138,9 +138,9 @@
 			);
 			dependencies = (
 			);
-			name = excerpt;
+			name = quoter;
 			productName = excerpts;
-			productReference = 794569A12AACB3860095DCBA /* excerpt.app */;
+			productReference = 794569A12AACB3860095DCBA /* quoter.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -158,7 +158,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 7945699C2AACB3860095DCBA /* Build configuration list for PBXProject "excerpt" */;
+			buildConfigurationList = 7945699C2AACB3860095DCBA /* Build configuration list for PBXProject "quoter" */;
 			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -172,7 +172,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				794569A02AACB3860095DCBA /* excerpt */,
+				794569A02AACB3860095DCBA /* quoter */,
 			);
 		};
 /* End PBXProject section */
@@ -202,7 +202,7 @@
 				794569A52AACB3860095DCBA /* App.swift in Sources */,
 				794A86372AAF4B7E00CE8969 /* MainView.swift in Sources */,
 				7988C2D22AB1F9EC00F20252 /* PasteSheetView.swift in Sources */,
-				794A86302AAE1C2F00CE8969 /* Excerpt.swift in Sources */,
+				794A86302AAE1C2F00CE8969 /* Quote.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,12 +347,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"excerpt/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"quoter/Preview Content\"";
 				DEVELOPMENT_TEAM = UWR2H46NK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = excerpt/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Excerpt;
+				INFOPLIST_FILE = quoter/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Quote;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -364,7 +364,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cc.stdrc.app.excerpt;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.stdrc.app.quoter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -381,12 +381,12 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"excerpt/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"quoter/Preview Content\"";
 				DEVELOPMENT_TEAM = UWR2H46NK6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = excerpt/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Excerpt;
+				INFOPLIST_FILE = quoter/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Quote;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -398,7 +398,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = cc.stdrc.app.excerpt;
+				PRODUCT_BUNDLE_IDENTIFIER = cc.stdrc.app.quoter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -411,7 +411,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7945699C2AACB3860095DCBA /* Build configuration list for PBXProject "excerpt" */ = {
+		7945699C2AACB3860095DCBA /* Build configuration list for PBXProject "quoter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				794569AD2AACB3870095DCBA /* Debug */,
@@ -420,7 +420,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		794569AF2AACB3870095DCBA /* Build configuration list for PBXNativeTarget "excerpt" */ = {
+		794569AF2AACB3870095DCBA /* Build configuration list for PBXNativeTarget "quoter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				794569B02AACB3870095DCBA /* Debug */,

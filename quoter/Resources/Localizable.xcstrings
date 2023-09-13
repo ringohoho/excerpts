@@ -86,13 +86,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "The excerpt pasted from Apple Books seems not a valid one."
+            "value" : "The pasted text seems not to be from Apple Books."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "粘贴的摘录似乎不是来自 Apple Books 的。"
+            "value" : "粘贴的文本似乎不是来自 Apple Books 的。"
           }
         }
       }
@@ -109,54 +109,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "从 Apple Books 粘贴"
-          }
-        }
-      }
-    },
-    "EXCERPT_AUTHOR" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "作者"
-          }
-        }
-      }
-    },
-    "EXCERPT_BOOK" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Book"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "书名"
-          }
-        }
-      }
-    },
-    "EXCERPT_CONTENT" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Content"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "内容"
           }
         }
       }
@@ -198,7 +150,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter excerpt content here"
+            "value" : "Enter quote content here"
           }
         },
         "zh-Hans" : {
@@ -214,7 +166,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Excerpt"
+            "value" : "Quoter"
           }
         },
         "zh-Hans" : {
@@ -230,13 +182,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Paste excerpt copied from Apple Books here"
+            "value" : "Paste text copied from Apple Books here (no need to modify)"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在这里粘贴从 Apple Books 拷贝的摘录"
+            "value" : "在这里粘贴从 Apple Books 拷贝的文本（不需要修改）"
           }
         }
       }
@@ -253,6 +205,54 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "从 Apple Books 粘贴"
+          }
+        }
+      }
+    },
+    "QUOTE_AUTHOR" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Author"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "作者"
+          }
+        }
+      }
+    },
+    "QUOTE_BOOK" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Book"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "书名"
+          }
+        }
+      }
+    },
+    "QUOTE_CONTENT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Content"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "内容"
           }
         }
       }

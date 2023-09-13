@@ -1,6 +1,6 @@
 //
 //  App.swift
-//  excerpt
+//  quoter
 //
 //  Created by Richard on 2023/9/9.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct ExcerptApp: App {
+struct QuoterApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()

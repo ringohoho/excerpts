@@ -1,6 +1,6 @@
 //
 //  ColorExt.swift
-//  excerpt
+//  quoter
 //
 //  Created by Richard on 2023/9/13.
 //

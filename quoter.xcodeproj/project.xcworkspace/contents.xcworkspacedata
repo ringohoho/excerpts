@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:">
+      location = "self:/Users/richard/Projects/ringo/excerpt/quoter.xcodeproj">
    </FileRef>
 </Workspace>

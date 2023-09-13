@@ -1,6 +1,6 @@
 //
 //  ShareView.swift
-//  excerpt
+//  quoter
 //
 //  Created by Richard on 2023/9/13.
 //
@@ -12,7 +12,7 @@ func round(_ value: Double, toNearest: Double) -> Double {
 }
 
 struct Card: View {
-    var excerpt: Excerpt
+    var quote: Quote
     var width: CGFloat
 
     private let fontName = "SourceHanSerifSC-Regular"
@@ -41,21 +41,21 @@ struct Card: View {
         VStack {
             HStack {
                 VStack {
-                    Text(self.excerpt.content)
+                    Text(self.quote.content)
                         .font(.custom(self.fontName, size: self.fontSizeContent))
                         .foregroundColor(self.colorContent)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, self.fontSizeContent)
 
-                    if !self.excerpt.author.isEmpty {
-                        Text("— \(self.excerpt.author)")
+                    if !self.quote.author.isEmpty {
+                        Text("— \(self.quote.author)")
                             .font(.custom(self.fontName, size: self.fontSizeFrom))
                             .foregroundColor(self.colorFrom)
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .multilineTextAlignment(.trailing)
                     }
-                    if !self.excerpt.book.isEmpty {
-                        Text(self.excerpt.book)
+                    if !self.quote.book.isEmpty {
+                        Text(self.quote.book)
                             .font(.custom(self.fontName, size: self.fontSizeFrom))
                             .foregroundColor(self.colorFrom)
                             .frame(maxWidth: .infinity, alignment: .trailing)
@@ -81,7 +81,7 @@ struct Card: View {
 struct ShareView: View {
     @Binding var isPresented: Bool
 
-    var excerpt: Excerpt
+    var quote: Quote
 
     func dismiss() {
         self.isPresented = false
@@ -91,7 +91,7 @@ struct ShareView: View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 ScrollView(.vertical, showsIndicators: false) {
-                    Card(excerpt: self.excerpt, width: geometry.size.width - 15 * 2)
+                    Card(quote: self.quote, width: geometry.size.width - 15 * 2)
                         .padding(15)
                         .frame(width: geometry.size.width)
                         .frame(minHeight: geometry.size.height)
@@ -116,22 +116,22 @@ struct ShareView: View {
 }
 
 #Preview("Share Dark") {
-    MainView(excerpts[0], sharing: true)
+    MainView(quotes[0], sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Share Short Light") {
-    MainView(Excerpt(id: UUID(), content: "你好。", book: "一本书", author: "谁"), sharing: true)
+    MainView(Quote(id: UUID(), content: "你好。", book: "一本书", author: "谁"), sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
 #Preview("Share Long") {
-    MainView(Excerpt(id: UUID(), content: excerpts[0].content + "\n" + excerpts[0].content + "\n" + excerpts[0].content, book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多"), sharing: true)
+    MainView(Quote(id: UUID(), content: quotes[0].content + "\n" + quotes[0].content + "\n" + quotes[0].content, book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多"), sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
 #Preview("Share English") {
-    MainView(Excerpt(id: UUID(), content: "Do not feel envious of the happiness of those who live in a fool's paradise, for only a fool will think that it is happiness.", book: "The Ten Commandments", author: "Bertrand Russell"), sharing: true)
+    MainView(Quote(id: UUID(), content: "Do not feel envious of the happiness of those who live in a fool's paradise, for only a fool will think that it is happiness.", book: "The Ten Commandments", author: "Bertrand Russell"), sharing: true)
         .environment(\.locale, .init(identifier: "en"))
 }
