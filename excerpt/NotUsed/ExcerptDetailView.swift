@@ -23,7 +23,7 @@ struct ExcerptDetailView: View {
         .padding()
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-                Button(LocalizedStringKey("Share")) {}
+                Button("Share") {}
             }
         }
     }

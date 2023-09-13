@@ -18,7 +18,7 @@ struct ExcerptsView: View {
 
     var body: some View {
         List {
-            Button(LocalizedStringKey("New Excerpt")) {
+            Button("New Excerpt") {
                 self.showNewExcerptSheet = true
             }
             .sheet(isPresented: $showNewExcerptSheet) {
@@ -33,10 +33,10 @@ struct ExcerptsView: View {
                 }
                 .contextMenu {
                     NavigationLink(value: excerpt) {
-                        Text(LocalizedStringKey("Open"))
+                        Text("Open")
                     }
-                    Button(LocalizedStringKey("Edit")) {}
-                    Button(LocalizedStringKey("Share")) {}
+                    Button("Edit") {}
+                    Button("Share") {}
                 }
             }
         }

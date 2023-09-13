@@ -22,28 +22,28 @@ struct NewExcerptSheetView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text(LocalizedStringKey("Content"))) {
-                    TextField(LocalizedStringKey("Please enter excerpt content here."), text: $content, axis: .vertical)
+                Section(header: Text("Content")) {
+                    TextField("Please enter excerpt content here.", text: $content, axis: .vertical)
                         .lineLimit(6 ... .max)
                 }
-                Section(header: Text(LocalizedStringKey("Book"))) {
-                    TextField(LocalizedStringKey("Please enter the book name here."), text: $book, axis: .vertical)
+                Section(header: Text("Book")) {
+                    TextField("Please enter the book name here.", text: $book, axis: .vertical)
                 }
-                Section(header: Text(LocalizedStringKey("Author"))) {
-                    TextField(LocalizedStringKey("Please enter the author name here."), text: $author, axis: .vertical)
+                Section(header: Text("Author")) {
+                    TextField("Please enter the author name here.", text: $author, axis: .vertical)
                 }
             }
             .scrollDismissesKeyboard(.interactively)
-            .navigationTitle(LocalizedStringKey("New Excerpt"))
+            .navigationTitle("New Excerpt")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(LocalizedStringKey("Cancel")) {
+                    Button("Cancel") {
                         dismiss()
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(LocalizedStringKey("Save")) {
+                    Button("Save") {
 //                        dismiss()
                     }
                 }

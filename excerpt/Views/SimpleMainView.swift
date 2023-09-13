@@ -22,23 +22,23 @@ struct PasteSheetView: View {
         NavigationStack {
             Form {
                 Section {
-                    TextField(LocalizedStringKey("Please paste excerpt here."), text: self.$pasted, axis: .vertical)
+                    TextField("Please paste excerpt here.", text: self.$pasted, axis: .vertical)
                         .focused(self.$focused)
                         .lineLimit(10 ... .max)
                         .frame(maxHeight: .infinity)
                 }
             }
-            .navigationTitle(LocalizedStringKey("Paste from Books"))
+            .navigationTitle("Paste from Books")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button(LocalizedStringKey("Cancel")) {
+                    Button("Cancel") {
                         self.pasted = ""
                         self.dismiss()
                     }
                 }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button(LocalizedStringKey("Done")) {
+                    Button("Done") {
                         self.dismiss()
                     }
                     .disabled(self.pasted.isEmpty)
@@ -177,40 +177,40 @@ struct SimpleMainView: View {
             NavigationStack {
                 Form {
                     Section {
-                        Button(LocalizedStringKey("Paste from Books")) {
+                        Button("Paste from Books") {
                             self.pasted = ""
                             self.showPasteSheet = true
                         }
                         .sheet(isPresented: self.$showPasteSheet, onDismiss: self.handlePasted) {
                             PasteSheetView(pasted: self.$pasted)
                         }
-                        .alert(LocalizedStringKey("Not a valid excerpt from Books."), isPresented: self.$showBadPasteAlert) {
-                            Button(LocalizedStringKey("OK"), role: .cancel) {}
+                        .alert("Not a valid excerpt from Books.", isPresented: self.$showBadPasteAlert) {
+                            Button("OK", role: .cancel) {}
                         }
                     }
 
-                    Section(header: Text(LocalizedStringKey("Content"))) {
-                        TextField(LocalizedStringKey("Please enter excerpt content here."), text: self.$excerpt.content, axis: .vertical)
+                    Section(header: Text("Content")) {
+                        TextField("Please enter excerpt content here.", text: self.$excerpt.content, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .content)
                             .lineLimit(6 ... .max)
                     }
-                    Section(header: Text(LocalizedStringKey("Book"))) {
-                        TextField(LocalizedStringKey("Please enter the book name here."), text: self.$excerpt.book, axis: .vertical)
+                    Section(header: Text("Book")) {
+                        TextField("Please enter the book name here.", text: self.$excerpt.book, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .book)
                     }
-                    Section(header: Text(LocalizedStringKey("Author"))) {
-                        TextField(LocalizedStringKey("Please enter the author name here."), text: self.$excerpt.author, axis: .vertical)
+                    Section(header: Text("Author")) {
+                        TextField("Please enter the author name here.", text: self.$excerpt.author, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .author)
                     }
 
                     Section {
-                        Button(LocalizedStringKey("Share")) {
+                        Button("Share") {
                             self.showShareView = true
                         }
                         .disabled(self.excerpt.content.isEmpty)
                     }
                 }
-                .navigationTitle(LocalizedStringKey("Excerpt"))
+                .navigationTitle("Excerpt")
                 .scrollDismissesKeyboard(.interactively)
                 .onAppear {
                     self.focusedFormField = .content
