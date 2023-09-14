@@ -1,4 +1,4 @@
-# Quoter
+# Quoter / 采书
 
 Similar to https://carbon.now.sh, but for quoting from books.
 
