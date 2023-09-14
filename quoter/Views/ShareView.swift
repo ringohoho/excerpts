@@ -12,6 +12,7 @@ func round(_ value: Double, toNearest: Double) -> Double {
 }
 
 struct Card: View {
+    var isPoem: Bool
     var content: String
     var book: String
     var author: String
@@ -50,7 +51,7 @@ struct Card: View {
             VStack {
                 VStack(spacing: self.contentFromSpacing) {
                     VStack(spacing: self.fontSizeContent) {
-                        ForEach(Array(self.content.components(separatedBy: "\n").enumerated()), id: \.offset) { _, paragraph in
+                        ForEach(Array(self.content.components(separatedBy: self.isPoem ? "\n\n" : "\n").enumerated()), id: \.offset) { _, paragraph in
                             let p = paragraph.trimmingCharacters(in: .whitespaces)
                             if !p.isEmpty {
                                 Text(p)
@@ -113,6 +114,7 @@ struct ShareView: View {
     @Binding var isPresented: Bool
 
     var quote: Quote
+    var isPoem: Bool
 
     private var quoteContent: String {
         self.quote.content.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -144,14 +146,14 @@ struct ShareView: View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
                 ScrollView(.vertical, showsIndicators: false) {
-                    Card(content: self.quoteContent, book: self.quoteBook, author: self.quoteAuthor, width: geometry.size.width - self.screenEdgePadding * 2)
+                    Card(isPoem: self.isPoem, content: self.quoteContent, book: self.quoteBook, author: self.quoteAuthor, width: geometry.size.width - self.screenEdgePadding * 2)
                         .padding(self.screenEdgePadding)
                         .frame(width: geometry.size.width)
                         .frame(minHeight: geometry.size.height)
                 }
                 .onAppear {
                     let width = geometry.size.width - self.screenEdgePadding * 2
-                    let renderer = ImageRenderer(content: Card(content: self.quoteContent, book: self.quoteBook, author: self.quoteAuthor, width: width).environment(\.locale, self.envLocale))
+                    let renderer = ImageRenderer(content: Card(isPoem: self.isPoem, content: self.quoteContent, book: self.quoteBook, author: self.quoteAuthor, width: width).environment(\.locale, self.envLocale))
                     renderer.proposedSize.width = width
                     renderer.scale = self.envDisplayScale
                     let uiImage = renderer.uiImage!

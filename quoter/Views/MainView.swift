@@ -25,6 +25,7 @@ struct MainView: View {
     @State private var showBadPasteAlert = false
 
     @State private var quote: Quote
+    @State private var isPoem: Bool = false
 
     enum QuoteFormField {
         case content
@@ -81,13 +82,19 @@ struct MainView: View {
                         }
                     }
 
+                    Section(header: Text("A_CONFIG")) {
+                        Toggle(isOn: self.$isPoem) {
+                            Text("CONFIG_POETRY_MODE")
+                        }
+                    }
+
                     Section(header: Text("QUOTE_CONTENT")) {
                         TextField("FORM_CONTENT_PLACEHOLDER", text: self.$quote.content, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .content)
                             .lineLimit(6 ... .max)
                     }
-                    Section(header: Text("QUOTE_BOOK")) {
-                        TextField("FORM_BOOK_PLACEHOLDER", text: self.$quote.book, axis: .vertical)
+                    Section(header: Text(self.isPoem ? "QUOTE_POEM" : "QUOTE_BOOK")) {
+                        TextField(self.isPoem ? "FORM_POEM_PLACEHOLDER" : "FORM_BOOK_PLACEHOLDER", text: self.$quote.book, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .book)
                     }
                     Section(header: Text("QUOTE_AUTHOR")) {
@@ -112,7 +119,7 @@ struct MainView: View {
             .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
 
             if self.showShareView {
-                ShareView(isPresented: self.$showShareView, quote: self.quote)
+                ShareView(isPresented: self.$showShareView, quote: self.quote, isPoem: self.isPoem)
                     .zIndex(1) // to fix animation: https://sarunw.com/posts/how-to-fix-zstack-transition-animation-in-swiftui/
                     .transition(.shareViewTrans)
             }

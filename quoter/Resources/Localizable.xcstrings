@@ -33,6 +33,22 @@
         }
       }
     },
+    "A_CONFIG" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Configuration"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "配置"
+          }
+        }
+      }
+    },
     "A_DONE" : {
       "localizations" : {
         "en" : {
@@ -129,6 +145,22 @@
         }
       }
     },
+    "CONFIG_POETRY_MODE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poetry Mode"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "诗模式"
+          }
+        }
+      }
+    },
     "FORM_AUTHOR_PLACEHOLDER" : {
       "localizations" : {
         "en" : {
@@ -173,6 +205,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在这里输入摘录内容"
+          }
+        }
+      }
+    },
+    "FORM_POEM_PLACEHOLDER" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter poem name here"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在这里输入诗名"
           }
         }
       }
@@ -269,6 +317,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "内容"
+          }
+        }
+      }
+    },
+    "QUOTE_POEM" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "诗名"
           }
         }
       }
