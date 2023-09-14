@@ -11,6 +11,7 @@ let animationDuration: CGFloat = 0.2
 let backgroundBlurRadius: CGFloat = 20
 
 let appleBooksExcerptTplt = /^“([\S\s]*)”\s*摘录来自\n([^\n]+)\n([^\n]+)\n此材料受版权保护。$/
+// TODO: english
 
 extension AnyTransition {
     static var shareViewTrans: AnyTransition {
@@ -95,7 +96,7 @@ struct MainView: View {
                     }
 
                     Section {
-                        Button("A_Share") {
+                        Button("A_SHARE") {
                             self.showShareView = true
                         }
                         .disabled(self.quote.content.isEmpty)
