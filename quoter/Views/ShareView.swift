@@ -12,7 +12,9 @@ func round(_ value: Double, toNearest: Double) -> Double {
 }
 
 struct Card: View {
-    var quote: Quote
+    var content: String
+    var book: String
+    var author: String
     var width: CGFloat
 
     private let fontName = "SourceHanSerifSC-Regular"
@@ -43,27 +45,12 @@ struct Card: View {
         self.contentVertOuterPadding
     }
 
-    private var quoteContent: String {
-        self.quote.content.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-
-    private var quoteAuthor: String {
-        self.quote.author
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .replacing("\n", with: " ")
-    }
-
-    private var quoteBook: String {
-        self.quote.book.trimmingCharacters(in: .whitespacesAndNewlines)
-            .replacing("\n", with: " ")
-    }
-
     var body: some View {
         VStack(alignment: .leading) {
             VStack {
                 VStack(spacing: self.contentFromSpacing) {
                     VStack(spacing: self.fontSizeContent) {
-                        ForEach(Array(self.quoteContent.components(separatedBy: "\n").enumerated()), id: \.offset) { _, paragraph in
+                        ForEach(Array(self.content.components(separatedBy: "\n").enumerated()), id: \.offset) { _, paragraph in
                             let p = paragraph.trimmingCharacters(in: .whitespaces)
                             if !p.isEmpty {
                                 Text(p)
@@ -75,17 +62,17 @@ struct Card: View {
                         }
                     }
 
-                    if !(self.quoteBook.isEmpty && self.quoteAuthor.isEmpty) {
+                    if !(self.book.isEmpty && self.author.isEmpty) {
                         VStack(spacing: self.fontSizeFrom * 0.2) {
-                            if !self.quoteAuthor.isEmpty {
-                                Text("— \(self.quote.author)")
+                            if !self.author.isEmpty {
+                                Text("— \(self.author)")
                                     .font(.custom(self.fontName, size: self.fontSizeFrom))
                                     .foregroundColor(self.colorFrom)
                                     .frame(maxWidth: .infinity, alignment: .trailing)
                                     .multilineTextAlignment(.trailing)
                             }
-                            if !self.quoteBook.isEmpty {
-                                Text(self.quote.book)
+                            if !self.book.isEmpty {
+                                Text(self.book)
                                     .font(.custom(self.fontName, size: self.fontSizeFrom))
                                     .foregroundColor(self.colorFrom)
                                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -125,12 +112,29 @@ struct Card: View {
 struct ShareView: View {
     @Binding var isPresented: Bool
 
+    var quote: Quote
+
+    private var quoteContent: String {
+        self.quote.content.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    private var quoteAuthor: String {
+        self.quote.author
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacing("\n", with: " ")
+    }
+
+    private var quoteBook: String {
+        self.quote.book.trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacing("\n", with: " ")
+    }
+
     @Environment(\.displayScale) var envDisplayScale
     @Environment(\.locale) var envLocale
 
-    var quote: Quote
-
     private let screenEdgePadding: CGFloat = 12
+
+    @State private var cardImage = Image(uiImage: UIImage())
 
     func dismiss() {
         self.isPresented = false
@@ -138,35 +142,42 @@ struct ShareView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: 0) {
+            ZStack(alignment: .top) {
                 ScrollView(.vertical, showsIndicators: false) {
-                    Card(quote: self.quote, width: geometry.size.width - self.screenEdgePadding * 2)
-                        .padding(12)
+                    Card(content: self.quoteContent, book: self.quoteBook, author: self.quoteAuthor, width: geometry.size.width - self.screenEdgePadding * 2)
+                        .padding(self.screenEdgePadding)
                         .frame(width: geometry.size.width)
-                        .frame(minHeight: geometry.size.height - 44 - 12 /* TODO: magic number */ )
+                        .frame(minHeight: geometry.size.height)
                 }
-                .onTapGesture {
-                    self.dismiss()
+                .onAppear {
+                    let width = geometry.size.width - self.screenEdgePadding * 2
+                    let renderer = ImageRenderer(content: Card(content: self.quoteContent, book: self.quoteBook, author: self.quoteAuthor, width: width).environment(\.locale, self.envLocale))
+                    renderer.proposedSize.width = width
+                    renderer.scale = self.envDisplayScale
+                    let uiImage = renderer.uiImage!
+                    self.cardImage = Image(uiImage: uiImage)
                 }
+
+                VStack {
+                    Spacer(minLength: 44) // leave a toolbar size here
+                    Color.clear
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            self.dismiss()
+                        }
+                }
+                .frame(width: geometry.size.width, height: geometry.size.height)
 
                 HStack {
-                    Button("A_SAVE_TO_PHOTO_LIBRARY") {
-                        let width = geometry.size.width - self.screenEdgePadding * 2
-                        let renderer = ImageRenderer(content: Card(quote: self.quote, width: width).environment(\.locale, self.envLocale))
-                        renderer.proposedSize.width = width
-                        renderer.scale = self.envDisplayScale
-
-                        if let uiImage = renderer.uiImage {
-                            UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
-                        }
-
-                        self.dismiss()
+                    Spacer()
+                    ShareLink(item: self.cardImage, preview: SharePreview(self.quoteBook, image: self.cardImage)) {
+                        Image(systemName: "square.and.arrow.up")
+                            .imageScale(.large)
+                            .padding([.leading, .trailing], 16)
+                            .padding(.bottom, 16)
                     }
-                    .frame(height: 44)
-                    .padding([.leading, .trailing], 20)
                 }
-                .background(Color.clear)
-                .padding(.bottom, 12)
             }
             .padding(0)
         }

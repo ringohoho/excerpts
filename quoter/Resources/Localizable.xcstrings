@@ -65,22 +65,6 @@
         }
       }
     },
-    "A_SAVE_TO_PHOTO_LIBRARY" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Save to photo library"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存到照片图库"
-          }
-        }
-      }
-    },
     "A_Share" : {
       "localizations" : {
         "en" : {
