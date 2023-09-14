@@ -16,8 +16,9 @@ struct Card: View {
     var width: CGFloat
 
     private let fontName = "SourceHanSerifSC-Regular"
-    private let fontSizeContent: CGFloat = 18
-    private let fontSizeFrom: CGFloat = 15
+    private let fontSizeContent: CGFloat = 17
+    private let fontSizeFrom: CGFloat = 14
+    private let fontSizeWatermark: CGFloat = 11
     private let colorBackground = Color("F9F9FB")!
     private let colorContent = Color("272220")!
     private let colorFrom = Color("514A48")!
@@ -30,7 +31,7 @@ struct Card: View {
     }
 
     private var contentWidth: CGFloat {
-        round(self.rectInnerWidth - self.fontSizeContent * 4, toNearest: self.fontSizeContent)
+        round(self.rectInnerWidth - self.fontSizeContent * 3, toNearest: self.fontSizeContent)
     }
 
     private var contentVertOuterPadding: CGFloat {
@@ -53,8 +54,8 @@ struct Card: View {
     }
 
     var body: some View {
-        VStack {
-            HStack {
+        VStack(alignment: .leading) {
+            VStack {
                 VStack(spacing: self.contentVertOuterPadding) {
                     VStack(spacing: self.fontSizeContent) {
                         ForEach(Array(self.quoteContent.components(separatedBy: "\n").enumerated()), id: \.offset) { _, paragraph in
@@ -64,6 +65,7 @@ struct Card: View {
                                     .font(.custom(self.fontName, size: self.fontSizeContent))
                                     .foregroundColor(self.colorContent)
                                     .frame(maxWidth: .infinity, alignment: .leading)
+                                    .lineSpacing(self.fontSizeContent * 0.2)
                             }
                         }
                     }
@@ -95,7 +97,19 @@ struct Card: View {
                         .padding(2)
                 }
             }
-            .padding(self.rectOuterPadding)
+            .padding([.leading, .top, .trailing], self.rectOuterPadding)
+            .padding(.bottom, 3)
+
+            HStack(spacing: 2) {
+                Text("CARD_SHARED_VIA")
+                    .font(.system(size: self.fontSizeWatermark))
+                    .foregroundColor(self.colorBorder)
+                Text("MAIN_VIEW_TITLE")
+                    .font(.system(size: self.fontSizeWatermark))
+                    .bold()
+                    .foregroundColor(self.colorBorder)
+            }
+            .padding([.leading, .bottom, .trailing], self.rectOuterPadding)
         }
         .background(self.colorBackground)
     }
@@ -104,7 +118,12 @@ struct Card: View {
 struct ShareView: View {
     @Binding var isPresented: Bool
 
+    @Environment(\.displayScale) var envDisplayScale
+    @Environment(\.locale) var envLocale
+
     var quote: Quote
+
+    private let screenEdgePadding: CGFloat = 12
 
     func dismiss() {
         self.isPresented = false
@@ -114,24 +133,33 @@ struct ShareView: View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
                 ScrollView(.vertical, showsIndicators: false) {
-                    Card(quote: self.quote, width: geometry.size.width - 15 * 2)
-                        .padding(15)
+                    Card(quote: self.quote, width: geometry.size.width - self.screenEdgePadding * 2)
+                        .padding(12)
                         .frame(width: geometry.size.width)
-                        .frame(minHeight: geometry.size.height)
+                        .frame(minHeight: geometry.size.height - 44 - 12 /* TODO: magic number */ )
                 }
                 .onTapGesture {
                     self.dismiss()
                 }
 
-//                HStack {
-//                    Text("Btn1")
-//                        .background(Color.purple)
-//
-//                    Text("Btn2")
-//                        .background(Color.yellow)
-//                }
-//                .frame(width: geometry.size.width, height: 40)
-//                .background(Color.green)
+                HStack {
+                    Button("A_SAVE_TO_PHOTO_LIBRARY") {
+                        let width = geometry.size.width - self.screenEdgePadding * 2
+                        let renderer = ImageRenderer(content: Card(quote: self.quote, width: width).environment(\.locale, self.envLocale))
+                        renderer.proposedSize.width = width
+                        renderer.scale = self.envDisplayScale
+
+                        if let uiImage = renderer.uiImage {
+                            UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
+                        }
+
+                        self.dismiss()
+                    }
+                    .frame(height: 44)
+                    .padding([.leading, .trailing], 20)
+                }
+                .background(Color.clear)
+                .padding(.bottom, 12)
             }
             .padding(0)
         }

@@ -7,3 +7,4 @@
 */
 
 "CFBundleDisplayName" = "采书";
+"NSPhotoLibraryAddUsageDescription" = "请允许采书保存图片到您的照片图库。";
