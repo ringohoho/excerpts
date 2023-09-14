@@ -18,11 +18,12 @@ struct Card: View {
     private let fontName = "SourceHanSerifSC-Regular"
     private let fontSizeContent: CGFloat = 17
     private let fontSizeFrom: CGFloat = 14
-    private let fontSizeWatermark: CGFloat = 11
+    private let fontSizeWatermark: CGFloat = 10
     private let colorBackground = Color("F9F9FB")!
     private let colorContent = Color("272220")!
     private let colorFrom = Color("514A48")!
     private let colorBorder = Color("D0CDCF")!
+    private let colorWatermark = Color("D0CDCF")!
 
     private let rectOuterPadding: CGFloat = 15
 
@@ -36,6 +37,10 @@ struct Card: View {
 
     private var contentVertOuterPadding: CGFloat {
         (self.rectInnerWidth - self.contentWidth) / 2
+    }
+
+    private var contentFromSpacing: CGFloat {
+        self.contentVertOuterPadding
     }
 
     private var quoteContent: String {
@@ -56,7 +61,7 @@ struct Card: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack {
-                VStack(spacing: self.contentVertOuterPadding) {
+                VStack(spacing: self.contentFromSpacing) {
                     VStack(spacing: self.fontSizeContent) {
                         ForEach(Array(self.quoteContent.components(separatedBy: "\n").enumerated()), id: \.offset) { _, paragraph in
                             let p = paragraph.trimmingCharacters(in: .whitespaces)
@@ -70,20 +75,22 @@ struct Card: View {
                         }
                     }
 
-                    VStack(spacing: self.fontSizeFrom / 4) {
-                        if !self.quoteAuthor.isEmpty {
-                            Text("— \(self.quote.author)")
-                                .font(.custom(self.fontName, size: self.fontSizeFrom))
-                                .foregroundColor(self.colorFrom)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                                .multilineTextAlignment(.trailing)
-                        }
-                        if !self.quoteBook.isEmpty {
-                            Text(self.quote.book)
-                                .font(.custom(self.fontName, size: self.fontSizeFrom))
-                                .foregroundColor(self.colorFrom)
-                                .frame(maxWidth: .infinity, alignment: .trailing)
-                                .multilineTextAlignment(.trailing)
+                    if !(self.quoteBook.isEmpty && self.quoteAuthor.isEmpty) {
+                        VStack(spacing: self.fontSizeFrom * 0.2) {
+                            if !self.quoteAuthor.isEmpty {
+                                Text("— \(self.quote.author)")
+                                    .font(.custom(self.fontName, size: self.fontSizeFrom))
+                                    .foregroundColor(self.colorFrom)
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                    .multilineTextAlignment(.trailing)
+                            }
+                            if !self.quoteBook.isEmpty {
+                                Text(self.quote.book)
+                                    .font(.custom(self.fontName, size: self.fontSizeFrom))
+                                    .foregroundColor(self.colorFrom)
+                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                    .multilineTextAlignment(.trailing)
+                            }
                         }
                     }
                 }
@@ -107,7 +114,7 @@ struct Card: View {
                 Text("MAIN_VIEW_TITLE")
                     .font(.system(size: self.fontSizeWatermark))
                     .bold()
-                    .foregroundColor(self.colorBorder)
+                    .foregroundColor(self.colorWatermark)
             }
             .padding([.leading, .bottom, .trailing], self.rectOuterPadding)
         }
