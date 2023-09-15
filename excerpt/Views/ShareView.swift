@@ -13,7 +13,7 @@ func round(_ value: Double, toNearest: Double) -> Double {
 
 struct Card: View {
     var excerpt: Excerpt
-    var isPoem: Bool
+    var excerptType: ExcerptType
     var width: CGFloat
 
     private let fontName = "SourceHanSerifSC-Regular"
@@ -49,7 +49,11 @@ struct Card: View {
             VStack {
                 VStack(spacing: self.contentFromSpacing) {
                     VStack(spacing: self.fontSizeContent) {
-                        ForEach(Array(self.excerpt.contentTrimmed.components(separatedBy: self.isPoem ? "\n\n" : "\n").enumerated()), id: \.offset) { _, paragraph in
+                        let lineSep = switch self.excerptType {
+                        case .paragraphs: "\n"
+                        case .verses, .lyrics: "\n\n"
+                        }
+                        ForEach(Array(self.excerpt.contentTrimmed.components(separatedBy: lineSep).enumerated()), id: \.offset) { _, paragraph in
                             let p = paragraph.trimmingCharacters(in: .whitespaces)
                             if !p.isEmpty {
                                 Text(p)
@@ -115,7 +119,7 @@ struct ShareView: View {
     @Binding var isPresented: Bool
 
     var excerpt: Excerpt
-    var isPoem: Bool
+    var excerptType: ExcerptType
 
     @Environment(\.displayScale) var envDisplayScale
     @Environment(\.locale) var envLocale
@@ -128,18 +132,22 @@ struct ShareView: View {
         self.isPresented = false
     }
 
+    func createCard(width: CGFloat) -> Card {
+        Card(excerpt: self.excerpt, excerptType: self.excerptType, width: width)
+    }
+
     var body: some View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
                 ScrollView(.vertical, showsIndicators: false) {
-                    Card(excerpt: self.excerpt, isPoem: self.isPoem, width: geometry.size.width - self.screenEdgePadding * 2)
+                    self.createCard(width: geometry.size.width - self.screenEdgePadding * 2)
                         .padding(self.screenEdgePadding)
                         .frame(width: geometry.size.width)
                         .frame(minHeight: geometry.size.height)
                 }
                 .onAppear {
                     let width = geometry.size.width - self.screenEdgePadding * 2
-                    let renderer = ImageRenderer(content: Card(excerpt: self.excerpt, isPoem: self.isPoem, width: width).environment(\.locale, self.envLocale))
+                    let renderer = ImageRenderer(content: self.createCard(width: width).environment(\.locale, self.envLocale))
                     renderer.proposedSize.width = width
                     renderer.scale = self.envDisplayScale
                     let uiImage = renderer.uiImage!
@@ -172,23 +180,26 @@ struct ShareView: View {
     }
 }
 
-#Preview("Share Dark") {
-    MainView(demoExcerpts[0], sharing: true)
+#Preview("D Para.") {
+    MainView(demoExcerpts[0], .paragraphs, sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
         .preferredColorScheme(.dark)
 }
 
-#Preview("Share Short Light") {
-    MainView(Excerpt(id: UUID(), book: "一本书", author: "谁", content: "你好。"), sharing: true)
+#Preview("L Verses") {
+    let excerpt = Excerpt(id: UUID(), title: "一首诗", author: "谁", content: "你好。\n我是谁？")
+    return MainView(excerpt, .verses, sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
-#Preview("Share Long") {
-    MainView(Excerpt(id: UUID(), book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多", content: demoExcerpts[0].content + "\n" + demoExcerpts[0].content + "\n" + demoExcerpts[0].content), sharing: true)
+#Preview("L Long Para.") {
+    let excerpt = Excerpt(id: UUID(), title: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多", content: demoExcerpts[0].content + "\n" + demoExcerpts[0].content + "\n" + demoExcerpts[0].content)
+    return MainView(excerpt, .paragraphs, sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
-#Preview("Share English") {
-    MainView(Excerpt(id: UUID(), book: "The Ten Commandments", author: "Bertrand Russell", content: "Do not feel envious of the happiness of those who live in a fool's paradise, for only a fool will think that it is happiness."), sharing: true)
+#Preview("L Eng Para.") {
+    let excerpt = Excerpt(id: UUID(), title: "The Ten Commandments", author: "Bertrand Russell", content: "Do not feel envious of the happiness of those who live in a fool's paradise, for only a fool will think that it is happiness.")
+    return MainView(excerpt, .paragraphs, sharing: true)
         .environment(\.locale, .init(identifier: "en"))
 }

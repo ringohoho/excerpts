@@ -25,7 +25,7 @@ struct MainView: View {
     @State private var showBadPasteAlert = false
 
     @State private var excerpt: Excerpt
-    @State private var isPoem: Bool = false
+    @State private var excerptType: ExcerptType = .paragraphs
 
     enum ExcerptFormField {
         case title
@@ -41,8 +41,9 @@ struct MainView: View {
         _excerpt = State(initialValue: Excerpt.empty())
     }
 
-    init(_ initialExcerpt: Excerpt, sharing: Bool = false) {
+    init(_ initialExcerpt: Excerpt, _ initialExcerptType: ExcerptType, sharing: Bool = false) {
         _excerpt = State(initialValue: initialExcerpt)
+        _excerptType = State(initialValue: initialExcerptType)
         _showShareView = State(initialValue: sharing)
     }
 
@@ -55,7 +56,7 @@ struct MainView: View {
 
         if let match = pasted.wholeMatch(of: appleBooksExcerptTplt) {
             self.excerpt.content = String(match.1)
-            self.excerpt.book = String(match.2)
+            self.excerpt.title = String(match.2)
             self.excerpt.author = String(match.3)
         } else {
             self.showBadPasteAlert = true
@@ -81,13 +82,15 @@ struct MainView: View {
                     }
 
                     Section(header: Text("A_CONFIG")) {
-                        Toggle(isOn: self.$isPoem) {
-                            Text("CONFIG_POETRY_MODE")
+                        Picker("C_EXCERPT_TYPE", selection: self.$excerptType) {
+                            Text("C_PARAGRAPHS").tag(ExcerptType.paragraphs)
+                            Text("C_VERSES").tag(ExcerptType.verses)
+                            Text("C_LYRICS").tag(ExcerptType.lyrics)
                         }
                     }
 
                     Section(header: Text("C_TITLE")) {
-                        TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerpt.book, axis: .vertical)
+                        TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerpt.title, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .title)
                     }
                     Section(header: Text("C_AUTHOR")) {
@@ -117,7 +120,7 @@ struct MainView: View {
             .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
 
             if self.showShareView {
-                ShareView(isPresented: self.$showShareView, excerpt: self.excerpt, isPoem: self.isPoem)
+                ShareView(isPresented: self.$showShareView, excerpt: self.excerpt, excerptType: self.excerptType)
                     .zIndex(1) // to fix animation: https://sarunw.com/posts/how-to-fix-zstack-transition-animation-in-swiftui/
                     .transition(.shareViewTrans)
             }
@@ -132,6 +135,6 @@ struct MainView: View {
 }
 
 #Preview("With Content") {
-    MainView(demoExcerpts[0])
+    MainView(demoExcerpts[0], .paragraphs)
         .environment(\.locale, .init(identifier: "en"))
 }
