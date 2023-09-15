@@ -192,6 +192,12 @@ struct ShareView: View {
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
+#Preview("D Lyrics") {
+    let excerpt = Excerpt(id: UUID(), title: "流沙", author: "陶喆", content: "爱情好像流沙\n我不挣扎\n随它去吧\n我不害怕\n\n爱情好像流沙\n心里的牵挂\n不愿放下\nOH BABY\n让我这样吧")
+    return MainView(excerpt, .lyrics, sharing: true)
+        .environment(\.locale, .init(identifier: "zh-Hans"))
+}
+
 #Preview("L Long Para.") {
     let excerpt = Excerpt(id: UUID(), title: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多", content: demoExcerpts[0].content + "\n\n" + demoExcerpts[0].content + "\n" + demoExcerpts[0].content)
     return MainView(excerpt, .paragraphs, sharing: true)
