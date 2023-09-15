@@ -28,9 +28,9 @@ struct MainView: View {
     @State private var isPoem: Bool = false
 
     enum ExcerptFormField {
-        case content
-        case book
+        case title
         case author
+        case content
     }
 
     @FocusState private var focusedFormField: ExcerptFormField?
@@ -38,7 +38,7 @@ struct MainView: View {
     @State private var showShareView = false
 
     init() {
-        _excerpt = State(initialValue: Excerpt(id: UUID(), content: "", book: "", author: ""))
+        _excerpt = State(initialValue: Excerpt.empty())
     }
 
     init(_ initialExcerpt: Excerpt, sharing: Bool = false) {
@@ -86,18 +86,18 @@ struct MainView: View {
                         }
                     }
 
-                    Section(header: Text("C_CONTENT")) {
-                        TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$excerpt.content, axis: .vertical)
-                            .focused(self.$focusedFormField, equals: .content)
-                            .lineLimit(6 ... .max)
-                    }
-                    Section(header: Text(self.isPoem ? "C_POEM" : "C_BOOK")) {
-                        TextField(self.isPoem ? "MAIN_VIEW_FORM_POEM_PLACEHOLDER" : "MAIN_VIEW_FORM_BOOK_PLACEHOLDER", text: self.$excerpt.book, axis: .vertical)
-                            .focused(self.$focusedFormField, equals: .book)
+                    Section(header: Text("C_TITLE")) {
+                        TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerpt.book, axis: .vertical)
+                            .focused(self.$focusedFormField, equals: .title)
                     }
                     Section(header: Text("C_AUTHOR")) {
                         TextField("MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER", text: self.$excerpt.author, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .author)
+                    }
+                    Section(header: Text("C_CONTENT")) {
+                        TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$excerpt.content, axis: .vertical)
+                            .focused(self.$focusedFormField, equals: .content)
+                            .lineLimit(6 ... .max)
                     }
 
                     Section {
@@ -128,8 +128,10 @@ struct MainView: View {
 
 #Preview("Empty") {
     MainView()
+        .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
 #Preview("With Content") {
     MainView(demoExcerpts[0])
+        .environment(\.locale, .init(identifier: "en"))
 }

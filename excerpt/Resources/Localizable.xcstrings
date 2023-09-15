@@ -113,22 +113,6 @@
         }
       }
     },
-    "C_BOOK" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Book"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "书名"
-          }
-        }
-      }
-    },
     "C_CONTENT" : {
       "localizations" : {
         "en" : {
@@ -145,18 +129,18 @@
         }
       }
     },
-    "C_POEM" : {
+    "C_TITLE" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Poem"
+            "value" : "Title"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "诗名"
+            "value" : "标题"
           }
         }
       }
@@ -241,22 +225,6 @@
         }
       }
     },
-    "MAIN_VIEW_FORM_BOOK_PLACEHOLDER" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Enter book name here"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "在这里输入书名"
-          }
-        }
-      }
-    },
     "MAIN_VIEW_FORM_CONTENT_PLACEHOLDER" : {
       "localizations" : {
         "en" : {
@@ -273,18 +241,18 @@
         }
       }
     },
-    "MAIN_VIEW_FORM_POEM_PLACEHOLDER" : {
+    "MAIN_VIEW_FORM_TITLE_PLACEHOLDER" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Enter poem name here"
+            "value" : "Enter title of excerpt source here"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在这里输入诗名"
+            "value" : "在这里输入摘录来源的标题"
           }
         }
       }
