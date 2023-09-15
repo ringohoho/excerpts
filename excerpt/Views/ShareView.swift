@@ -94,12 +94,15 @@ struct Card: View {
             .padding(.bottom, 3)
 
             HStack(spacing: 2) {
-                Text("CARD_VIEW_SHARED_VIA")
+                Text("CARD_VIEW_SHARED_VIA_BEGIN")
                     .font(.system(size: self.fontSizeWatermark))
-                    .foregroundColor(self.colorBorder)
+                    .foregroundColor(self.colorWatermark)
                 Text("C_APP_NAME")
                     .font(.system(size: self.fontSizeWatermark))
+                    .foregroundColor(self.colorWatermark)
                     .bold()
+                Text("CARD_VIEW_SHARED_VIA_END")
+                    .font(.system(size: self.fontSizeWatermark))
                     .foregroundColor(self.colorWatermark)
             }
             .padding([.leading, .bottom, .trailing], self.rectOuterPadding)

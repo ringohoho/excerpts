@@ -161,7 +161,7 @@
         }
       }
     },
-    "CARD_VIEW_SHARED_VIA" : {
+    "CARD_VIEW_SHARED_VIA_BEGIN" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -173,6 +173,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "分享自"
+          }
+        }
+      }
+    },
+    "CARD_VIEW_SHARED_VIA_END" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "App"
           }
         }
       }
