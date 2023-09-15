@@ -50,6 +50,7 @@
       }
     },
     "A_MODE" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -146,7 +147,6 @@
       }
     },
     "C_EXCERPT_TYPE" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {

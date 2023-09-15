@@ -193,7 +193,7 @@ struct ShareView: View {
 }
 
 #Preview("L Long Para.") {
-    let excerpt = Excerpt(id: UUID(), title: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多", content: demoExcerpts[0].content + "\n" + demoExcerpts[0].content + "\n" + demoExcerpts[0].content)
+    let excerpt = Excerpt(id: UUID(), title: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多", content: demoExcerpts[0].content + "\n\n" + demoExcerpts[0].content + "\n" + demoExcerpts[0].content)
     return MainView(excerpt, .paragraphs, sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
