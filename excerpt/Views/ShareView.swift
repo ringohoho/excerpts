@@ -67,19 +67,36 @@ struct Card: View {
 
                     if !(self.excerpt.titleTrimmed.isEmpty && self.excerpt.authorTrimmed.isEmpty) {
                         VStack(spacing: self.fontSizeFrom * 0.2) {
-                            if !self.excerpt.authorTrimmed.isEmpty {
-                                Text("CARD_VIEW_AUTHOR_TPLT \(self.excerpt.authorTrimmed)")
-                                    .font(.custom(self.fontName, size: self.fontSizeFrom))
-                                    .foregroundColor(self.colorFrom)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                    .multilineTextAlignment(.trailing)
-                            }
-                            if !self.excerpt.titleTrimmed.isEmpty {
-                                Text(self.excerpt.titleTrimmed)
-                                    .font(.custom(self.fontName, size: self.fontSizeFrom))
-                                    .foregroundColor(self.colorFrom)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                    .multilineTextAlignment(.trailing)
+                            if self.excerptType != .lyrics {
+                                if !self.excerpt.authorTrimmed.isEmpty {
+                                    Text("CARD_VIEW_AUTHOR_TPLT \(self.excerpt.authorTrimmed)")
+                                        .font(.custom(self.fontName, size: self.fontSizeFrom))
+                                        .foregroundColor(self.colorFrom)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                        .multilineTextAlignment(.trailing)
+                                }
+                                if !self.excerpt.titleTrimmed.isEmpty {
+                                    Text(self.excerpt.titleTrimmed)
+                                        .font(.custom(self.fontName, size: self.fontSizeFrom))
+                                        .foregroundColor(self.colorFrom)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                        .multilineTextAlignment(.trailing)
+                                }
+                            } else {
+                                if !self.excerpt.titleTrimmed.isEmpty {
+                                    Text(self.excerpt.titleTrimmed)
+                                        .font(.custom(self.fontName, size: self.fontSizeFrom))
+                                        .foregroundColor(self.colorFrom)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                        .multilineTextAlignment(.trailing)
+                                }
+                                if !self.excerpt.authorTrimmed.isEmpty {
+                                    Text(self.excerpt.authorTrimmed)
+                                        .font(.custom(self.fontName, size: self.fontSizeFrom))
+                                        .foregroundColor(self.colorFrom)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                        .multilineTextAlignment(.trailing)
+                                }
                             }
                         }
                     }
