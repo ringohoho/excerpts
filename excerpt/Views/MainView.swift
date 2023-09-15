@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+let keyLastExcerptType = "lastExcerptType"
+
 let animationDuration: CGFloat = 0.2
 let backgroundBlurRadius: CGFloat = 20
 
@@ -25,7 +27,8 @@ struct MainView: View {
     @State private var showBadPasteAlert = false
 
     @State private var excerpt: Excerpt
-    @State private var excerptType: ExcerptType = .paragraphs
+    @State private var excerptType: ExcerptType
+    @State private var showShareView: Bool
 
     enum ExcerptFormField {
         case title
@@ -35,16 +38,14 @@ struct MainView: View {
 
     @FocusState private var focusedFormField: ExcerptFormField?
 
-    @State private var showShareView = false
-
     init() {
-        _excerpt = State(initialValue: Excerpt.empty())
+        self.init(Excerpt.empty(), ExcerptType(rawValue: UserDefaults.standard.integer(forKey: keyLastExcerptType)) ?? .paragraphs, sharing: false)
     }
 
     init(_ initialExcerpt: Excerpt, _ initialExcerptType: ExcerptType, sharing: Bool = false) {
-        _excerpt = State(initialValue: initialExcerpt)
-        _excerptType = State(initialValue: initialExcerptType)
-        _showShareView = State(initialValue: sharing)
+        self._excerpt = State(initialValue: initialExcerpt)
+        self._excerptType = State(initialValue: initialExcerptType)
+        self._showShareView = State(initialValue: sharing)
     }
 
     func handlePasted() {
@@ -67,25 +68,14 @@ struct MainView: View {
         ZStack {
             NavigationStack {
                 Form {
-                    Section {
-                        Button("PASTE_VIEW_TITLE") {
-                            self.pasted = ""
-                            self.showPasteSheet = true
-                            self.focusedFormField = nil
-                        }
-                        .sheet(isPresented: self.$showPasteSheet, onDismiss: self.handlePasted) {
-                            PasteSheetView(pasted: self.$pasted)
-                        }
-                        .alert("MAIN_VIEW_ALRT_INVALID_APPLE_BOOKS_EXCERPT", isPresented: self.$showBadPasteAlert) {
-                            Button("A_OK", role: .cancel) {}
-                        }
-                    }
-
                     Section(header: Text("A_CONFIG")) {
                         Picker("C_EXCERPT_TYPE", selection: self.$excerptType) {
                             Text("C_PARAGRAPHS").tag(ExcerptType.paragraphs)
                             Text("C_VERSES").tag(ExcerptType.verses)
                             Text("C_LYRICS").tag(ExcerptType.lyrics)
+                        }
+                        .onChange(of: self.excerptType) { newValue in
+                            UserDefaults.standard.set(newValue.rawValue, forKey: keyLastExcerptType)
                         }
                     }
 
@@ -110,8 +100,27 @@ struct MainView: View {
                         .disabled(self.excerpt.content.isEmpty)
                     }
                 }
-                .navigationTitle("C_APP_NAME")
                 .scrollDismissesKeyboard(.interactively)
+                .navigationTitle("C_APP_NAME")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Menu {
+                            Button("PASTE_VIEW_TITLE") {
+                                self.pasted = ""
+                                self.showPasteSheet = true
+                                self.focusedFormField = nil
+                            }
+                        } label: {
+                            Image(systemName: "doc.on.clipboard")
+                        }
+                    }
+                }
+                .sheet(isPresented: self.$showPasteSheet, onDismiss: self.handlePasted) {
+                    PasteSheetView(pasted: self.$pasted)
+                }
+                .alert("MAIN_VIEW_ALRT_INVALID_APPLE_BOOKS_EXCERPT", isPresented: self.$showBadPasteAlert) {
+                    Button("A_OK", role: .cancel) {}
+                }
             }
             .allowsHitTesting(!self.showShareView)
             // another way to blur: https://stackoverflow.com/a/59111492

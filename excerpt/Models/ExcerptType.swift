@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ExcerptType {
+enum ExcerptType: Int {
     case paragraphs
     case verses
     case lyrics
