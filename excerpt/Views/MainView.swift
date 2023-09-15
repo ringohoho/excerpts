@@ -53,8 +53,6 @@ struct MainView: View {
         }
         self.pasted = ""
 
-        print("Pasted: \(pasted)")
-
         if let match = pasted.wholeMatch(of: appleBooksExcerptTplt) {
             self.quote.content = String(match.1)
             self.quote.book = String(match.2)
@@ -69,7 +67,7 @@ struct MainView: View {
             NavigationStack {
                 Form {
                     Section {
-                        Button("BTN_PASTE_FROM_APPLE_BOOKS") {
+                        Button("PASTE_VIEW_TITLE") {
                             self.pasted = ""
                             self.showPasteSheet = true
                             self.focusedFormField = nil
@@ -77,7 +75,7 @@ struct MainView: View {
                         .sheet(isPresented: self.$showPasteSheet, onDismiss: self.handlePasted) {
                             PasteSheetView(pasted: self.$pasted)
                         }
-                        .alert("ALRT_INVALID_APPLE_BOOKS_EXCERPT", isPresented: self.$showBadPasteAlert) {
+                        .alert("MAIN_VIEW_ALRT_INVALID_APPLE_BOOKS_EXCERPT", isPresented: self.$showBadPasteAlert) {
                             Button("A_OK", role: .cancel) {}
                         }
                     }
@@ -88,17 +86,17 @@ struct MainView: View {
                         }
                     }
 
-                    Section(header: Text("QUOTE_CONTENT")) {
-                        TextField("FORM_CONTENT_PLACEHOLDER", text: self.$quote.content, axis: .vertical)
+                    Section(header: Text("C_CONTENT")) {
+                        TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$quote.content, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .content)
                             .lineLimit(6 ... .max)
                     }
-                    Section(header: Text(self.isPoem ? "QUOTE_POEM" : "QUOTE_BOOK")) {
-                        TextField(self.isPoem ? "FORM_POEM_PLACEHOLDER" : "FORM_BOOK_PLACEHOLDER", text: self.$quote.book, axis: .vertical)
+                    Section(header: Text(self.isPoem ? "C_POEM" : "C_BOOK")) {
+                        TextField(self.isPoem ? "MAIN_VIEW_FORM_POEM_PLACEHOLDER" : "MAIN_VIEW_FORM_BOOK_PLACEHOLDER", text: self.$quote.book, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .book)
                     }
                     Section(header: Text("QUOTE_AUTHOR")) {
-                        TextField("FORM_AUTHOR_PLACEHOLDER", text: self.$quote.author, axis: .vertical)
+                        TextField("MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER", text: self.$quote.author, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .author)
                     }
 
@@ -109,7 +107,7 @@ struct MainView: View {
                         .disabled(self.quote.content.isEmpty)
                     }
                 }
-                .navigationTitle("MAIN_VIEW_TITLE")
+                .navigationTitle("C_APP_NAME")
                 .scrollDismissesKeyboard(.interactively)
             }
             .allowsHitTesting(!self.showShareView)
@@ -133,5 +131,5 @@ struct MainView: View {
 }
 
 #Preview("With Content") {
-    MainView(quotes[0])
+    MainView(demoExcerpts[0])
 }

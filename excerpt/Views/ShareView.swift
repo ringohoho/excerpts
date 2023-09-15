@@ -66,7 +66,7 @@ struct Card: View {
                     if !(self.book.isEmpty && self.author.isEmpty) {
                         VStack(spacing: self.fontSizeFrom * 0.2) {
                             if !self.author.isEmpty {
-                                Text("— \(self.author)")
+                                Text("CARD_VIEW_AUTHOR_TPLT \(self.author)")
                                     .font(.custom(self.fontName, size: self.fontSizeFrom))
                                     .foregroundColor(self.colorFrom)
                                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -96,10 +96,10 @@ struct Card: View {
             .padding(.bottom, 3)
 
             HStack(spacing: 2) {
-                Text("CARD_SHARED_VIA")
+                Text("CARD_VIEW_SHARED_VIA")
                     .font(.system(size: self.fontSizeWatermark))
                     .foregroundColor(self.colorBorder)
-                Text("MAIN_VIEW_TITLE")
+                Text("C_APP_NAME")
                     .font(.system(size: self.fontSizeWatermark))
                     .bold()
                     .foregroundColor(self.colorWatermark)
@@ -187,7 +187,7 @@ struct ShareView: View {
 }
 
 #Preview("Share Dark") {
-    MainView(quotes[0], sharing: true)
+    MainView(demoExcerpts[0], sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
         .preferredColorScheme(.dark)
 }
@@ -198,7 +198,7 @@ struct ShareView: View {
 }
 
 #Preview("Share Long") {
-    MainView(Quote(id: UUID(), content: quotes[0].content + "\n" + quotes[0].content + "\n" + quotes[0].content, book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多"), sharing: true)
+    MainView(Quote(id: UUID(), content: demoExcerpts[0].content + "\n" + demoExcerpts[0].content + "\n" + demoExcerpts[0].content, book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多"), sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
