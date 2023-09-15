@@ -97,6 +97,22 @@
         }
       }
     },
+    "C_AUTHOR" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Author"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "作者"
+          }
+        }
+      }
+    },
     "C_BOOK" : {
       "localizations" : {
         "en" : {
@@ -301,22 +317,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "从 Apple Books 粘贴"
-          }
-        }
-      }
-    },
-    "QUOTE_AUTHOR" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Author"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "作者"
           }
         }
       }

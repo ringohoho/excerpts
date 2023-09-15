@@ -12,10 +12,8 @@ func round(_ value: Double, toNearest: Double) -> Double {
 }
 
 struct Card: View {
+    var excerpt: Excerpt
     var isPoem: Bool
-    var content: String
-    var book: String
-    var author: String
     var width: CGFloat
 
     private let fontName = "SourceHanSerifSC-Regular"
@@ -51,7 +49,7 @@ struct Card: View {
             VStack {
                 VStack(spacing: self.contentFromSpacing) {
                     VStack(spacing: self.fontSizeContent) {
-                        ForEach(Array(self.content.components(separatedBy: self.isPoem ? "\n\n" : "\n").enumerated()), id: \.offset) { _, paragraph in
+                        ForEach(Array(self.excerpt.contentTrimmed.components(separatedBy: self.isPoem ? "\n\n" : "\n").enumerated()), id: \.offset) { _, paragraph in
                             let p = paragraph.trimmingCharacters(in: .whitespaces)
                             if !p.isEmpty {
                                 Text(p)
@@ -63,17 +61,17 @@ struct Card: View {
                         }
                     }
 
-                    if !(self.book.isEmpty && self.author.isEmpty) {
+                    if !(self.excerpt.titleTrimmed.isEmpty && self.excerpt.authorTrimmed.isEmpty) {
                         VStack(spacing: self.fontSizeFrom * 0.2) {
-                            if !self.author.isEmpty {
-                                Text("CARD_VIEW_AUTHOR_TPLT \(self.author)")
+                            if !self.excerpt.authorTrimmed.isEmpty {
+                                Text("CARD_VIEW_AUTHOR_TPLT \(self.excerpt.authorTrimmed)")
                                     .font(.custom(self.fontName, size: self.fontSizeFrom))
                                     .foregroundColor(self.colorFrom)
                                     .frame(maxWidth: .infinity, alignment: .trailing)
                                     .multilineTextAlignment(.trailing)
                             }
-                            if !self.book.isEmpty {
-                                Text(self.book)
+                            if !self.excerpt.titleTrimmed.isEmpty {
+                                Text(self.excerpt.titleTrimmed)
                                     .font(.custom(self.fontName, size: self.fontSizeFrom))
                                     .foregroundColor(self.colorFrom)
                                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -113,23 +111,8 @@ struct Card: View {
 struct ShareView: View {
     @Binding var isPresented: Bool
 
-    var quote: Quote
+    var excerpt: Excerpt
     var isPoem: Bool
-
-    private var quoteContent: String {
-        self.quote.content.trimmingCharacters(in: .whitespacesAndNewlines)
-    }
-
-    private var quoteAuthor: String {
-        self.quote.author
-            .trimmingCharacters(in: .whitespacesAndNewlines)
-            .replacing("\n", with: " ")
-    }
-
-    private var quoteBook: String {
-        self.quote.book.trimmingCharacters(in: .whitespacesAndNewlines)
-            .replacing("\n", with: " ")
-    }
 
     @Environment(\.displayScale) var envDisplayScale
     @Environment(\.locale) var envLocale
@@ -146,14 +129,14 @@ struct ShareView: View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
                 ScrollView(.vertical, showsIndicators: false) {
-                    Card(isPoem: self.isPoem, content: self.quoteContent, book: self.quoteBook, author: self.quoteAuthor, width: geometry.size.width - self.screenEdgePadding * 2)
+                    Card(excerpt: self.excerpt, isPoem: self.isPoem, width: geometry.size.width - self.screenEdgePadding * 2)
                         .padding(self.screenEdgePadding)
                         .frame(width: geometry.size.width)
                         .frame(minHeight: geometry.size.height)
                 }
                 .onAppear {
                     let width = geometry.size.width - self.screenEdgePadding * 2
-                    let renderer = ImageRenderer(content: Card(isPoem: self.isPoem, content: self.quoteContent, book: self.quoteBook, author: self.quoteAuthor, width: width).environment(\.locale, self.envLocale))
+                    let renderer = ImageRenderer(content: Card(excerpt: self.excerpt, isPoem: self.isPoem, width: width).environment(\.locale, self.envLocale))
                     renderer.proposedSize.width = width
                     renderer.scale = self.envDisplayScale
                     let uiImage = renderer.uiImage!
@@ -173,7 +156,7 @@ struct ShareView: View {
 
                 HStack {
                     Spacer()
-                    ShareLink(item: self.cardImage, preview: SharePreview(self.quoteBook, image: self.cardImage)) {
+                    ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
                         Image(systemName: "square.and.arrow.up")
                             .imageScale(.large)
                             .padding([.leading, .trailing], 16)
@@ -193,16 +176,16 @@ struct ShareView: View {
 }
 
 #Preview("Share Short Light") {
-    MainView(Quote(id: UUID(), content: "你好。", book: "一本书", author: "谁"), sharing: true)
+    MainView(Excerpt(id: UUID(), content: "你好。", book: "一本书", author: "谁"), sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
 #Preview("Share Long") {
-    MainView(Quote(id: UUID(), content: demoExcerpts[0].content + "\n" + demoExcerpts[0].content + "\n" + demoExcerpts[0].content, book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多"), sharing: true)
+    MainView(Excerpt(id: UUID(), content: demoExcerpts[0].content + "\n" + demoExcerpts[0].content + "\n" + demoExcerpts[0].content, book: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多"), sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
 #Preview("Share English") {
-    MainView(Quote(id: UUID(), content: "Do not feel envious of the happiness of those who live in a fool's paradise, for only a fool will think that it is happiness.", book: "The Ten Commandments", author: "Bertrand Russell"), sharing: true)
+    MainView(Excerpt(id: UUID(), content: "Do not feel envious of the happiness of those who live in a fool's paradise, for only a fool will think that it is happiness.", book: "The Ten Commandments", author: "Bertrand Russell"), sharing: true)
         .environment(\.locale, .init(identifier: "en"))
 }
