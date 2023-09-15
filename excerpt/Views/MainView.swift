@@ -1,5 +1,5 @@
 //
-//  SimpleMainView.swift
+//  MainView.swift
 //  excerpt
 //
 //  Created by Richard on 2023/9/11.
