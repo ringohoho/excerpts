@@ -17,6 +17,8 @@
 		7988C2D22AB1F9EC00F20252 /* PasteSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988C2D12AB1F9EC00F20252 /* PasteSheetView.swift */; };
 		7988C2D42AB1FB0100F20252 /* ShareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988C2D32AB1FB0100F20252 /* ShareView.swift */; };
 		7988C2D62AB2108F00F20252 /* ColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988C2D52AB2108F00F20252 /* ColorExt.swift */; };
+		798C1AB12AB577D100D8BF39 /* Classic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C1AB02AB577D100D8BF39 /* Classic.swift */; };
+		798C1AB42AB5781D00D8BF39 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C1AB32AB5781D00D8BF39 /* Math.swift */; };
 		7993A3C92AB1ACEF0050EAB3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7993A3C82AB1ACEF0050EAB3 /* Localizable.xcstrings */; };
 		7993A3CD2AB1B8AF0050EAB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7993A3CF2AB1B8AF0050EAB3 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
@@ -34,6 +36,8 @@
 		7988C2D12AB1F9EC00F20252 /* PasteSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteSheetView.swift; sourceTree = "<group>"; };
 		7988C2D32AB1FB0100F20252 /* ShareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareView.swift; sourceTree = "<group>"; };
 		7988C2D52AB2108F00F20252 /* ColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExt.swift; sourceTree = "<group>"; };
+		798C1AB02AB577D100D8BF39 /* Classic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Classic.swift; sourceTree = "<group>"; };
+		798C1AB32AB5781D00D8BF39 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		7993A3C82AB1ACEF0050EAB3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7993A3CE2AB1B8AF0050EAB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7993A3D02AB1B8B30050EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -73,6 +77,7 @@
 				794569A42AACB3860095DCBA /* App.swift */,
 				794569B42AACBBB50095DCBA /* Views */,
 				794A862E2AAE1C2000CE8969 /* Models */,
+				798C1AB22AB5780000D8BF39 /* Utils */,
 				794A86312AAE2D6200CE8969 /* Resources */,
 				794569A82AACB3870095DCBA /* Assets.xcassets */,
 				794569AA2AACB3870095DCBA /* Preview Content */,
@@ -91,6 +96,7 @@
 		794569B42AACBBB50095DCBA /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				798C1AAF2AB5777D00D8BF39 /* Cards */,
 				794A86362AAF4B7E00CE8969 /* MainView.swift */,
 				7988C2D12AB1F9EC00F20252 /* PasteSheetView.swift */,
 				7988C2D32AB1FB0100F20252 /* ShareView.swift */,
@@ -124,6 +130,22 @@
 				794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		798C1AAF2AB5777D00D8BF39 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				798C1AB02AB577D100D8BF39 /* Classic.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
+		798C1AB22AB5780000D8BF39 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				798C1AB32AB5781D00D8BF39 /* Math.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +224,8 @@
 			files = (
 				7988C2D42AB1FB0100F20252 /* ShareView.swift in Sources */,
 				7988C2D62AB2108F00F20252 /* ColorExt.swift in Sources */,
+				798C1AB42AB5781D00D8BF39 /* Math.swift in Sources */,
+				798C1AB12AB577D100D8BF39 /* Classic.swift in Sources */,
 				791513682AB4A14900DD7F8B /* ExcerptType.swift in Sources */,
 				794569A52AACB3860095DCBA /* App.swift in Sources */,
 				794A86372AAF4B7E00CE8969 /* MainView.swift in Sources */,
