@@ -45,9 +45,8 @@ struct ClassicCard: View {
                 VStack(spacing: self.contentFromSpacing) {
                     VStack(spacing: self.fontSizeContent) {
                         ForEach(Array(self.excerpt.contentLinesTrimmed().enumerated()), id: \.offset) { _, paragraph in
-                            let p = paragraph.trimmingCharacters(in: .whitespaces)
-                            if !p.isEmpty {
-                                Text(p)
+                            if !paragraph.isEmpty {
+                                Text(paragraph)
                                     .font(.custom(self.fontName, size: self.fontSizeContent))
                                     .foregroundColor(self.colorContent)
                                     .frame(maxWidth: .infinity, alignment: .leading)
