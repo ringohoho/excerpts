@@ -29,7 +29,7 @@ struct ShareView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            ZStack(alignment: .top) {
+            ZStack {
                 ScrollView(.vertical, showsIndicators: false) {
                     // scroll view defaults to take up full height
 
@@ -44,7 +44,7 @@ struct ShareView: View {
                                     self.dismiss()
                                 }
                         }
-                        .frame(width: geometry.size.width, height: .infinity)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
 
                         VStack {
                             self.createCard(width: geometry.size.width - self.screenEdgePadding * 2)
