@@ -30,7 +30,7 @@ private extension Text {
 
     func inContentSection() -> some View {
         self.withNiceFont(C.fontSizeContent)
-            .foregroundColor(C.colorContent)
+            .foregroundStyle(C.colorContent)
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
             .lineSpacing(C.fontSizeContent * 0.2)
@@ -38,14 +38,14 @@ private extension Text {
 
     func inFromSection() -> some View {
         self.withNiceFont(C.fontSizeFrom)
-            .foregroundColor(C.colorFrom)
+            .foregroundStyle(C.colorFrom)
             .multilineTextAlignment(.trailing)
             .frame(maxWidth: .infinity, alignment: .trailing)
     }
 
     func inWatermarkSection() -> some View {
         self.withSystemFont(C.fontSizeWatermark)
-            .foregroundColor(C.colorWatermark)
+            .foregroundStyle(C.colorWatermark)
     }
 }
 
