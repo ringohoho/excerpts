@@ -7,3 +7,4 @@
 */
 
 "CFBundleDisplayName" = "文采";
+"NSPhotoLibraryAddUsageDescription" = "请允许此 App 保存图片到您的照片图库。";

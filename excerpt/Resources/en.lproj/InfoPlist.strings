@@ -7,3 +7,4 @@
 */
 
 "CFBundleDisplayName" = "Excerpt";
+"NSPhotoLibraryAddUsageDescription" = "Please allow this app to save picture to your photo library.";
