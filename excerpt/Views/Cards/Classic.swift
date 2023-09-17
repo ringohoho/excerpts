@@ -103,8 +103,8 @@ struct ClassicCard: View {
                         }
                     }
                 }
-                .padding([.leading, .trailing], self.contentVertOuterPadding)
-                .padding([.top, .bottom], self.contentVertOuterPadding * 1.6)
+                .padding([.horizontal], self.contentVertOuterPadding)
+                .padding([.vertical], self.contentVertOuterPadding * 1.6)
                 .border(C.colorBorder, width: 0.7)
                 .overlay {
                     Color.clear
@@ -112,7 +112,7 @@ struct ClassicCard: View {
                         .padding(2)
                 }
             }
-            .padding([.leading, .top, .trailing], self.rectOuterPadding)
+            .padding([.horizontal, .top], self.rectOuterPadding)
             .padding(.bottom, 3)
 
             HStack(spacing: 2) {
@@ -120,7 +120,7 @@ struct ClassicCard: View {
                 Text("C_APP_NAME").bold().inWatermarkSection()
                 Text("CARD_VIEW_SHARED_VIA_END").inWatermarkSection()
             }
-            .padding([.leading, .bottom, .trailing], self.rectOuterPadding)
+            .padding([.horizontal, .bottom], self.rectOuterPadding)
         }
         .background(C.colorBackground)
     }

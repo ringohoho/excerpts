@@ -80,7 +80,7 @@ struct ShareView: View {
                     ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
                         Image(systemName: "square.and.arrow.up")
                             .imageScale(.large)
-                            .padding([.leading, .trailing], 16)
+                            .padding([.horizontal], 16)
                             .padding(.bottom, 16)
                     }
                 }
