@@ -31,32 +31,49 @@ struct ShareView: View {
         GeometryReader { geometry in
             ZStack(alignment: .top) {
                 ScrollView(.vertical, showsIndicators: false) {
-                    VStack {
-                        self.createCard(width: geometry.size.width - self.screenEdgePadding * 2)
+                    // scroll view defaults to take up full height
+
+                    ZStack(alignment: .center) {
+                        // invisible rect to dismiss the share view
+                        VStack {
+                            Spacer(minLength: 44) // leave a toolbar size here
+                            Color.clear
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                .contentShape(Rectangle())
+                                .onTapGesture {
+                                    self.dismiss()
+                                }
+                        }
+                        .frame(width: geometry.size.width, height: .infinity)
+
+                        VStack {
+                            self.createCard(width: geometry.size.width - self.screenEdgePadding * 2)
+                        }
+                        .padding(self.screenEdgePadding)
+                        .frame(width: geometry.size.width)
+                        .onAppear {
+                            // when the card appear, render it into an Image
+                            let width = geometry.size.width - self.screenEdgePadding * 2
+                            let renderer = ImageRenderer(content: self.createCard(width: width).environment(\.locale, self.envLocale))
+                            renderer.proposedSize.width = width
+                            renderer.scale = self.envDisplayScale
+                            let uiImage = renderer.uiImage!
+                            self.cardImage = Image(uiImage: uiImage)
+                        }
+                        .contextMenu {
+                            // allow user to share in context menu, if they don't see the up-right button
+                            ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
+                                Text("A_SHARE")
+                            }
+                        }
+                        .onTapGesture {
+                            // tap on the card also dismiss the share view
+                            self.dismiss()
+                        }
                     }
-                    .padding(self.screenEdgePadding)
                     .frame(width: geometry.size.width)
                     .frame(minHeight: geometry.size.height)
                 }
-                .onAppear {
-                    let width = geometry.size.width - self.screenEdgePadding * 2
-                    let renderer = ImageRenderer(content: self.createCard(width: width).environment(\.locale, self.envLocale))
-                    renderer.proposedSize.width = width
-                    renderer.scale = self.envDisplayScale
-                    let uiImage = renderer.uiImage!
-                    self.cardImage = Image(uiImage: uiImage)
-                }
-
-                VStack {
-                    Spacer(minLength: 44) // leave a toolbar size here
-                    Color.clear
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            self.dismiss()
-                        }
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height)
 
                 HStack {
                     Spacer()
@@ -68,7 +85,6 @@ struct ShareView: View {
                     }
                 }
             }
-            .padding(0)
         }
     }
 }
