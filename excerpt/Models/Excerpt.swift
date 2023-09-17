@@ -7,20 +7,25 @@
 
 import Foundation
 
-let demoExcerpts = [
-    Excerpt(title: "", author: "罗素", content: "数学，正确地看，不仅拥有真，也拥有至高的美。一种冷而严峻的美，一种屹立不摇的美。如雕塑一般，一种不为我们软弱天性所动摇的美。不像绘画或音乐那般，有着富丽堂皇的修饰，然而这是极其纯净的美，只有这个最伟大的艺术才能显示出最严格的完美。"),
-    Excerpt(title: "", author: "罗素", content: "许多人宁愿死，也不愿思考，事实上他们也确实至死都没有思考。"),
-    Excerpt(title: "我的信仰", author: "罗素", content: "一部分儿童具有思考的习惯，而教育的目的在于铲除他们的这种习惯。")
-]
+enum ExcerptType: Int, Hashable, Codable {
+    case general
+    case verses
+    case lyrics
+}
 
 struct Excerpt: Hashable, Codable, Identifiable {
     var id: UUID = .init()
+    var type: ExcerptType
     var title: String
     var author: String
     var content: String
 
-    static func empty() -> Excerpt {
-        Excerpt(id: UUID(), title: "", author: "", content: "")
+    init(_ type: ExcerptType, title: String, author: String, content: String) {
+        self.id = UUID()
+        self.type = type
+        self.title = title
+        self.author = author
+        self.content = content
     }
 
     var titleTrimmed: String {
@@ -33,5 +38,11 @@ struct Excerpt: Hashable, Codable, Identifiable {
 
     var contentTrimmed: String {
         self.content.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    func contentLinesTrimmed() -> [String] {
+        self.content
+            .components(separatedBy: self.type == .general ? "\n" : "\n\n")
+            .map { s in s.trimmingCharacters(in: .whitespaces) }
     }
 }

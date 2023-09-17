@@ -11,7 +11,6 @@ struct ShareView: View {
     @Binding var isPresented: Bool
 
     var excerpt: Excerpt
-    var excerptType: ExcerptType
 
     @Environment(\.displayScale) var envDisplayScale
     @Environment(\.locale) var envLocale
@@ -25,7 +24,7 @@ struct ShareView: View {
     }
 
     func createCard(width: CGFloat) -> some View {
-        ClassicCard(excerpt: self.excerpt, excerptType: self.excerptType, width: width)
+        ClassicCard(excerpt: self.excerpt, width: width)
     }
 
     var body: some View {
@@ -75,13 +74,17 @@ struct ShareView: View {
 }
 
 #Preview("Dark") {
-    MainView(demoExcerpts[0], .paragraphs, sharing: true)
+    MainView(demoExcerpts[0], sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
         .preferredColorScheme(.dark)
 }
 
 #Preview("Light Long") {
-    let excerpt = Excerpt(id: UUID(), title: "这是一本名字超长的书：甚至还有副标题", author: "名字超长的作者·甚至还有 Last Name·以及更多", content: demoExcerpts[0].content + "\n\n" + demoExcerpts[0].content + "\n" + demoExcerpts[0].content)
-    return MainView(excerpt, .paragraphs, sharing: true)
+    return MainView(demoExcerpts[2], sharing: true)
         .environment(\.locale, .init(identifier: "zh-Hans"))
+}
+
+#Preview("Light English") {
+    MainView(demoExcerpts[3], sharing: true)
+        .environment(\.locale, .init(identifier: "en"))
 }

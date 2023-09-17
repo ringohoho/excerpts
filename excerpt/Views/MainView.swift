@@ -27,7 +27,6 @@ struct MainView: View {
     @State private var showBadPasteAlert = false
 
     @State private var excerpt: Excerpt
-    @State private var excerptType: ExcerptType
     @State private var showShareView: Bool
 
     enum ExcerptFormField {
@@ -39,12 +38,12 @@ struct MainView: View {
     @FocusState private var focusedFormField: ExcerptFormField?
 
     init() {
-        self.init(Excerpt.empty(), ExcerptType(rawValue: UserDefaults.standard.integer(forKey: keyLastExcerptType)) ?? .paragraphs, sharing: false)
+        let excerptType = ExcerptType(rawValue: UserDefaults.standard.integer(forKey: keyLastExcerptType)) ?? .general
+        self.init(Excerpt(excerptType, title: "", author: "", content: ""), sharing: false)
     }
 
-    init(_ initialExcerpt: Excerpt, _ initialExcerptType: ExcerptType, sharing: Bool = false) {
+    init(_ initialExcerpt: Excerpt, sharing: Bool = false) {
         self._excerpt = State(initialValue: initialExcerpt)
-        self._excerptType = State(initialValue: initialExcerptType)
         self._showShareView = State(initialValue: sharing)
     }
 
@@ -68,13 +67,13 @@ struct MainView: View {
         ZStack {
             NavigationStack {
                 Form {
-                    Section(header: Text("A_CONFIG")) {
-                        Picker("C_EXCERPT_TYPE", selection: self.$excerptType) {
-                            Text("C_PARAGRAPHS").tag(ExcerptType.paragraphs)
+                    Section {
+                        Picker("C_EXCERPT_TYPE", selection: self.$excerpt.type) {
+                            Text("C_GENERAL_TEXT").tag(ExcerptType.general)
                             Text("C_VERSES").tag(ExcerptType.verses)
                             Text("C_LYRICS").tag(ExcerptType.lyrics)
                         }
-                        .onChange(of: self.excerptType) { newValue in
+                        .onChange(of: self.excerpt.type) { newValue in
                             UserDefaults.standard.set(newValue.rawValue, forKey: keyLastExcerptType)
                         }
                     }
@@ -129,7 +128,7 @@ struct MainView: View {
             .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
 
             if self.showShareView {
-                ShareView(isPresented: self.$showShareView, excerpt: self.excerpt, excerptType: self.excerptType)
+                ShareView(isPresented: self.$showShareView, excerpt: self.excerpt)
                     .zIndex(1) // to fix animation: https://sarunw.com/posts/how-to-fix-zstack-transition-animation-in-swiftui/
                     .transition(.shareViewTrans)
             }
@@ -143,7 +142,7 @@ struct MainView: View {
         .environment(\.locale, .init(identifier: "zh-Hans"))
 }
 
-#Preview("With Content") {
-    MainView(demoExcerpts[0], .paragraphs)
+#Preview("Non-empty English") {
+    MainView(demoExcerpts[0])
         .environment(\.locale, .init(identifier: "en"))
 }

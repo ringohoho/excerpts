@@ -18,6 +18,7 @@
       }
     },
     "A_CONFIG" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -162,6 +163,22 @@
         }
       }
     },
+    "C_GENERAL_TEXT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General Text"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一般文本"
+          }
+        }
+      }
+    },
     "C_LYRICS" : {
       "localizations" : {
         "en" : {
@@ -179,6 +196,7 @@
       }
     },
     "C_PARAGRAPHS" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
