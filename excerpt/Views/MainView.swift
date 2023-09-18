@@ -124,7 +124,7 @@ struct MainView: View {
             .allowsHitTesting(!self.showShareView)
             // another way to blur: https://stackoverflow.com/a/59111492
             .blur(radius: self.showShareView ? backgroundBlurRadius : 0)
-            .overlay(self.showShareView ? Color.gray.opacity(0.1) : Color.clear)
+            .overlay(self.showShareView ? Color.gray.opacity(0.2) : Color.clear)
             .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
 
             if self.showShareView {

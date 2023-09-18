@@ -50,6 +50,22 @@
         }
       }
     },
+    "A_FONT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Font"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字体"
+          }
+        }
+      }
+    },
     "A_MODE" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -95,6 +111,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "分享"
+          }
+        }
+      }
+    },
+    "A_STYLE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Style"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "样式"
           }
         }
       }
@@ -387,6 +419,21 @@
           }
         }
       }
+    },
+    "思源宋体" : {
+
+    },
+    "现代" : {
+
+    },
+    "简约" : {
+
+    },
+    "系统字体" : {
+
+    },
+    "经典" : {
+
     }
   },
   "version" : "1.0"

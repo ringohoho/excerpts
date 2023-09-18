@@ -19,7 +19,8 @@ struct ShareView: View {
 
     @State private var cardImage = Image(uiImage: UIImage())
 
-    @State private var selectedCardStyle = 0
+    @State private var selectedStyle = 0
+    @State private var selectedFont = 0
 
     func dismiss() {
         self.isPresented = false
@@ -43,7 +44,7 @@ struct ShareView: View {
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-                                    self.dismiss()
+//                                    self.dismiss()
                                 }
                         }
                         .frame(width: geometry.size.width, height: geometry.size.height)
@@ -70,7 +71,7 @@ struct ShareView: View {
                         }
                         .onTapGesture {
                             // tap on the card also dismiss the share view
-                            self.dismiss()
+//                            self.dismiss()
                         }
                     }
                     .frame(width: geometry.size.width)
@@ -78,55 +79,54 @@ struct ShareView: View {
                 }
 
                 VStack {
-                    HStack {
-                        Spacer()
-                        ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
-                            Image(systemName: "square.and.arrow.up")
-                                .imageScale(.large)
-                                .padding([.horizontal], 16)
+                    HStack(spacing: 16) {
+                        Color.clear.frame(maxWidth: 0, maxHeight: 0)
+
+                        Button {
+                            self.dismiss()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .symbolRenderingMode(.hierarchical)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 38, height: 38)
                                 .padding(.bottom, 16)
                         }
+
+                        Spacer()
+
+                        Menu {
+                            Picker("A_STYLE", selection: self.$selectedStyle) {
+                                Label(title: { Text("经典") }, icon: { Image(systemName: "rectangle") }).tag(0)
+                                Label(title: { Text("现代") }, icon: { Image(systemName: "rectangle.checkered") }).tag(1)
+                                Label(title: { Text("简约") }, icon: { Image(systemName: "rectangle.fill") }).tag(2)
+                            }
+                            Picker("A_FONT", selection: self.$selectedFont) {
+                                Label(title: { Text("系统字体") }, icon: { Image(systemName: "rectangle") }).tag(1)
+                                Label(title: { Text("思源宋体") }, icon: { Image(systemName: "rectangle.checkered") }).tag(0)
+                            }
+                        } label: {
+                            Image(systemName: "square.and.pencil.circle.fill")
+                                .symbolRenderingMode(.hierarchical)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 38, height: 38)
+                                .padding(.bottom, 16)
+                        }
+
+                        ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
+                            Image(systemName: "square.and.arrow.up.circle.fill")
+                                .symbolRenderingMode(.hierarchical)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 38, height: 38)
+                                .padding([.bottom], 16)
+                        }
+
+                        Color.clear.frame(maxWidth: 0, maxHeight: 0)
                     }
                     Spacer()
                 }
-
-//                VStack(spacing: 0) {
-//                    Spacer()
-//                    ScrollView(.horizontal) {
-//                        HStack(spacing: 10) {
-//                            Spacer()
-//                            ForEach(Array(["经典", "现代", "简洁"].enumerated()), id: \.offset) { i, styleName in
-//                                Text(styleName)
-//                                    .font(.subheadline)
-//                                    .frame(width: 84)
-//                                    .frame(maxHeight: .infinity)
-//                                    .foregroundStyle(Color("272220")!)
-//                                    .background {
-//                                        Color("F9F9FB")!
-//                                    }
-//                                    .clipShape(RoundedRectangle(cornerRadius: 6).inset(by: 1))
-//                                    .shadow(radius: 0.5)
-//                                    .overlay {
-//                                        if self.selectedCardStyle == i {
-//                                            RoundedRectangle(cornerRadius: 6)
-//                                                .strokeBorder(Color.accentColor, lineWidth: 2)
-//                                        } else {
-//                                            EmptyView()
-//                                        }
-//                                    }
-//                                    .onTapGesture {
-//                                        self.selectedCardStyle = i
-//                                    }
-//                            }
-//                            Spacer()
-//                        }
-//                        .frame(minWidth: geometry.size.width)
-//                        .padding(.vertical, 2)
-//                    }
-//                    .frame(width: geometry.size.width, height: 46)
-//                    Color.clear
-//                        .frame(maxWidth: .infinity, maxHeight: 44)
-//                }
             }
         }
     }
