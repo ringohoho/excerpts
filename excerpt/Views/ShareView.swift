@@ -19,6 +19,8 @@ struct ShareView: View {
 
     @State private var cardImage = Image(uiImage: UIImage())
 
+    @State private var selectedCardStyle = 0
+
     func dismiss() {
         self.isPresented = false
     }
@@ -75,15 +77,56 @@ struct ShareView: View {
                     .frame(minHeight: geometry.size.height)
                 }
 
-                HStack {
-                    Spacer()
-                    ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
-                        Image(systemName: "square.and.arrow.up")
-                            .imageScale(.large)
-                            .padding([.horizontal], 16)
-                            .padding(.bottom, 16)
+                VStack {
+                    HStack {
+                        Spacer()
+                        ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
+                            Image(systemName: "square.and.arrow.up")
+                                .imageScale(.large)
+                                .padding([.horizontal], 16)
+                                .padding(.bottom, 16)
+                        }
                     }
+                    Spacer()
                 }
+
+//                VStack(spacing: 0) {
+//                    Spacer()
+//                    ScrollView(.horizontal) {
+//                        HStack(spacing: 10) {
+//                            Spacer()
+//                            ForEach(Array(["经典", "现代", "简洁"].enumerated()), id: \.offset) { i, styleName in
+//                                Text(styleName)
+//                                    .font(.subheadline)
+//                                    .frame(width: 84)
+//                                    .frame(maxHeight: .infinity)
+//                                    .foregroundStyle(Color("272220")!)
+//                                    .background {
+//                                        Color("F9F9FB")!
+//                                    }
+//                                    .clipShape(RoundedRectangle(cornerRadius: 6).inset(by: 1))
+//                                    .shadow(radius: 0.5)
+//                                    .overlay {
+//                                        if self.selectedCardStyle == i {
+//                                            RoundedRectangle(cornerRadius: 6)
+//                                                .strokeBorder(Color.accentColor, lineWidth: 2)
+//                                        } else {
+//                                            EmptyView()
+//                                        }
+//                                    }
+//                                    .onTapGesture {
+//                                        self.selectedCardStyle = i
+//                                    }
+//                            }
+//                            Spacer()
+//                        }
+//                        .frame(minWidth: geometry.size.width)
+//                        .padding(.vertical, 2)
+//                    }
+//                    .frame(width: geometry.size.width, height: 46)
+//                    Color.clear
+//                        .frame(maxWidth: .infinity, maxHeight: 44)
+//                }
             }
         }
     }
