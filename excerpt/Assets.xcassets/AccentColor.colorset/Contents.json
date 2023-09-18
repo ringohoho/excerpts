@@ -1,10 +1,6 @@
 {
   "colors" : [
     {
-      "color" : {
-        "platform" : "universal",
-        "reference" : "systemBrownColor"
-      },
       "idiom" : "universal"
     },
     {
@@ -14,10 +10,6 @@
           "value" : "dark"
         }
       ],
-      "color" : {
-        "platform" : "universal",
-        "reference" : "systemBrownColor"
-      },
       "idiom" : "universal"
     }
   ],
