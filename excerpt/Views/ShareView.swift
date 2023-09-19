@@ -42,7 +42,7 @@ struct ShareView: View {
     @State private var cardFont = CardFont.sourceHanSerif
 
     @ViewBuilder
-    private func createCard(width: CGFloat) -> some View {
+    private func createCard(width: CGFloat) -> some Card {
         switch self.style {
         case .classic:
             ClassicCard(CardOptions(excerpt: self.excerpt, width: width, font: self.cardFont))
