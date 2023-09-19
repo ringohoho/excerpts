@@ -39,15 +39,16 @@ struct ShareView: View {
                     ZStack(alignment: .center) {
                         // invisible rect to dismiss the share view
                         VStack {
-                            Spacer(minLength: 44) // leave a toolbar size here
+                            Color.clear.frame(width: 0, height: 44) // leave a toolbar size here
                             Color.clear
                                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                                 .contentShape(Rectangle())
                                 .onTapGesture {
-//                                    self.dismiss()
+                                    self.dismiss()
                                 }
                         }
-                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .frame(width: geometry.size.width)
+                        .frame(maxHeight: .infinity)
 
                         VStack {
                             self.createCard(width: geometry.size.width - self.screenEdgePadding * 2)
@@ -71,7 +72,7 @@ struct ShareView: View {
                         }
                         .onTapGesture {
                             // tap on the card also dismiss the share view
-//                            self.dismiss()
+                            self.dismiss()
                         }
                     }
                     .frame(width: geometry.size.width)
