@@ -22,6 +22,8 @@
 		7993A3C92AB1ACEF0050EAB3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7993A3C82AB1ACEF0050EAB3 /* Localizable.xcstrings */; };
 		7993A3CD2AB1B8AF0050EAB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7993A3CF2AB1B8AF0050EAB3 /* InfoPlist.strings */; };
 		79ADB5AD2AB9FADF00A39AC0 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */; };
+		79ADB5AF2ABA050000A39AC0 /* CardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB5AE2ABA050000A39AC0 /* CardOptions.swift */; };
+		79ADB5B12ABA058300A39AC0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB5B02ABA058300A39AC0 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +45,8 @@
 		7993A3CE2AB1B8AF0050EAB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7993A3D02AB1B8B30050EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
+		79ADB5AE2ABA050000A39AC0 /* CardOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOptions.swift; sourceTree = "<group>"; };
+		79ADB5B02ABA058300A39AC0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,8 @@
 			isa = PBXGroup;
 			children = (
 				798C1AB02AB577D100D8BF39 /* Classic.swift */,
+				79ADB5AE2ABA050000A39AC0 /* CardOptions.swift */,
+				79ADB5B02ABA058300A39AC0 /* Card.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -232,9 +238,11 @@
 				798C1AB12AB577D100D8BF39 /* Classic.swift in Sources */,
 				794569A52AACB3860095DCBA /* App.swift in Sources */,
 				794A86372AAF4B7E00CE8969 /* MainView.swift in Sources */,
+				79ADB5B12ABA058300A39AC0 /* Card.swift in Sources */,
 				7988C2D22AB1F9EC00F20252 /* PasteSheetView.swift in Sources */,
 				79729BBD2AB6D7B000B318F9 /* DemoExcerpts.swift in Sources */,
 				794A86302AAE1C2F00CE8969 /* Excerpt.swift in Sources */,
+				79ADB5AF2ABA050000A39AC0 /* CardOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

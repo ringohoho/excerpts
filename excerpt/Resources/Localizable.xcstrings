@@ -145,6 +145,38 @@
         }
       }
     },
+    "C_FONT_SOURCE_HAN_SERIF" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Source Han Serif"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "思源宋体"
+          }
+        }
+      }
+    },
+    "C_FONT_SYSTEM" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Font"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "系统字体"
+          }
+        }
+      }
+    },
     "C_GENERAL_TEXT" : {
       "localizations" : {
         "en" : {
@@ -237,6 +269,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "样式"
+          }
+        }
+      }
+    },
+    "C_STYLE_CLASSIC" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Classic"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "经典"
           }
         }
       }
@@ -416,21 +464,6 @@
           }
         }
       }
-    },
-    "思源宋体" : {
-
-    },
-    "现代" : {
-
-    },
-    "简约" : {
-
-    },
-    "系统字体" : {
-
-    },
-    "经典" : {
-
     }
   },
   "version" : "1.0"

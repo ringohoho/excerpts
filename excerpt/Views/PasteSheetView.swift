@@ -17,7 +17,7 @@ private enum PasteSource: Int {
     }
 }
 
-private let appleBooksExcerptTplt = /^“([\S\s]*)”\s*摘录来自\n([^\n]+)\n([^\n]+)\n此材料受版权保护。$/
+private let appleBooksExcerptTplt = /^“([\S\s]*)”\s*摘录来自\n([^\n]+)\n([^\n]+)(?:\n[^\n]+)?\n此材料(?:可能)?受版权保护。$/
 // TODO: english
 
 struct PasteSheetView: View {

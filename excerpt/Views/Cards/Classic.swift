@@ -20,38 +20,45 @@ private enum C {
 }
 
 private extension Text {
-    func withNiceFont(_ size: CGFloat) -> Text {
-        self.font(.custom("SourceHanSerifSC-Regular", size: size))
-    }
-
-    func withSystemFont(_ size: CGFloat) -> Text {
-        self.font(.system(size: size))
-    }
-
-    func inContentSection() -> some View {
-        self.withNiceFont(C.fontSizeContent)
+    func inContentSection(_ options: CardOptions) -> some View {
+        self.font(options.font.font(size: C.fontSizeContent))
             .foregroundStyle(C.colorContent)
             .multilineTextAlignment(.leading)
             .frame(maxWidth: .infinity, alignment: .leading)
             .lineSpacing(C.fontSizeContent * 0.2)
     }
 
-    func inFromSection() -> some View {
-        self.withNiceFont(C.fontSizeFrom)
+    func inFromSection(_ options: CardOptions) -> some View {
+        self.font(options.font.font(size: C.fontSizeFrom))
             .foregroundStyle(C.colorFrom)
             .multilineTextAlignment(.trailing)
             .frame(maxWidth: .infinity, alignment: .trailing)
     }
 
     func inWatermarkSection() -> some View {
-        self.withSystemFont(C.fontSizeWatermark)
+        self.font(.system(size: C.fontSizeWatermark))
             .foregroundStyle(C.colorWatermark)
     }
 }
 
-struct ClassicCard: View {
-    var excerpt: Excerpt
-    var width: CGFloat
+struct ClassicCard: Card {
+    let options: CardOptions
+
+    init(_ options: CardOptions) {
+        self.options = options
+    }
+
+    private var excerpt: Excerpt {
+        self.options.excerpt
+    }
+
+    private var width: CGFloat {
+        self.options.width
+    }
+
+    private var font: CardFont {
+        self.options.font
+    }
 
     private let rectOuterPadding: CGFloat = 15
 
@@ -78,7 +85,7 @@ struct ClassicCard: View {
                     VStack(spacing: C.fontSizeContent) {
                         ForEach(Array(self.excerpt.contentLinesTrimmed().enumerated()), id: \.offset) { _, paragraph in
                             if !paragraph.isEmpty {
-                                Text(paragraph).inContentSection()
+                                Text(paragraph).inContentSection(self.options)
                             }
                         }
                     }
@@ -87,17 +94,17 @@ struct ClassicCard: View {
                         VStack(spacing: C.fontSizeFrom * 0.2) {
                             if self.excerpt.type != .lyrics {
                                 if !self.excerpt.authorTrimmed.isEmpty {
-                                    Text("CARD_VIEW_AUTHOR_TPLT \(self.excerpt.authorTrimmed)").inFromSection()
+                                    Text("CARD_VIEW_AUTHOR_TPLT \(self.excerpt.authorTrimmed)").inFromSection(self.options)
                                 }
                                 if !self.excerpt.titleTrimmed.isEmpty {
-                                    Text(self.excerpt.titleTrimmed).inFromSection()
+                                    Text(self.excerpt.titleTrimmed).inFromSection(self.options)
                                 }
                             } else {
                                 if !self.excerpt.titleTrimmed.isEmpty {
-                                    Text(self.excerpt.titleTrimmed).inFromSection()
+                                    Text(self.excerpt.titleTrimmed).inFromSection(self.options)
                                 }
                                 if !self.excerpt.authorTrimmed.isEmpty {
-                                    Text(self.excerpt.authorTrimmed).inFromSection()
+                                    Text(self.excerpt.authorTrimmed).inFromSection(self.options)
                                 }
                             }
                         }
@@ -134,7 +141,7 @@ struct ClassicCard_Previews: PreviewProvider {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
-                        ClassicCard(excerpt: excerpt, width: geometry.size.width - screenEdgePadding * 2)
+                        ClassicCard(CardOptions(excerpt: excerpt, width: geometry.size.width - screenEdgePadding * 2, font: .sourceHanSerif))
                     }
                     .padding(screenEdgePadding)
                     .frame(width: geometry.size.width)

@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+private enum Style: Int, CaseIterable {
+    case classic
+
+    var string: String {
+        switch self {
+        case .classic: String(localized: "C_STYLE_CLASSIC")
+        }
+    }
+}
+
 struct ShareView: View {
     @Environment(\.displayScale) private var envDisplayScale
     @Environment(\.locale) private var envLocale
@@ -28,15 +38,14 @@ struct ShareView: View {
 
     @State private var isMenuOpen = false
 
-    @State private var selectedStyle = 0
-    @State private var selectedFont = 0
+    @State private var style = Style.classic
+    @State private var cardFont = CardFont.sourceHanSerif
 
     @ViewBuilder
     private func createCard(width: CGFloat) -> some View {
-        if self.selectedStyle == 0 {
-            ClassicCard(excerpt: self.excerpt, width: width)
-        } else {
-            EmptyView()
+        switch self.style {
+        case .classic:
+            ClassicCard(CardOptions(excerpt: self.excerpt, width: width, font: self.cardFont))
         }
     }
 
@@ -102,15 +111,16 @@ struct ShareView: View {
                         Spacer()
 
                         Menu {
-                            Picker("C_STYLE", selection: self.$selectedStyle) {
-                                Label(title: { Text("经典") }, icon: { Image(systemName: "rectangle") }).tag(0)
-                                Label(title: { Text("现代") }, icon: { Image(systemName: "rectangle.checkered") }).tag(1)
-                                Label(title: { Text("简约") }, icon: { Image(systemName: "rectangle.fill") }).tag(2)
+                            Picker("C_STYLE", selection: self.$style) {
+                                ForEach(Style.allCases, id: \.rawValue) { style in
+                                    Label(title: { Text(style.string) }, icon: { Image(systemName: "rectangle") }).tag(style)
+                                }
                             }
                             .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
-                            Picker("C_FONT", selection: self.$selectedFont) {
-                                Label(title: { Text("系统字体") }, icon: { Image(systemName: "rectangle") }).tag(1)
-                                Label(title: { Text("思源宋体") }, icon: { Image(systemName: "rectangle.checkered") }).tag(0)
+                            Picker("C_FONT", selection: self.$cardFont) {
+                                ForEach(CardFont.allCases, id: \.rawValue) { font in
+                                    Text(font.string).tag(font)
+                                }
                             }
                             .menuActionDismissBehavior(.disabled)
                         } label: {
