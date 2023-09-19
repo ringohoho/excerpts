@@ -10,28 +10,34 @@ import SwiftUI
 struct ShareView: View {
     @Binding var isPresented: Bool
 
-    var excerpt: Excerpt
-
-    @Environment(\.displayScale) var envDisplayScale
-    @Environment(\.locale) var envLocale
-
-    private let screenEdgePadding: CGFloat = 12
-
-    @State private var cardUiImage = UIImage()
-
-    var cardImage: Image {
-        Image(uiImage: self.cardUiImage)
-    }
-
-    @State private var selectedStyle = 0
-    @State private var selectedFont = 0
-
     func dismiss() {
         self.isPresented = false
     }
 
-    func createCard(width: CGFloat) -> some View {
-        ClassicCard(excerpt: self.excerpt, width: width)
+    var excerpt: Excerpt
+
+    private let screenEdgePadding: CGFloat = 12
+    @Environment(\.displayScale) var envDisplayScale
+    @Environment(\.locale) var envLocale
+
+    @State private var cardUiImage = UIImage()
+
+    private var cardImage: Image {
+        Image(uiImage: self.cardUiImage)
+    }
+
+    @State private var isMenuOpen = false
+
+    @State private var selectedStyle = 0
+    @State private var selectedFont = 0
+
+    @ViewBuilder
+    private func createCard(width: CGFloat) -> some View {
+        if self.selectedStyle == 0 {
+            ClassicCard(excerpt: self.excerpt, width: width)
+        } else {
+            EmptyView()
+        }
     }
 
     var body: some View {
@@ -78,6 +84,7 @@ struct ShareView: View {
                 }
 
                 VStack {
+                    // hand-made toolbar
                     HStack(spacing: 16) {
                         Color.clear.frame(maxWidth: 0, maxHeight: 0)
 
@@ -100,10 +107,12 @@ struct ShareView: View {
                                 Label(title: { Text("现代") }, icon: { Image(systemName: "rectangle.checkered") }).tag(1)
                                 Label(title: { Text("简约") }, icon: { Image(systemName: "rectangle.fill") }).tag(2)
                             }
+                            .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
                             Picker("A_FONT", selection: self.$selectedFont) {
                                 Label(title: { Text("系统字体") }, icon: { Image(systemName: "rectangle") }).tag(1)
                                 Label(title: { Text("思源宋体") }, icon: { Image(systemName: "rectangle.checkered") }).tag(0)
                             }
+                            .menuActionDismissBehavior(.disabled)
                         } label: {
                             Image(systemName: "square.and.pencil.circle.fill")
                                 .symbolRenderingMode(.hierarchical)
@@ -111,6 +120,9 @@ struct ShareView: View {
                                 .scaledToFit()
                                 .frame(width: 38, height: 38)
                                 .padding(.bottom, 16)
+                        }
+                        .onTapGesture {
+                            self.isMenuOpen = true
                         }
 
                         ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
@@ -126,6 +138,17 @@ struct ShareView: View {
                         Color.clear.frame(maxWidth: 0, maxHeight: 0)
                     }
                     Spacer()
+                }
+            }
+            .overlay {
+                if self.isMenuOpen {
+                    // mask all the controls except menu
+                    Color.gray.opacity(0.001)
+                        .ignoresSafeArea()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .onTapGesture {
+                            self.isMenuOpen = false
+                        }
                 }
             }
         }
