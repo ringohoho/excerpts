@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct ShareView: View {
-    @Binding var isPresented: Bool
+    @Environment(\.displayScale) private var envDisplayScale
+    @Environment(\.locale) private var envLocale
 
-    func dismiss() {
+    @Binding var isPresented: Bool
+    var excerpt: Excerpt
+
+    private func dismiss() {
         self.isPresented = false
     }
 
-    var excerpt: Excerpt
-
     private let screenEdgePadding: CGFloat = 12
-    @Environment(\.displayScale) var envDisplayScale
-    @Environment(\.locale) var envLocale
 
     @State private var cardUiImage = UIImage()
 
@@ -102,13 +102,13 @@ struct ShareView: View {
                         Spacer()
 
                         Menu {
-                            Picker("A_STYLE", selection: self.$selectedStyle) {
+                            Picker("C_STYLE", selection: self.$selectedStyle) {
                                 Label(title: { Text("经典") }, icon: { Image(systemName: "rectangle") }).tag(0)
                                 Label(title: { Text("现代") }, icon: { Image(systemName: "rectangle.checkered") }).tag(1)
                                 Label(title: { Text("简约") }, icon: { Image(systemName: "rectangle.fill") }).tag(2)
                             }
                             .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
-                            Picker("A_FONT", selection: self.$selectedFont) {
+                            Picker("C_FONT", selection: self.$selectedFont) {
                                 Label(title: { Text("系统字体") }, icon: { Image(systemName: "rectangle") }).tag(1)
                                 Label(title: { Text("思源宋体") }, icon: { Image(systemName: "rectangle.checkered") }).tag(0)
                             }
