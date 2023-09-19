@@ -52,12 +52,7 @@ struct ShareView: View {
 
                         VStack {
                             self.createCard(width: geometry.size.width - self.screenEdgePadding * 2)
-                                .contextMenu {
-                                    // allow user to share in context menu, if they don't see the up-right button
-                                    ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
-                                        Text("A_SHARE")
-                                    }
-                                }
+                                .draggable(self.cardImage)
                         }
                         .padding(self.screenEdgePadding)
                         .frame(width: geometry.size.width)
