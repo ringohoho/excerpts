@@ -17,7 +17,11 @@ struct ShareView: View {
 
     private let screenEdgePadding: CGFloat = 12
 
-    @State private var cardImage = Image(uiImage: UIImage())
+    @State private var cardUiImage = UIImage()
+
+    var cardImage: Image {
+        Image(uiImage: self.cardUiImage)
+    }
 
     @State private var selectedStyle = 0
     @State private var selectedFont = 0
@@ -62,8 +66,7 @@ struct ShareView: View {
                             let renderer = ImageRenderer(content: self.createCard(width: width).environment(\.locale, self.envLocale))
                             renderer.proposedSize.width = width
                             renderer.scale = self.envDisplayScale
-                            let uiImage = renderer.uiImage!
-                            self.cardImage = Image(uiImage: uiImage)
+                            self.cardUiImage = renderer.uiImage!
                         }
                         .onTapGesture {
                             // tap on the card also dismiss the share view
@@ -118,6 +121,7 @@ struct ShareView: View {
                                 .frame(width: 38, height: 38)
                                 .padding([.bottom], 16)
                         }
+                        .disabled(self.cardUiImage.size == CGSize())
 
                         Color.clear.frame(maxWidth: 0, maxHeight: 0)
                     }
