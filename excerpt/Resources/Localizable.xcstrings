@@ -17,23 +17,6 @@
         }
       }
     },
-    "A_CONFIG" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Configuration"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "配置"
-          }
-        }
-      }
-    },
     "A_DONE" : {
       "localizations" : {
         "en" : {
@@ -46,39 +29,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "完成"
-          }
-        }
-      }
-    },
-    "A_FONT" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Font"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "字体"
-          }
-        }
-      }
-    },
-    "A_MODE" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Mode"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "模式"
           }
         }
       }
@@ -111,22 +61,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "分享"
-          }
-        }
-      }
-    },
-    "A_STYLE" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Style"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "样式"
           }
         }
       }
@@ -195,6 +129,22 @@
         }
       }
     },
+    "C_FONT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Font"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "字体"
+          }
+        }
+      }
+    },
     "C_GENERAL_TEXT" : {
       "localizations" : {
         "en" : {
@@ -227,19 +177,66 @@
         }
       }
     },
-    "C_PARAGRAPHS" : {
-      "extractionState" : "stale",
+    "C_PASTE_CONTENT" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Paragraphs"
+            "value" : "Paste Content"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "段落"
+            "value" : "粘贴内容"
+          }
+        }
+      }
+    },
+    "C_PASTE_SOURCE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paste Source"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "粘贴来源"
+          }
+        }
+      }
+    },
+    "C_PASTE_SOURCE_APPLE_BOOKS" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Books"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Books"
+          }
+        }
+      }
+    },
+    "C_STYLE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Style"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "样式"
           }
         }
       }
@@ -324,22 +321,6 @@
         }
       }
     },
-    "MAIN_VIEW_ALRT_INVALID_APPLE_BOOKS_EXCERPT" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "The pasted excerpt seems not to be from Apple Books."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "粘贴的摘录似乎不是来自 Apple Books 的。"
-          }
-        }
-      }
-    },
     "MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER" : {
       "localizations" : {
         "en" : {
@@ -388,18 +369,34 @@
         }
       }
     },
-    "PASTE_VIEW_TEXT_PLACEHOLDER" : {
+    "PASTE_VIEW_ALRT_INVALID_PASTE_CONTENT_FROM %@" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Paste excerpt copied from Apple Books here (no need to modify)"
+            "value" : "The pasted content seems not to be from %@."
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在这里粘贴从 Apple Books 拷贝的摘录（不需要修改）"
+            "value" : "粘贴的内容似乎不是来自 %@ 的。"
+          }
+        }
+      }
+    },
+    "PASTE_VIEW_CONTENT_PLACEHOLDER" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paste content copied from the selected source here (no need to modify)"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在这里粘贴从其它 App 拷贝的内容（不需要修改）"
           }
         }
       }
@@ -409,13 +406,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Paste from Apple Books"
+            "value" : "Paste from Other Apps"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "从 Apple Books 粘贴"
+            "value" : "从其它 App 粘贴"
           }
         }
       }

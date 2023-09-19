@@ -21,6 +21,7 @@
 		798C1AB42AB5781D00D8BF39 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 798C1AB32AB5781D00D8BF39 /* Math.swift */; };
 		7993A3C92AB1ACEF0050EAB3 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7993A3C82AB1ACEF0050EAB3 /* Localizable.xcstrings */; };
 		7993A3CD2AB1B8AF0050EAB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7993A3CF2AB1B8AF0050EAB3 /* InfoPlist.strings */; };
+		79ADB5AD2AB9FADF00A39AC0 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		7993A3C82AB1ACEF0050EAB3 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7993A3CE2AB1B8AF0050EAB3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7993A3D02AB1B8B30050EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 			children = (
 				794A86352AAE2DEC00CE8969 /* Info.plist */,
 				794569A42AACB3860095DCBA /* App.swift */,
+				79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */,
 				794569B42AACBBB50095DCBA /* Views */,
 				794A862E2AAE1C2000CE8969 /* Models */,
 				798C1AB22AB5780000D8BF39 /* Utils */,
@@ -224,6 +227,7 @@
 			files = (
 				7988C2D42AB1FB0100F20252 /* ShareView.swift in Sources */,
 				7988C2D62AB2108F00F20252 /* ColorExt.swift in Sources */,
+				79ADB5AD2AB9FADF00A39AC0 /* UserDefaultsKeys.swift in Sources */,
 				798C1AB42AB5781D00D8BF39 /* Math.swift in Sources */,
 				798C1AB12AB577D100D8BF39 /* Classic.swift in Sources */,
 				794569A52AACB3860095DCBA /* App.swift in Sources */,

@@ -7,15 +7,9 @@
 
 import SwiftUI
 
-let keyLastExcerptType = "lastExcerptType"
+private let animationDuration: CGFloat = 0.2
 
-let animationDuration: CGFloat = 0.2
-let backgroundBlurRadius: CGFloat = 20
-
-let appleBooksExcerptTplt = /^“([\S\s]*)”\s*摘录来自\n([^\n]+)\n([^\n]+)\n此材料受版权保护。$/
-// TODO: english
-
-extension AnyTransition {
+private extension AnyTransition {
     static var shareViewTrans: AnyTransition {
         AnyTransition.offset(y: 60).combined(with: .opacity)
     }
@@ -23,13 +17,11 @@ extension AnyTransition {
 
 struct MainView: View {
     @State private var showPasteSheet = false
-    @State private var pasted = ""
-    @State private var showBadPasteAlert = false
 
     @State private var excerpt: Excerpt
     @State private var showShareView: Bool
 
-    enum ExcerptFormField {
+    private enum ExcerptFormField {
         case title
         case author
         case content
@@ -38,7 +30,7 @@ struct MainView: View {
     @FocusState private var focusedFormField: ExcerptFormField?
 
     init() {
-        let excerptType = ExcerptType(rawValue: UserDefaults.standard.integer(forKey: keyLastExcerptType)) ?? .general
+        let excerptType = ExcerptType(rawValue: UserDefaults.standard.integer(forKey: UserDefaultsKeys.initialExcerptType)) ?? .general
         self.init(Excerpt(excerptType, title: "", author: "", content: ""), sharing: false)
     }
 
@@ -47,46 +39,35 @@ struct MainView: View {
         self._showShareView = State(initialValue: sharing)
     }
 
-    func handlePasted() {
-        let pasted = self.pasted
-        if pasted.isEmpty {
-            return
-        }
-        self.pasted = ""
-
-        if let match = pasted.wholeMatch(of: appleBooksExcerptTplt) {
-            self.excerpt.content = String(match.1)
-            self.excerpt.title = String(match.2)
-            self.excerpt.author = String(match.3)
-        } else {
-            self.showBadPasteAlert = true
-        }
-    }
-
     var body: some View {
         ZStack {
             NavigationStack {
                 Form {
                     Section {
+                        Button("PASTE_VIEW_TITLE") {
+                            self.showPasteSheet = true
+                            self.focusedFormField = nil
+                        }
+
                         Picker("C_EXCERPT_TYPE", selection: self.$excerpt.type) {
                             Text("C_GENERAL_TEXT").tag(ExcerptType.general)
                             Text("C_VERSES").tag(ExcerptType.verses)
                             Text("C_LYRICS").tag(ExcerptType.lyrics)
                         }
                         .onChange(of: self.excerpt.type) { newValue in
-                            UserDefaults.standard.set(newValue.rawValue, forKey: keyLastExcerptType)
+                            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultsKeys.initialExcerptType)
                         }
                     }
 
-                    Section(header: Text("C_TITLE")) {
+                    Section("C_TITLE") {
                         TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerpt.title, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .title)
                     }
-                    Section(header: Text("C_AUTHOR")) {
+                    Section("C_AUTHOR") {
                         TextField("MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER", text: self.$excerpt.author, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .author)
                     }
-                    Section(header: Text("C_CONTENT")) {
+                    Section("C_CONTENT") {
                         TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$excerpt.content, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .content)
                             .lineLimit(6 ... .max)
@@ -101,29 +82,13 @@ struct MainView: View {
                 }
                 .scrollDismissesKeyboard(.interactively)
                 .navigationTitle("C_APP_NAME")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Menu {
-                            Button("PASTE_VIEW_TITLE") {
-                                self.pasted = ""
-                                self.showPasteSheet = true
-                                self.focusedFormField = nil
-                            }
-                        } label: {
-                            Image(systemName: "doc.on.clipboard")
-                        }
-                    }
-                }
-                .sheet(isPresented: self.$showPasteSheet, onDismiss: self.handlePasted) {
-                    PasteSheetView(pasted: self.$pasted)
-                }
-                .alert("MAIN_VIEW_ALRT_INVALID_APPLE_BOOKS_EXCERPT", isPresented: self.$showBadPasteAlert) {
-                    Button("A_OK", role: .cancel) {}
+                .sheet(isPresented: self.$showPasteSheet) {
+                    PasteSheetView(excerpt: self.$excerpt)
                 }
             }
             .allowsHitTesting(!self.showShareView)
             // another way to blur: https://stackoverflow.com/a/59111492
-            .blur(radius: self.showShareView ? backgroundBlurRadius : 0)
+            .blur(radius: self.showShareView ? 20 : 0)
             .overlay(self.showShareView ? Color.gray.opacity(0.2) : Color.clear)
             .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
 
