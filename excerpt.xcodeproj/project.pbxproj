@@ -24,6 +24,9 @@
 		79ADB5AD2AB9FADF00A39AC0 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */; };
 		79ADB5AF2ABA050000A39AC0 /* CardOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB5AE2ABA050000A39AC0 /* CardOptions.swift */; };
 		79ADB5B12ABA058300A39AC0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB5B02ABA058300A39AC0 /* Card.swift */; };
+		79D5AB092ABB1C410023305B /* PasteParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5AB082ABB1C410023305B /* PasteParser.swift */; };
+		79D5AB0B2ABB1D910023305B /* AppleBooksPasteParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5AB0A2ABB1D910023305B /* AppleBooksPasteParser.swift */; };
+		79D5AB0D2ABB1EE90023305B /* PasteSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5AB0C2ABB1EE90023305B /* PasteSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +50,9 @@
 		79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		79ADB5AE2ABA050000A39AC0 /* CardOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardOptions.swift; sourceTree = "<group>"; };
 		79ADB5B02ABA058300A39AC0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		79D5AB082ABB1C410023305B /* PasteParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteParser.swift; sourceTree = "<group>"; };
+		79D5AB0A2ABB1D910023305B /* AppleBooksPasteParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleBooksPasteParser.swift; sourceTree = "<group>"; };
+		79D5AB0C2ABB1EE90023305B /* PasteSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +89,7 @@
 				794569A42AACB3860095DCBA /* App.swift */,
 				79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */,
 				794569B42AACBBB50095DCBA /* Views */,
+				79D5AB072ABB1C020023305B /* PasteSources */,
 				794A862E2AAE1C2000CE8969 /* Models */,
 				798C1AB22AB5780000D8BF39 /* Utils */,
 				794A86312AAE2D6200CE8969 /* Resources */,
@@ -155,6 +162,16 @@
 				798C1AB32AB5781D00D8BF39 /* Math.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		79D5AB072ABB1C020023305B /* PasteSources */ = {
+			isa = PBXGroup;
+			children = (
+				79D5AB0C2ABB1EE90023305B /* PasteSource.swift */,
+				79D5AB082ABB1C410023305B /* PasteParser.swift */,
+				79D5AB0A2ABB1D910023305B /* AppleBooksPasteParser.swift */,
+			);
+			path = PasteSources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,12 +251,15 @@
 				7988C2D42AB1FB0100F20252 /* ShareView.swift in Sources */,
 				7988C2D62AB2108F00F20252 /* ColorExt.swift in Sources */,
 				79ADB5AD2AB9FADF00A39AC0 /* UserDefaultsKeys.swift in Sources */,
+				79D5AB0D2ABB1EE90023305B /* PasteSource.swift in Sources */,
 				798C1AB42AB5781D00D8BF39 /* Math.swift in Sources */,
 				798C1AB12AB577D100D8BF39 /* Classic.swift in Sources */,
 				794569A52AACB3860095DCBA /* App.swift in Sources */,
 				794A86372AAF4B7E00CE8969 /* MainView.swift in Sources */,
 				79ADB5B12ABA058300A39AC0 /* Card.swift in Sources */,
 				7988C2D22AB1F9EC00F20252 /* PasteSheetView.swift in Sources */,
+				79D5AB092ABB1C410023305B /* PasteParser.swift in Sources */,
+				79D5AB0B2ABB1D910023305B /* AppleBooksPasteParser.swift in Sources */,
 				79729BBD2AB6D7B000B318F9 /* DemoExcerpts.swift in Sources */,
 				794A86302AAE1C2F00CE8969 /* Excerpt.swift in Sources */,
 				79ADB5AF2ABA050000A39AC0 /* CardOptions.swift in Sources */,
