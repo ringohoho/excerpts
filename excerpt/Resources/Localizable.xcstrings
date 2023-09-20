@@ -444,7 +444,7 @@
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在这里粘贴从其它 App 拷贝的内容（不需要修改）"
+            "value" : "在这里粘贴从所选来源拷贝的内容（不需要修改）"
           }
         }
       }
