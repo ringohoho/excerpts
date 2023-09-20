@@ -30,7 +30,7 @@ struct MainView: View {
     @FocusState private var focusedFormField: ExcerptFormField?
 
     init() {
-        let excerptType = ExcerptType(rawValue: UserDefaults.standard.integer(forKey: UserDefaultsKeys.initialExcerptType)) ?? .general
+        let excerptType = ExcerptType(rawValue: UserDefaults.standard.integer(forKey: UserDefaultsKeys.initialExcerptType)) ?? .defaultValue
         self.init(Excerpt(excerptType, title: "", author: "", content: ""), sharing: false)
     }
 
@@ -50,9 +50,9 @@ struct MainView: View {
                         }
 
                         Picker("C_EXCERPT_TYPE", selection: self.$excerpt.type) {
-                            Text("C_GENERAL_TEXT").tag(ExcerptType.general)
-                            Text("C_VERSES").tag(ExcerptType.verses)
-                            Text("C_LYRICS").tag(ExcerptType.lyrics)
+                            ForEach(ExcerptType.allCases, id: \.rawValue) { type in
+                                Text(type.displayName).tag(type)
+                            }
                         }
                         .onChange(of: self.excerpt.type) { newValue in
                             UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultsKeys.initialExcerptType)

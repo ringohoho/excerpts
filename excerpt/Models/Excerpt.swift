@@ -7,10 +7,20 @@
 
 import Foundation
 
-enum ExcerptType: Int, Hashable, Codable {
+enum ExcerptType: Int, CaseIterable, Hashable, Codable {
     case general
     case verses
     case lyrics
+
+    static let defaultValue = Self.general
+
+    var displayName: String {
+        switch self {
+        case .general: String(localized: "C_GENERAL_TEXT")
+        case .verses: String(localized: "C_VERSES")
+        case .lyrics: String(localized: "C_LYRICS")
+        }
+    }
 }
 
 struct Excerpt: Hashable, Codable, Identifiable {
