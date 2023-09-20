@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-private enum Style: Int, CaseIterable {
-    case classic
-
-    var string: String {
-        switch self {
-        case .classic: String(localized: "C_STYLE_CLASSIC")
-        }
-    }
-}
-
 struct ShareView: View {
     @Environment(\.displayScale) private var envDisplayScale
     @Environment(\.locale) private var envLocale
@@ -38,15 +28,13 @@ struct ShareView: View {
 
     @State private var isMenuOpen = false
 
-    @State private var style = Style.classic
-    @State private var cardFont = CardFont.sourceHanSerif
+    @State private var cardStyle = CardStyle.defaultValue
+    @State private var cardFont = CardFont.defaultValue
 
     @ViewBuilder
-    private func createCard(width: CGFloat) -> some Card {
-        switch self.style {
-        case .classic:
-            ClassicCard(CardOptions(excerpt: self.excerpt, width: width, font: self.cardFont))
-        }
+    private func card(width: CGFloat) -> some Card {
+        self.cardStyle
+            .create(.init(excerpt: self.excerpt, width: width, font: self.cardFont))
     }
 
     var body: some View {
@@ -70,7 +58,7 @@ struct ShareView: View {
                         .frame(maxHeight: .infinity)
 
                         VStack {
-                            self.createCard(width: geometry.size.width - self.screenEdgePadding * 2)
+                            self.card(width: geometry.size.width - self.screenEdgePadding * 2)
                                 .draggable(self.cardImage)
                         }
                         .padding(self.screenEdgePadding)
@@ -78,7 +66,7 @@ struct ShareView: View {
                         .onAppear {
                             // when the card appear, render it into an Image
                             let width = geometry.size.width - self.screenEdgePadding * 2
-                            let renderer = ImageRenderer(content: self.createCard(width: width).environment(\.locale, self.envLocale))
+                            let renderer = ImageRenderer(content: self.card(width: width).environment(\.locale, self.envLocale))
                             renderer.proposedSize.width = width
                             renderer.scale = self.envDisplayScale
                             self.cardUiImage = renderer.uiImage!
@@ -111,15 +99,15 @@ struct ShareView: View {
                         Spacer()
 
                         Menu {
-                            Picker("C_STYLE", selection: self.$style) {
-                                ForEach(Style.allCases, id: \.rawValue) { style in
-                                    Label(title: { Text(style.string) }, icon: { Image(systemName: "rectangle") }).tag(style)
+                            Picker("C_STYLE", selection: self.$cardStyle) {
+                                ForEach(CardStyle.allCases, id: \.rawValue) { style in
+                                    Label(title: { Text(style.displayName) }, icon: { Image(systemName: "rectangle") }).tag(style)
                                 }
                             }
                             .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
                             Picker("C_FONT", selection: self.$cardFont) {
                                 ForEach(CardFont.allCases, id: \.rawValue) { font in
-                                    Text(font.string).tag(font)
+                                    Text(font.displayName).tag(font)
                                 }
                             }
                             .menuActionDismissBehavior(.disabled)

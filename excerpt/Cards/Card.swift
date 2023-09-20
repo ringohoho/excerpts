@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+struct CardOptions {
+    let excerpt: Excerpt
+    let width: CGFloat
+    let font: CardFont
+}
+
 protocol Card: View {
     init(_ options: CardOptions)
 }

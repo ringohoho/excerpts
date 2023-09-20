@@ -1,5 +1,5 @@
 //
-//  CardOptions.swift
+//  CardFont.swift
 //  excerpt
 //
 //  Created by Richard on 2023/9/20.
@@ -11,7 +11,11 @@ enum CardFont: Int, CaseIterable {
     case system
     case sourceHanSerif
 
-    var string: String {
+    static var defaultValue: Self {
+        .sourceHanSerif
+    }
+
+    var displayName: String {
         switch self {
         case .system: String(localized: "C_FONT_SYSTEM")
         case .sourceHanSerif: String(localized: "C_FONT_SOURCE_HAN_SERIF")
@@ -24,10 +28,4 @@ enum CardFont: Int, CaseIterable {
         case .sourceHanSerif: .custom("SourceHanSerifSC-Regular", size: size)
         }
     }
-}
-
-struct CardOptions {
-    let excerpt: Excerpt
-    let width: CGFloat
-    let font: CardFont
 }
