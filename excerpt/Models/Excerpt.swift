@@ -8,9 +8,9 @@
 import Foundation
 
 enum ExcerptType: Int, CaseIterable, Hashable, Codable {
-    case general
-    case verses
-    case lyrics
+    case general = 1010
+    case verses = 1015
+    case lyrics = 1020
 
     static let defaultValue = Self.general
 

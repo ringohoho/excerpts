@@ -8,11 +8,9 @@
 import SwiftUI
 
 enum CardStyle: Int, CaseIterable {
-    case classic
+    case classic = 1010
 
-    static var defaultValue: Self {
-        .classic
-    }
+    static let defaultValue = Self.classic
 
     var displayName: String {
         switch self {

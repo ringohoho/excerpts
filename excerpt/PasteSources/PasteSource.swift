@@ -8,11 +8,9 @@
 import Foundation
 
 enum PasteSource: Int, CaseIterable {
-    case appleBooks = 1000
+    case appleBooks = 1010
 
-    static var defaultValue: Self {
-        .appleBooks
-    }
+    static let defaultValue = Self.appleBooks
 
     var displayName: String {
         switch self {

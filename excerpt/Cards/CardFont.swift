@@ -8,12 +8,10 @@
 import SwiftUI
 
 enum CardFont: Int, CaseIterable {
-    case system
-    case sourceHanSerif
+    case system = 1010
+    case sourceHanSerif = 1015
 
-    static var defaultValue: Self {
-        .sourceHanSerif
-    }
+    static let defaultValue = Self.sourceHanSerif
 
     var displayName: String {
         switch self {
