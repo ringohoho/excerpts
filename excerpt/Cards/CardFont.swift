@@ -11,8 +11,6 @@ enum CardFont: Int, CaseIterable {
     case system = 1010
     case sourceHanSerif = 1015
 
-    static let defaultValue = Self.sourceHanSerif
-
     var displayName: String {
         switch self {
         case .system: String(localized: "C_FONT_SYSTEM")

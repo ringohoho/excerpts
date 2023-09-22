@@ -42,6 +42,10 @@ private extension Text {
 }
 
 struct ClassicCard: Card {
+    static let displayName: String.LocalizationValue = "C_STYLE_CLASSIC"
+    static let miniPreview: Image = Image(systemName: "rectangle")
+    static let defaultFont: CardFont = .sourceHanSerif
+
     let options: CardOptions
 
     init(_ options: CardOptions) {
@@ -70,12 +74,12 @@ struct ClassicCard: Card {
         round(self.rectInnerWidth - C.fontSizeContent * 3, toNearest: C.fontSizeContent)
     }
 
-    private var contentVertOuterPadding: CGFloat {
+    private var contentHoriOuterPadding: CGFloat {
         (self.rectInnerWidth - self.contentWidth) / 2
     }
 
     private var contentFromSpacing: CGFloat {
-        self.contentVertOuterPadding
+        self.contentHoriOuterPadding
     }
 
     var body: some View {
@@ -110,8 +114,8 @@ struct ClassicCard: Card {
                         }
                     }
                 }
-                .padding([.horizontal], self.contentVertOuterPadding)
-                .padding([.vertical], self.contentVertOuterPadding * 1.6)
+                .padding([.horizontal], self.contentHoriOuterPadding)
+                .padding([.vertical], self.contentHoriOuterPadding * 1.6)
                 .border(C.colorBorder, width: 0.7)
                 .overlay {
                     Color.clear
