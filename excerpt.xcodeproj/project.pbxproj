@@ -23,6 +23,7 @@
 		7993A3CD2AB1B8AF0050EAB3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7993A3CF2AB1B8AF0050EAB3 /* InfoPlist.strings */; };
 		79ADB5AD2AB9FADF00A39AC0 /* UserDefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */; };
 		79ADB5B12ABA058300A39AC0 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79ADB5B02ABA058300A39AC0 /* Card.swift */; };
+		79B8387A2ABDCE4400FAFEFA /* Bold.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79B838792ABDCE4400FAFEFA /* Bold.swift */; };
 		79D5AB092ABB1C410023305B /* PasteParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5AB082ABB1C410023305B /* PasteParser.swift */; };
 		79D5AB0B2ABB1D910023305B /* AppleBooksPasteParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5AB0A2ABB1D910023305B /* AppleBooksPasteParser.swift */; };
 		79D5AB0D2ABB1EE90023305B /* PasteSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79D5AB0C2ABB1EE90023305B /* PasteSource.swift */; };
@@ -50,6 +51,7 @@
 		7993A3D02AB1B8B30050EAB3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		79ADB5AC2AB9FADF00A39AC0 /* UserDefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKeys.swift; sourceTree = "<group>"; };
 		79ADB5B02ABA058300A39AC0 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
+		79B838792ABDCE4400FAFEFA /* Bold.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bold.swift; sourceTree = "<group>"; };
 		79D5AB082ABB1C410023305B /* PasteParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteParser.swift; sourceTree = "<group>"; };
 		79D5AB0A2ABB1D910023305B /* AppleBooksPasteParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleBooksPasteParser.swift; sourceTree = "<group>"; };
 		79D5AB0C2ABB1EE90023305B /* PasteSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasteSource.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				79D5AB0E2ABB20110023305B /* CardFont.swift */,
 				79ADB5B02ABA058300A39AC0 /* Card.swift */,
 				798C1AB02AB577D100D8BF39 /* Classic.swift */,
+				79B838792ABDCE4400FAFEFA /* Bold.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				798C1AB12AB577D100D8BF39 /* Classic.swift in Sources */,
 				794569A52AACB3860095DCBA /* App.swift in Sources */,
 				794A86372AAF4B7E00CE8969 /* MainView.swift in Sources */,
+				79B8387A2ABDCE4400FAFEFA /* Bold.swift in Sources */,
 				79ADB5B12ABA058300A39AC0 /* Card.swift in Sources */,
 				7988C2D22AB1F9EC00F20252 /* PasteSheetView.swift in Sources */,
 				79D5AB0F2ABB20110023305B /* CardFont.swift in Sources */,

@@ -14,5 +14,9 @@ struct CardOptions {
 }
 
 protocol Card: View {
+    static var displayName: String.LocalizationValue { get }
+    static var miniPreview: Image { get }
+    static var defaultFont: CardFont { get }
+
     init(_ options: CardOptions)
 }
