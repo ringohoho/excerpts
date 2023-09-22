@@ -18,6 +18,9 @@ private extension AnyTransition {
 struct MainView: View {
     @State private var showPasteSheet = false
 
+    @AppStorage(UserDefaultsKeys.excerptType)
+    private var excerptType: ExcerptType = .general
+
     @State private var excerpt: Excerpt
     @State private var showShareView: Bool
 
@@ -30,8 +33,9 @@ struct MainView: View {
     @FocusState private var focusedFormField: ExcerptFormField?
 
     init() {
-        let excerptType = ExcerptType(rawValue: UserDefaults.standard.integer(forKey: UserDefaultsKeys.initialExcerptType)) ?? .defaultValue
-        self.init(Excerpt(excerptType, title: "", author: "", content: ""), sharing: false)
+        let excerpt = Excerpt(.general, title: "", author: "", content: "")
+//        let excerpt = demoExcerpts[6]
+        self.init(excerpt, sharing: false)
     }
 
     init(_ initialExcerpt: Excerpt, sharing: Bool = false) {
@@ -49,13 +53,10 @@ struct MainView: View {
                             self.focusedFormField = nil
                         }
 
-                        Picker("C_EXCERPT_TYPE", selection: self.$excerpt.type) {
+                        Picker("C_EXCERPT_TYPE", selection: self.$excerptType) {
                             ForEach(ExcerptType.allCases, id: \.rawValue) { type in
                                 Text(type.displayName).tag(type)
                             }
-                        }
-                        .onChange(of: self.excerpt.type) { newValue in
-                            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultsKeys.initialExcerptType)
                         }
                     }
 
@@ -75,6 +76,7 @@ struct MainView: View {
 
                     Section {
                         Button("A_SHARE") {
+                            self.excerpt.type = self.excerptType
                             self.showShareView = true
                         }
                         .disabled(self.excerpt.content.isEmpty)

@@ -8,6 +8,8 @@
 import Foundation
 
 enum UserDefaultsKeys {
-    static let initialExcerptType = "initialExcerptType"
-    static let initialPasteSource = "initialPasteSource"
+    static let excerptType = "excerptType"
+    static let pasteSource = "pasteSource"
+    static let cardStyle = "cardStyle"
+    static let cardFont = "cardFont"
 }

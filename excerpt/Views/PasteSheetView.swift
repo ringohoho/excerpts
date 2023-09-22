@@ -12,7 +12,9 @@ struct PasteSheetView: View {
 
     @Binding var excerpt: Excerpt
 
-    @State private var pasteSource = PasteSource(rawValue: UserDefaults.standard.integer(forKey: UserDefaultsKeys.initialPasteSource)) ?? .defaultValue
+    @AppStorage(UserDefaultsKeys.pasteSource)
+    private var pasteSource: PasteSource = .defaultValue
+
     @State private var pasteContent = ""
     @FocusState private var focused: Bool
 
@@ -26,9 +28,6 @@ struct PasteSheetView: View {
                         ForEach(PasteSource.allCases, id: \.rawValue) { source in
                             Text(source.displayName).tag(source)
                         }
-                    }
-                    .onChange(of: self.pasteSource) { newValue in
-                        UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultsKeys.initialPasteSource)
                     }
                 }
                 Section("C_PASTE_CONTENT") {

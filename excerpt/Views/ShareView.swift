@@ -28,8 +28,10 @@ struct ShareView: View {
 
     @State private var isMenuOpen = false
 
-    @State private var cardStyle = CardStyle.defaultValue
-    @State private var cardFont = CardStyle.defaultValue.defaultFont
+    @AppStorage(UserDefaultsKeys.cardStyle)
+    private var cardStyle = CardStyle.defaultValue
+    @AppStorage(UserDefaultsKeys.cardFont)
+    private var cardFont = CardStyle.defaultValue.defaultFont
 
     @ViewBuilder
     private func card(width: CGFloat) -> some View {
