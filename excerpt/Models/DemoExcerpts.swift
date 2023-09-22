@@ -49,12 +49,10 @@ let demoExcerpts = [
     那是五千年的象形文字，
     那是未来人们凝视的眼睛。
     """),
-    Excerpt(.lyrics, title: "很难", author: "张震岳", content: """
-    有时候 想把自己关起来
-    还是学着把心门打开
-    人与人之间的关系
-    变得不理不睬
-    习惯 无关紧要的冷淡
+    Excerpt(.lyrics, title: "Bohemian Rhapsody", author: "Queen", content: """
+    Mama, ooh-ooh-ooh-ooh (Any way the wind blows)
+    I don't want to die
+    I sometimes wish I'd never been born at all
     """),
     Excerpt(.general, title: "", author: "", content: "一句没有标题和作者的摘录。"),
     Excerpt(.general, title: "", author: "佚名", content: "一句没有标题的摘录。"),
