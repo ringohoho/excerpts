@@ -273,6 +273,22 @@
         }
       }
     },
+    "C_STYLE_BOLD" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bold"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "醒目"
+          }
+        }
+      }
+    },
     "C_STYLE_CLASSIC" : {
       "localizations" : {
         "en" : {
