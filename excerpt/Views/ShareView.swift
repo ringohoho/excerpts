@@ -29,12 +29,21 @@ struct ShareView: View {
     @State private var isMenuOpen = false
 
     @State private var cardStyle = CardStyle.defaultValue
-    @State private var cardFont = CardFont.defaultValue
+    @State private var cardFont = CardStyle.defaultValue.defaultFont
 
     @ViewBuilder
-    private func card(width: CGFloat) -> some Card {
+    private func card(width: CGFloat) -> some View {
         self.cardStyle
             .create(.init(excerpt: self.excerpt, width: width, font: self.cardFont))
+    }
+
+    @MainActor
+    private func renderCard(width: CGFloat) {
+        let width = width - self.screenEdgePadding * 2
+        let renderer = ImageRenderer(content: self.card(width: width).environment(\.locale, self.envLocale))
+        renderer.proposedSize.width = width
+        renderer.scale = self.envDisplayScale
+        self.cardUiImage = renderer.uiImage!
     }
 
     var body: some View {
@@ -65,11 +74,7 @@ struct ShareView: View {
                         .frame(width: geometry.size.width)
                         .onAppear {
                             // when the card appear, render it into an Image
-                            let width = geometry.size.width - self.screenEdgePadding * 2
-                            let renderer = ImageRenderer(content: self.card(width: width).environment(\.locale, self.envLocale))
-                            renderer.proposedSize.width = width
-                            renderer.scale = self.envDisplayScale
-                            self.cardUiImage = renderer.uiImage!
+                            self.renderCard(width: geometry.size.width)
                         }
                         .onTapGesture {
                             // tap on the card also dismiss the share view
@@ -101,15 +106,20 @@ struct ShareView: View {
                         Menu {
                             Picker("C_STYLE", selection: self.$cardStyle) {
                                 ForEach(CardStyle.allCases, id: \.rawValue) { style in
-                                    Label(title: { Text(style.displayName) }, icon: { Image(systemName: "rectangle") }).tag(style)
+                                    Label(title: { Text(style.displayName) }, icon: { style.miniPreview }).tag(style)
                                 }
                             }
                             .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
+                            .onChange(of: self.cardStyle) { style in
+                                self.cardFont = style.defaultFont
+                                self.renderCard(width: geometry.size.width)
+                            }
                             Picker("C_FONT", selection: self.$cardFont) {
                                 ForEach(CardFont.allCases, id: \.rawValue) { font in
                                     Text(font.displayName).tag(font)
                                 }
                             }
+                            .pickerStyle(.menu)
                             .menuActionDismissBehavior(.disabled)
                         } label: {
                             Image(systemName: "square.and.pencil.circle.fill")
