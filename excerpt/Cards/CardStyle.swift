@@ -13,24 +13,10 @@ enum CardStyle: Int, CaseIterable {
 
     static let defaultValue = Self.classic
 
-    var displayName: String {
+    var meta: CardMeta {
         switch self {
-        case .classic: String(localized: ClassicCard.displayName)
-        case .bold: String(localized: BoldCard.displayName)
-        }
-    }
-
-    var miniPreview: Image {
-        switch self {
-        case .classic: ClassicCard.miniPreview
-        case .bold: BoldCard.miniPreview
-        }
-    }
-
-    var defaultFont: CardFont {
-        switch self {
-        case .classic: ClassicCard.defaultFont
-        case .bold: BoldCard.defaultFont
+        case .classic: ClassicCard.meta
+        case .bold: BoldCard.meta
         }
     }
 

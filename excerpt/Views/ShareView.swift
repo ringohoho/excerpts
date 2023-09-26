@@ -31,7 +31,7 @@ struct ShareView: View {
     @AppStorage(UserDefaultsKeys.cardStyle)
     private var cardStyle = CardStyle.defaultValue
     @AppStorage(UserDefaultsKeys.cardFont)
-    private var cardFont = CardStyle.defaultValue.defaultFont
+    private var cardFont = CardStyle.defaultValue.meta.defaultFont
 
     @ViewBuilder
     private func card(width: CGFloat) -> some View {
@@ -108,12 +108,12 @@ struct ShareView: View {
                         Menu {
                             Picker("C_STYLE", selection: self.$cardStyle) {
                                 ForEach(CardStyle.allCases, id: \.rawValue) { style in
-                                    Label(title: { Text(style.displayName) }, icon: { style.miniPreview }).tag(style)
+                                    Label(title: { Text(String(localized: style.meta.displayName)) }, icon: { style.meta.miniPreview }).tag(style)
                                 }
                             }
                             .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
                             .onChange(of: self.cardStyle) { style in
-                                self.cardFont = style.defaultFont
+                                self.cardFont = style.meta.defaultFont
                                 self.renderCard(width: geometry.size.width)
                             }
                             Picker("C_FONT", selection: self.$cardFont) {

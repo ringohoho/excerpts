@@ -49,9 +49,11 @@ private extension Text {
 }
 
 struct BoldCard: Card {
-    static let displayName: String.LocalizationValue = "C_STYLE_BOLD"
-    static let miniPreview: Image = .init(systemName: "rectangle.fill")
-    static let defaultFont: CardFont = .system
+    static let meta: CardMeta = .init(
+        displayName: "C_STYLE_BOLD",
+        miniPreview: .init(systemName: "rectangle.fill"),
+        defaultFont: .system
+    )
 
     let options: CardOptions
 
@@ -132,7 +134,7 @@ struct BoldCard_Previews: PreviewProvider {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
-                        BoldCard(CardOptions(excerpt: excerpt, width: geometry.size.width - screenEdgePadding * 2, font: BoldCard.defaultFont))
+                        BoldCard(CardOptions(excerpt: excerpt, width: geometry.size.width - screenEdgePadding * 2, font: BoldCard.meta.defaultFont))
                     }
                     .padding(screenEdgePadding)
                     .frame(width: geometry.size.width)

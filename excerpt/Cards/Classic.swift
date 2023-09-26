@@ -42,9 +42,11 @@ private extension Text {
 }
 
 struct ClassicCard: Card {
-    static let displayName: String.LocalizationValue = "C_STYLE_CLASSIC"
-    static let miniPreview: Image = Image(systemName: "rectangle")
-    static let defaultFont: CardFont = .sourceHanSerif
+    static let meta: CardMeta = .init(
+        displayName: "C_STYLE_CLASSIC",
+        miniPreview: .init(systemName: "rectangle"),
+        defaultFont: .sourceHanSerif
+    )
 
     let options: CardOptions
 
@@ -145,7 +147,7 @@ struct ClassicCard_Previews: PreviewProvider {
             GeometryReader { geometry in
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack {
-                        ClassicCard(CardOptions(excerpt: excerpt, width: geometry.size.width - screenEdgePadding * 2, font: .sourceHanSerif))
+                        ClassicCard(CardOptions(excerpt: excerpt, width: geometry.size.width - screenEdgePadding * 2, font: ClassicCard.meta.defaultFont))
                     }
                     .padding(screenEdgePadding)
                     .frame(width: geometry.size.width)
