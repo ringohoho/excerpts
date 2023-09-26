@@ -61,12 +61,20 @@ struct MainView: View {
                     }
 
                     Section("C_TITLE") {
-                        TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerpt.title, axis: .vertical)
+                        TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerpt.title, axis: .horizontal)
                             .focused(self.$focusedFormField, equals: .title)
+                            .submitLabel(.next)
+                            .onSubmit {
+                                self.focusedFormField = .author
+                            }
                     }
                     Section("C_AUTHOR") {
-                        TextField("MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER", text: self.$excerpt.author, axis: .vertical)
+                        TextField("MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER", text: self.$excerpt.author, axis: .horizontal)
                             .focused(self.$focusedFormField, equals: .author)
+                            .submitLabel(.next)
+                            .onSubmit {
+                                self.focusedFormField = .content
+                            }
                     }
                     Section("C_CONTENT") {
                         TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$excerpt.content, axis: .vertical)
