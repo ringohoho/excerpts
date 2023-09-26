@@ -74,7 +74,7 @@ struct BoldCard: Card {
     }
 
     private var contentWidth: CGFloat {
-        round(self.width - C.fontSizeContent * 2, toNearest: C.fontSizeContent)
+        round(self.width - C.fontSizeContent * 2, toNearest: self.font.charWidth(size: C.fontSizeContent))
     }
 
     private var contentPadding: CGFloat {

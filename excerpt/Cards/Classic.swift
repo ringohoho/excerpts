@@ -73,7 +73,7 @@ struct ClassicCard: Card {
     }
 
     private var contentWidth: CGFloat {
-        round(self.rectInnerWidth - C.fontSizeContent * 3, toNearest: C.fontSizeContent)
+        round(self.rectInnerWidth - C.fontSizeContent * 3, toNearest: self.font.charWidth(size: C.fontSizeContent))
     }
 
     private var contentHoriOuterPadding: CGFloat {

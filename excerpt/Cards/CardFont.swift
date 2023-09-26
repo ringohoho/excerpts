@@ -24,4 +24,11 @@ enum CardFont: Int, CaseIterable {
         case .sourceHanSerif: .custom("SourceHanSerifSC-Regular", size: size)
         }
     }
+
+    func charWidth(size: CGFloat) -> CGFloat {
+        switch self {
+        case .system: size + 0.325 // FIXME: seems a little bit dirty
+        case .sourceHanSerif: size
+        }
+    }
 }
