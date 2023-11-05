@@ -7,6 +7,7 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>font_SourceHanSerifSC-Regular.otf</string>
+		<string>font_SourceHanSerifSC-Bold.otf</string>
 	</array>
 </dict>
 </plist>

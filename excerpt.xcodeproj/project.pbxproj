@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		79013EB62AF767FE00F85D99 /* Minimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79013EB52AF767FE00F85D99 /* Minimal.swift */; };
+		79013EB82AF76AFE00F85D99 /* font_SourceHanSerifSC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 79013EB72AF76AFE00F85D99 /* font_SourceHanSerifSC-Bold.otf */; };
 		794569A52AACB3860095DCBA /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 794569A42AACB3860095DCBA /* App.swift */; };
 		794569A92AACB3870095DCBA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794569A82AACB3870095DCBA /* Assets.xcassets */; };
 		794569AC2AACB3870095DCBA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 794569AB2AACB3870095DCBA /* Preview Assets.xcassets */; };
@@ -32,6 +34,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		79013EB52AF767FE00F85D99 /* Minimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minimal.swift; sourceTree = "<group>"; };
+		79013EB72AF76AFE00F85D99 /* font_SourceHanSerifSC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "font_SourceHanSerifSC-Bold.otf"; sourceTree = "<group>"; };
 		794569A12AACB3860095DCBA /* excerpt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = excerpt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		794569A42AACB3860095DCBA /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		794569A82AACB3870095DCBA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -146,6 +150,7 @@
 			isa = PBXGroup;
 			children = (
 				794A86332AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf */,
+				79013EB72AF76AFE00F85D99 /* font_SourceHanSerifSC-Bold.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 				79ADB5B02ABA058300A39AC0 /* Card.swift */,
 				798C1AB02AB577D100D8BF39 /* Classic.swift */,
 				79B838792ABDCE4400FAFEFA /* Bold.swift */,
+				79013EB52AF767FE00F85D99 /* Minimal.swift */,
 			);
 			path = Cards;
 			sourceTree = "<group>";
@@ -244,6 +250,7 @@
 				794569A92AACB3870095DCBA /* Assets.xcassets in Resources */,
 				7993A3C92AB1ACEF0050EAB3 /* Localizable.xcstrings in Resources */,
 				794A86342AAE2D8B00CE8969 /* font_SourceHanSerifSC-Regular.otf in Resources */,
+				79013EB82AF76AFE00F85D99 /* font_SourceHanSerifSC-Bold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +272,7 @@
 				794A86372AAF4B7E00CE8969 /* MainView.swift in Sources */,
 				79B8387A2ABDCE4400FAFEFA /* Bold.swift in Sources */,
 				79ADB5B12ABA058300A39AC0 /* Card.swift in Sources */,
+				79013EB62AF767FE00F85D99 /* Minimal.swift in Sources */,
 				7988C2D22AB1F9EC00F20252 /* PasteSheetView.swift in Sources */,
 				79D5AB0F2ABB20110023305B /* CardFont.swift in Sources */,
 				79D5AB092ABB1C410023305B /* PasteParser.swift in Sources */,
