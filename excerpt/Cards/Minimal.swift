@@ -58,7 +58,7 @@ private extension Text {
 struct MinimalCard: Card {
     static let meta: CardMeta = .init(
         displayName: "C_STYLE_MINIMAL",
-        miniPreview: .init(systemName: "rectangle"),
+        miniPreview: .init(systemName: "rectangle.fill"),
         defaultFont: .sourceHanSerif
     )
 
