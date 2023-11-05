@@ -305,6 +305,22 @@
         }
       }
     },
+    "C_STYLE_MINIMAL" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Minimal"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "简约"
+          }
+        }
+      }
+    },
     "C_TITLE" : {
       "localizations" : {
         "en" : {
