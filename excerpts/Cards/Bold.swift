@@ -1,6 +1,6 @@
 //
 //  Bold.swift
-//  excerpt
+//  excerpts
 //
 //  Created by Richard on 2023/9/22.
 //
@@ -108,7 +108,7 @@ struct BoldCard: Card {
                 .frame(maxWidth: .infinity)
                 HStack(spacing: 2) {
                     Text("CARD_VIEW_SHARED_VIA_BEGIN").inWatermarkSection()
-                    Text("C_APP_NAME").bold().inWatermarkSection()
+                    Text(Bundle.main.displayName).bold().inWatermarkSection()
                     Text("CARD_VIEW_SHARED_VIA_END").inWatermarkSection()
                 }
             }

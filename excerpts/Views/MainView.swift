@@ -1,6 +1,6 @@
 //
 //  MainView.swift
-//  excerpt
+//  excerpts
 //
 //  Created by Richard on 2023/9/11.
 //
@@ -91,7 +91,7 @@ struct MainView: View {
                     }
                 }
                 .scrollDismissesKeyboard(.interactively)
-                .navigationTitle("C_APP_NAME")
+                .navigationTitle(Bundle.main.displayName)
                 .sheet(isPresented: self.$showPasteSheet) {
                     PasteSheetView(excerpt: self.$excerpt)
                 }

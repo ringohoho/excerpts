@@ -1,6 +1,6 @@
 //
 //  Minimal.swift
-//  excerpt
+//  excerpts
 //
 //  Created by Richard on 2023/11/5.
 //
@@ -126,7 +126,7 @@ struct MinimalCard: Card {
 
             HStack(spacing: 2) {
                 Text("CARD_VIEW_SHARED_VIA_BEGIN").inWatermarkSection()
-                Text("C_APP_NAME").bold().inWatermarkSection()
+                Text(Bundle.main.displayName).bold().inWatermarkSection()
                 Text("CARD_VIEW_SHARED_VIA_END").inWatermarkSection()
             }
             .padding([.horizontal, .bottom], self.outerPadding)

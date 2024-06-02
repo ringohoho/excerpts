@@ -1,6 +1,6 @@
 //
 //  PasteSource.swift
-//  excerpt
+//  excerpts
 //
 //  Created by Richard on 2023/9/20.
 //
