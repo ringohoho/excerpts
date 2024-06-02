@@ -65,22 +65,6 @@
         }
       }
     },
-    "C_APP_NAME" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Excerpt"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "文采"
-          }
-        }
-      }
-    },
     "C_AUTHOR" : {
       "localizations" : {
         "en" : {
@@ -315,7 +299,7 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "简约"
           }
         }
