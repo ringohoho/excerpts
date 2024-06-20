@@ -68,12 +68,12 @@ struct PasteSheetView: View {
     }
 }
 
-#Preview("Paste") {
-    struct PreviewView: View {
-        @State var excerpt: Excerpt = .init(.general, title: "", author: "", content: "")
-        var body: some View {
-            PasteSheetView(excerpt: self.$excerpt)
-        }
-    }
-    return PreviewView()
-}
+// #Preview("Paste") {
+//    struct PreviewView: View {
+//        @State var excerpt: Excerpt = .init(.general, title: "", author: "", content: "")
+//        var body: some View {
+//            PasteSheetView(excerpt: self.$excerpt)
+//        }
+//    }
+//    return PreviewView()
+// }

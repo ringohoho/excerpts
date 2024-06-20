@@ -108,16 +108,22 @@ struct MainView: View {
                     .transition(.shareViewTrans)
             }
         }
-        .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
+        .animation(.easeInOut(duration: animationDuration), value: showShareView)
     }
 }
 
-#Preview("Empty") {
+#Preview("Main") {
     MainView()
         .environment(\.locale, .init(identifier: "zh-Hans"))
+        .modelContainer(MockData.container)
 }
 
-#Preview("Non-empty English") {
-    MainView(demoExcerpts[0])
-        .environment(\.locale, .init(identifier: "en"))
-}
+// #Preview("Empty") {
+//    MainView()
+//        .environment(\.locale, .init(identifier: "zh-Hans"))
+// }
+
+// #Preview("Non-empty English") {
+//    MainView(demoExcerpts[0])
+//        .environment(\.locale, .init(identifier: "en"))
+// }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 enum ExcerptType: Int, CaseIterable, Hashable, Codable {
     case general = 1010
@@ -23,12 +24,13 @@ enum ExcerptType: Int, CaseIterable, Hashable, Codable {
     }
 }
 
-struct Excerpt: Hashable, Codable, Identifiable {
-    var id: UUID = .init()
-    var type: ExcerptType
-    var title: String
-    var author: String
-    var content: String
+@Model
+final class Excerpt {
+    var id: UUID = UUID()
+    var type: ExcerptType = ExcerptType.general
+    var title: String = ""
+    var author: String = ""
+    var content: String = ""
 
     init(_ type: ExcerptType, title: String, author: String, content: String) {
         self.id = UUID()
