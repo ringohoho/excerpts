@@ -118,12 +118,12 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Clear Content"
+            "value" : "Clear Content Only"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "仅清空内容"
           }
         }

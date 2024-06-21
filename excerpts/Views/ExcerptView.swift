@@ -79,13 +79,13 @@ struct ExcerptView: View {
                             self.showShareView = true
                         }
                         .disabled(self.excerpt.content.isEmpty)
-                    }
 
-                    Section {
+                        // TODO: ask user to confirm
                         Button("C_CLEAR_ALL") {
                             self.excerpt = Excerpt(self.excerptType) // mainly to reset the UUID
                         }
                         .disabled(self.excerpt.isEmpty)
+
                         Button("C_CLEAR_CONTENT") {
                             self.excerpt.id = UUID()
                             self.excerpt.content = ""
@@ -109,6 +109,7 @@ struct ExcerptView: View {
                 ShareView(isPresented: self.$showShareView, excerpt: self.excerpt)
                     .zIndex(1) // to fix animation: https://sarunw.com/posts/how-to-fix-zstack-transition-animation-in-swiftui/
                     .transition(.shareViewTrans)
+                    .toolbar(.hidden, for: .tabBar) // TODO: move ShareView to top-level
             }
         }
         .animation(.easeInOut(duration: animationDuration), value: showShareView)
@@ -122,7 +123,9 @@ struct ExcerptView: View {
 }
 
 #Preview("Non-empty English") {
-    ExcerptView(demoExcerpts[0])
-        .environment(\.locale, .init(identifier: "en"))
-        .modelContainer(MockData.container)
+    TabView {
+        ExcerptView(demoExcerpts[0])
+    }
+    .environment(\.locale, .init(identifier: "en"))
+    .modelContainer(MockData.container)
 }
