@@ -90,10 +90,15 @@ struct MainView: View {
                     }
 
                     Section {
-                        Button("A_RESET") {
+                        Button("C_CLEAR_ALL") {
                             self.excerpt = Excerpt(self.excerptType) // mainly to reset the UUID
                         }
                         .disabled(self.excerpt.isEmpty)
+                        Button("C_CLEAR_CONTENT") {
+                            self.excerpt.id = UUID()
+                            self.excerpt.content = ""
+                        }
+                        .disabled(self.excerpt.content.isEmpty)
                     }
                 }
                 .scrollDismissesKeyboard(.interactively)

@@ -49,22 +49,6 @@
         }
       }
     },
-    "A_RESET" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Reset"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "重置"
-          }
-        }
-      }
-    },
     "A_SHARE" : {
       "localizations" : {
         "en" : {
@@ -93,6 +77,38 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "作者"
+          }
+        }
+      }
+    },
+    "C_CLEAR_ALL" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear All Fields"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清空"
+          }
+        }
+      }
+    },
+    "C_CLEAR_CONTENT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear Content"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "仅清空内容"
           }
         }
       }
