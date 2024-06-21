@@ -26,11 +26,11 @@ enum ExcerptType: Int, CaseIterable, Hashable, Codable {
 
 @Model
 final class Excerpt {
-    var id: UUID = UUID()
-    var type: ExcerptType = ExcerptType.general
-    var title: String = ""
-    var author: String = ""
-    var content: String = ""
+    var id = UUID()
+    var type = ExcerptType.general
+    var title = ""
+    var author = ""
+    var content = ""
 
     init(_ type: ExcerptType, title: String, author: String, content: String) {
         self.id = UUID()

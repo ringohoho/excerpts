@@ -18,7 +18,7 @@ private extension AnyTransition {
 struct MainView: View {
     @State private var showPasteSheet = false
 
-    @AppStorage(UserDefaultsKeys.excerptType)
+    @AppStorage(UserDefaultsKeys.excerptType) // save selected excerpt type for the next time
     private var excerptType: ExcerptType = .general
 
     @State private var excerpt: Excerpt
@@ -33,8 +33,7 @@ struct MainView: View {
     @FocusState private var focusedFormField: ExcerptFormField?
 
     init() {
-        let excerpt = Excerpt(.general, title: "", author: "", content: "")
-//        let excerpt = demoExcerpts[6]
+        let excerpt = Excerpt(.general)
         self.init(excerpt, sharing: false)
     }
 
@@ -112,18 +111,14 @@ struct MainView: View {
     }
 }
 
-#Preview("Main") {
+#Preview("Empty") {
     MainView()
         .environment(\.locale, .init(identifier: "zh-Hans"))
         .modelContainer(MockData.container)
 }
 
-// #Preview("Empty") {
-//    MainView()
-//        .environment(\.locale, .init(identifier: "zh-Hans"))
-// }
-
-// #Preview("Non-empty English") {
-//    MainView(demoExcerpts[0])
-//        .environment(\.locale, .init(identifier: "en"))
-// }
+#Preview("Non-empty English") {
+    MainView(demoExcerpts[0])
+        .environment(\.locale, .init(identifier: "en"))
+        .modelContainer(MockData.container)
+}
