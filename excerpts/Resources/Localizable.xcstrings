@@ -49,6 +49,22 @@
         }
       }
     },
+    "A_RESET" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "重置"
+          }
+        }
+      }
+    },
     "A_SHARE" : {
       "localizations" : {
         "en" : {
@@ -384,6 +400,9 @@
           }
         }
       }
+    },
+    "History" : {
+
     },
     "MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER" : {
       "localizations" : {

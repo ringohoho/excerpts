@@ -88,6 +88,13 @@ struct MainView: View {
                         }
                         .disabled(self.excerpt.content.isEmpty)
                     }
+
+                    Section {
+                        Button("A_RESET") {
+                            self.excerpt = Excerpt(self.excerptType) // mainly to reset the UUID
+                        }
+                        .disabled(self.excerpt.isEmpty)
+                    }
                 }
                 .scrollDismissesKeyboard(.interactively)
                 .navigationTitle(Bundle.main.displayName)

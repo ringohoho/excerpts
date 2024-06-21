@@ -32,12 +32,21 @@ final class Excerpt {
     var author = ""
     var content = ""
 
+    init(_ type: ExcerptType) {
+        self.id = UUID()
+        self.type = type
+    }
+
     init(_ type: ExcerptType, title: String, author: String, content: String) {
         self.id = UUID()
         self.type = type
         self.title = title
         self.author = author
         self.content = content
+    }
+
+    var isEmpty: Bool {
+        self.title.isEmpty && self.author.isEmpty && self.content.isEmpty
     }
 
     var titleTrimmed: String {
