@@ -33,6 +33,22 @@
         }
       }
     },
+    "A_HISTORY" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "历史"
+          }
+        }
+      }
+    },
     "A_OK" : {
       "localizations" : {
         "en" : {
@@ -125,6 +141,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "内容"
+          }
+        }
+      }
+    },
+    "C_EXCERPT" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excerpt"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "摘录"
           }
         }
       }
@@ -416,9 +448,6 @@
           }
         }
       }
-    },
-    "History" : {
-
     },
     "MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER" : {
       "localizations" : {
