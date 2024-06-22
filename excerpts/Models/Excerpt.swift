@@ -36,7 +36,7 @@ final class Excerpt {
     var content = ""
 
     @Attribute(.externalStorage)
-    var sharedImage: Data? = nil
+    var sharedImageData: Data? = nil
 
     convenience init(_ type: ExcerptType, _ excerptForEdit: ExcerptForEdit) {
         self.init(type, title: excerptForEdit.title, author: excerptForEdit.author, content: excerptForEdit.content)
@@ -57,12 +57,20 @@ final class Excerpt {
         self.title = excerptForEdit.title
         self.author = excerptForEdit.author
         self.content = excerptForEdit.content
-        self.sharedImage = nil // invalidate the shared image
+        self.sharedImageData = nil // invalidate the shared image
     }
 
     func updateWith(sharedImage: UIImage) {
         self.updatedAt = Date()
-        self.sharedImage = sharedImage.heicData()
+        self.sharedImageData = sharedImage.heicData()
+    }
+
+    var sharedUIImage: UIImage? {
+        if let data = self.sharedImageData {
+            UIImage(data: data)
+        } else {
+            nil
+        }
     }
 
     var titleTrimmed: String {

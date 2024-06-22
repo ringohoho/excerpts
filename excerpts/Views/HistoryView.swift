@@ -11,14 +11,31 @@ import SwiftUI
 struct HistoryView: View {
     @Environment(\.modelContext) private var modelContext
 
-    @Query(sort: \Excerpt.updatedAt, order: .reverse)
+    @Query(sort: \Excerpt.createdAt, order: .reverse)
     private var excerpts: [Excerpt]
+
+    @State private var selectedExcerpt: Excerpt? = nil
+
+    @State private var showShareView = false // this is the inner control state
+    @Binding private var isSharing: Bool // this is for notifying outside
+
+    init(isSharing: Binding<Bool>) {
+        self._isSharing = isSharing
+    }
 
     var body: some View {
         NavigationStack {
             List {
                 ForEach(self.excerpts, id: \.id) { excerpt in
-                    HistoryRow(excerpt: excerpt)
+                    Button {
+                        self.selectedExcerpt = excerpt
+                        self.showShareView = true
+                        print("selected: \(excerpt.id)")
+                    } label: {
+                        HistoryRow(excerpt: excerpt)
+                    }
+                    .foregroundStyle(.primary) // show text in normal style/color
+                    .tag(excerpt.id)
                 }
                 .onDelete(perform: { indexSet in
                     for index in indexSet {
@@ -27,12 +44,25 @@ struct HistoryView: View {
                 })
             }
             .navigationTitle("A_HISTORY")
-            .toolbar { EditButton() }
+//            .toolbar { EditButton() } // TODO: has some bug
+            .fullScreenCover(isPresented: self.$showShareView) {
+                let selectedExcerpt = Binding { self.selectedExcerpt! } set: {
+                    // this actually doesn't matter, because ShareView won't reassign the value
+                    self.selectedExcerpt = $0
+                }
+                ShareView(isPresented: self.$showShareView, excerpt: selectedExcerpt)
+                    .presentationBackground(.clear)
+            }
+            .onChange(of: self.showShareView) {
+                self.isSharing = self.showShareView
+            }
         }
     }
 }
 
 #Preview {
-    HistoryView()
+    var sharing = false
+    let binding = Binding { sharing } set: { sharing = $0 }
+    return HistoryView(isSharing: binding)
         .modelContainer(MockData.container)
 }

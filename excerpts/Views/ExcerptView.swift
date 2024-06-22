@@ -19,7 +19,9 @@ struct ExcerptView: View {
     @State private var excerptForEdit: ExcerptForEdit
     @State private var excerpt: Excerpt
     @State private var excerptIsSaved = false
-    @Binding private var showShareView: Bool
+
+    @State private var showShareView = false // this is the inner control state
+    @Binding private var isSharing: Bool // this is for notifying outside
 
     private enum ExcerptFormField {
         case title
@@ -40,7 +42,7 @@ struct ExcerptView: View {
     init(_ initialExcerpt: ExcerptForEdit, isSharing: Binding<Bool>) {
         self._excerptForEdit = State(initialValue: initialExcerpt)
         self._excerpt = State(initialValue: Excerpt(.general, initialExcerpt)) // the initial value doesn't matter
-        self._showShareView = isSharing
+        self._isSharing = isSharing
     }
 
     var body: some View {
@@ -96,7 +98,7 @@ struct ExcerptView: View {
 
                         self.showShareView = true
                     }
-                    .onChange(of: self.excerpt.sharedImage) {
+                    .onChange(of: self.excerpt.sharedImageData) {
                         if !self.excerptIsSaved {
                             self.modelContext.insert(self.excerpt)
                             self.excerptIsSaved = true
@@ -129,6 +131,9 @@ struct ExcerptView: View {
         .fullScreenCover(isPresented: $showShareView) {
             ShareView(isPresented: self.$showShareView, excerpt: self.$excerpt)
                 .presentationBackground(.clear)
+        }
+        .onChange(of: showShareView) {
+            self.isSharing = self.showShareView
         }
     }
 }

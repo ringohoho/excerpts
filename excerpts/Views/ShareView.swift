@@ -35,6 +35,7 @@ struct ShareView: View {
 
     @ViewBuilder
     private func card(width: CGFloat) -> some View {
+        let width = width - self.screenEdgePadding * 2
         self.cardStyle
             .create(.init(excerpt: self.excerpt, width: width, font: self.cardFont))
     }
@@ -72,14 +73,26 @@ struct ShareView: View {
                         .frame(maxHeight: .infinity)
 
                         VStack {
-                            self.card(width: geometry.size.width - self.screenEdgePadding * 2)
-                                .draggable(self.cardImage)
+                            if let uiImage = self.excerpt.sharedUIImage {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: geometry.size.width - self.screenEdgePadding * 2)
+                                    .draggable(Image(uiImage: uiImage))
+                                // TODO: fix the card preview
+//                            } else {
+//                                self.card(width: geometry.size.width)
+//                                    .draggable(self.cardImage)
+                            }
                         }
                         .padding(self.screenEdgePadding)
                         .frame(width: geometry.size.width)
                         .onAppear {
                             // when the card appear, render it into an Image
-                            self.renderCard(width: geometry.size.width)
+                            if self.excerpt.sharedImageData == nil {
+                                // only do it when there's no saved image, otherwise we'll lose the previous one which may have a custom style
+                                self.renderCard(width: geometry.size.width)
+                            }
                         }
                         .onTapGesture {
                             // tap on the card also dismiss the share view
@@ -115,8 +128,8 @@ struct ShareView: View {
                                 }
                             }
                             .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
-                            .onChange(of: self.cardStyle) { style in
-                                self.cardFont = style.meta.defaultFont
+                            .onChange(of: self.cardStyle) {
+                                self.cardFont = self.cardStyle.meta.defaultFont
                                 self.renderCard(width: geometry.size.width)
                             }
                             Picker("C_FONT", selection: self.$cardFont) {
@@ -126,6 +139,9 @@ struct ShareView: View {
                             }
                             .pickerStyle(.menu)
                             .menuActionDismissBehavior(.disabled)
+                            .onChange(of: self.cardFont) {
+                                self.renderCard(width: geometry.size.width)
+                            }
                         } label: {
                             Image(systemName: "square.and.pencil.circle.fill")
                                 .symbolRenderingMode(.hierarchical)
