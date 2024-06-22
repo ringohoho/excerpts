@@ -28,7 +28,3 @@ struct HistoryRow: View {
         .padding(.vertical, 8)
     }
 }
-
-#Preview {
-    HistoryRow(excerpt: demoExcerpts[0])
-}
