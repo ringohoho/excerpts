@@ -10,7 +10,7 @@ import SwiftUI
 struct PasteSheetView: View {
     @Environment(\.dismiss) var dismiss
 
-    @Binding var excerpt: Excerpt
+    @Binding var excerpt: ExcerptForEdit
 
     @AppStorage(UserDefaultsKeys.pasteSource)
     private var pasteSource: PasteSource = .defaultValue

@@ -13,7 +13,7 @@ private let appleBooksExcerptTplts: [Regex] = [
 ]
 
 struct AppleBooksPasteParser: PasteParser {
-    func parse(_ content: String, excerpt: inout Excerpt) -> Bool {
+    func parse(_ content: String, excerpt: inout ExcerptForEdit) -> Bool {
         for tplt in appleBooksExcerptTplts {
             if let match = content.wholeMatch(of: tplt) {
                 excerpt.content = String(match.1)

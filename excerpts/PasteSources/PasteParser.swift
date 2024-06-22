@@ -8,5 +8,5 @@
 import Foundation
 
 protocol PasteParser {
-    func parse(_ content: String, excerpt: inout Excerpt) -> Bool
+    func parse(_ content: String, excerpt: inout ExcerptForEdit) -> Bool
 }

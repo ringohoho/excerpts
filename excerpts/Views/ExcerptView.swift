@@ -5,15 +5,20 @@
 //  Created by Richard on 2023/9/11.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ExcerptView: View {
+    @Environment(\.modelContext) private var modelContext
+
     @State private var showPasteSheet = false
 
     @AppStorage(UserDefaultsKeys.excerptType) // save selected excerpt type for the next time
     private var excerptType: ExcerptType = .general
 
-    @State private var excerpt: Excerpt
+    @State private var excerptForEdit: ExcerptForEdit
+    @State private var excerptSaved: Excerpt
+    @State private var excerptIsSaved = false
     @State private var showShareView: Bool
 
     private enum ExcerptFormField {
@@ -25,13 +30,34 @@ struct ExcerptView: View {
     @FocusState private var focusedFormField: ExcerptFormField?
 
     init() {
-        let excerpt = Excerpt(.general)
-        self.init(excerpt, sharing: false)
+        self.init(ExcerptForEdit(), sharing: false)
     }
 
     init(_ initialExcerpt: Excerpt, sharing: Bool = false) {
-        self._excerpt = State(initialValue: initialExcerpt)
+        self.init(ExcerptForEdit(initialExcerpt), sharing: sharing)
+    }
+
+    init(_ initialExcerpt: ExcerptForEdit, sharing: Bool = false) {
+        self._excerptForEdit = State(initialValue: initialExcerpt)
+        self._excerptSaved = State(initialValue: Excerpt(.general, initialExcerpt)) // the initial value doesn't matter
         self._showShareView = State(initialValue: sharing)
+    }
+
+    func saveExcerpt() {
+        if self.excerptIsSaved {
+            // update the saved excerpt
+            self.excerptSaved.updateWith(self.excerptType, self.excerptForEdit)
+            print("update: \(self.excerptSaved.persistentModelID.id)")
+        } else {
+            // create a new excerpt record
+            self.excerptSaved = Excerpt(self.excerptType, self.excerptForEdit)
+            self.excerptIsSaved = true
+            print("save: \(self.excerptSaved.persistentModelID.id)")
+        }
+    }
+
+    func resetExcerpt() {
+        self.excerptIsSaved = false
     }
 
     var body: some View {
@@ -52,7 +78,7 @@ struct ExcerptView: View {
                     }
 
                     Section("C_TITLE") {
-                        TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerpt.title, axis: .horizontal)
+                        TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerptForEdit.title, axis: .horizontal)
                             .focused(self.$focusedFormField, equals: .title)
                             .submitLabel(.next)
                             .onSubmit {
@@ -60,7 +86,7 @@ struct ExcerptView: View {
                             }
                     }
                     Section("C_AUTHOR") {
-                        TextField("MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER", text: self.$excerpt.author, axis: .horizontal)
+                        TextField("MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER", text: self.$excerptForEdit.author, axis: .horizontal)
                             .focused(self.$focusedFormField, equals: .author)
                             .submitLabel(.next)
                             .onSubmit {
@@ -68,35 +94,36 @@ struct ExcerptView: View {
                             }
                     }
                     Section("C_CONTENT") {
-                        TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$excerpt.content, axis: .vertical)
+                        TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$excerptForEdit.content, axis: .vertical)
                             .focused(self.$focusedFormField, equals: .content)
                             .lineLimit(6 ... .max)
                     }
 
                     Section {
                         Button("A_SHARE") {
-                            self.excerpt.type = self.excerptType
+                            self.saveExcerpt()
                             self.showShareView = true
                         }
-                        .disabled(self.excerpt.content.isEmpty)
+                        .disabled(self.excerptForEdit.content.isEmpty)
 
                         // TODO: ask user to confirm
                         Button("C_CLEAR_ALL") {
-                            self.excerpt = Excerpt(self.excerptType) // mainly to reset the UUID
+                            self.excerptForEdit = ExcerptForEdit()
+                            self.resetExcerpt()
                         }
-                        .disabled(self.excerpt.isEmpty)
+                        .disabled(self.excerptForEdit.isEmpty)
 
                         Button("C_CLEAR_CONTENT") {
-                            self.excerpt.id = UUID()
-                            self.excerpt.content = ""
+                            self.excerptForEdit.content = ""
+                            self.resetExcerpt()
                         }
-                        .disabled(self.excerpt.content.isEmpty)
+                        .disabled(self.excerptForEdit.content.isEmpty)
                     }
                 }
                 .scrollDismissesKeyboard(.interactively)
                 .navigationTitle("MAIN_VIEW_TITLE")
                 .sheet(isPresented: self.$showPasteSheet) {
-                    PasteSheetView(excerpt: self.$excerpt)
+                    PasteSheetView(excerpt: self.$excerptForEdit)
                 }
             }
             .allowsHitTesting(!self.showShareView)
@@ -106,13 +133,13 @@ struct ExcerptView: View {
             .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
 
             if self.showShareView {
-                ShareView(isPresented: self.$showShareView, excerpt: self.excerpt)
+                ShareView(isPresented: self.$showShareView, excerpt: self.$excerptSaved)
                     .zIndex(1) // to fix animation: https://sarunw.com/posts/how-to-fix-zstack-transition-animation-in-swiftui/
                     .transition(.shareViewTrans)
                     .toolbar(.hidden, for: .tabBar) // TODO: move ShareView to top-level
             }
         }
-        .animation(.easeInOut(duration: animationDuration), value: showShareView)
+        .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
     }
 }
 

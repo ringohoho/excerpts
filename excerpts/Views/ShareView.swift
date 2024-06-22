@@ -12,7 +12,7 @@ struct ShareView: View {
     @Environment(\.locale) private var envLocale
 
     @Binding var isPresented: Bool
-    var excerpt: Excerpt
+    @Binding var excerpt: Excerpt
 
     private func dismiss() {
         self.isPresented = false
@@ -46,6 +46,9 @@ struct ShareView: View {
         renderer.proposedSize.width = width
         renderer.scale = self.envDisplayScale
         self.cardUiImage = renderer.uiImage!
+
+        print("update shared image: \(self.excerpt.persistentModelID.id)")
+        self.excerpt.updateWith(sharedImage: self.cardUiImage)
     }
 
     var body: some View {

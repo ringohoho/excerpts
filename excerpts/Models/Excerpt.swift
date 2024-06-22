@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+import UIKit
 
 enum ExcerptType: Int, CaseIterable, Hashable, Codable {
     case general = 1010
@@ -26,27 +27,41 @@ enum ExcerptType: Int, CaseIterable, Hashable, Codable {
 
 @Model
 final class Excerpt {
-    var id = UUID()
     var type = ExcerptType.general
     var title = ""
     var author = ""
     var content = ""
 
-    init(_ type: ExcerptType) {
-        self.id = UUID()
-        self.type = type
+    var createdAt: Date?
+    var updatedAt: Date?
+
+    @Attribute(.externalStorage)
+    var sharedImage: Data? = nil
+
+    convenience init(_ type: ExcerptType, _ excerptForEdit: ExcerptForEdit) {
+        self.init(type, title: excerptForEdit.title, author: excerptForEdit.author, content: excerptForEdit.content)
     }
 
     init(_ type: ExcerptType, title: String, author: String, content: String) {
-        self.id = UUID()
         self.type = type
         self.title = title
         self.author = author
         self.content = content
+        self.createdAt = Date()
+        self.updatedAt = Date()
     }
 
-    var isEmpty: Bool {
-        self.title.isEmpty && self.author.isEmpty && self.content.isEmpty
+    func updateWith(_ type: ExcerptType, _ excerptForEdit: ExcerptForEdit) {
+        self.type = type
+        self.title = excerptForEdit.title
+        self.author = excerptForEdit.author
+        self.content = excerptForEdit.content
+        self.updatedAt = Date()
+    }
+
+    func updateWith(sharedImage: UIImage) {
+        self.sharedImage = sharedImage.heicData()
+        self.updatedAt = Date()
     }
 
     var titleTrimmed: String {
@@ -65,5 +80,27 @@ final class Excerpt {
         self.content
             .components(separatedBy: self.type == .general ? "\n" : "\n\n")
             .map { s in s.trimmingCharacters(in: .whitespaces) }
+    }
+}
+
+struct ExcerptForEdit {
+    var title = ""
+    var author = ""
+    var content = ""
+
+    init() {}
+
+    init(_ excerpt: Excerpt) {
+        self.init(title: excerpt.title, author: excerpt.author, content: excerpt.content)
+    }
+
+    init(title: String, author: String, content: String) {
+        self.title = title
+        self.author = author
+        self.content = content
+    }
+
+    var isEmpty: Bool {
+        self.title.isEmpty && self.author.isEmpty && self.content.isEmpty
     }
 }
