@@ -86,10 +86,11 @@ struct ExcerptView: View {
                         if self.excerptIsSaved {
                             // update the saved excerpt
                             self.excerpt.updateWith(self.excerptType, self.excerptForEdit)
-                            print("updated: \(self.excerpt.persistentModelID.id)")
+                            print("updated: \(self.excerpt.id)")
                         } else {
                             // create a new excerpt record
                             self.excerpt = Excerpt(self.excerptType, self.excerptForEdit)
+                            print("created: \(self.excerpt.id)")
                             // but don't save it for now, instead, save it after successfully rendering the image
                         }
 
@@ -99,7 +100,7 @@ struct ExcerptView: View {
                         if !self.excerptIsSaved {
                             self.modelContext.insert(self.excerpt)
                             self.excerptIsSaved = true
-                            print("saved: \(self.excerpt.persistentModelID.id)")
+                            print("saved: \(self.excerpt.id)")
                         }
                     }
                     .disabled(self.excerptForEdit.content.isEmpty)

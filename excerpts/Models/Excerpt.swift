@@ -27,13 +27,13 @@ enum ExcerptType: Int, CaseIterable, Hashable, Codable {
 
 @Model
 final class Excerpt {
+    var createdAt: Date?
+    var updatedAt: Date?
+
     var type = ExcerptType.general
     var title = ""
     var author = ""
     var content = ""
-
-    var createdAt: Date?
-    var updatedAt: Date?
 
     @Attribute(.externalStorage)
     var sharedImage: Data? = nil
@@ -43,25 +43,26 @@ final class Excerpt {
     }
 
     init(_ type: ExcerptType, title: String, author: String, content: String) {
+        self.createdAt = Date()
+        self.updatedAt = Date()
         self.type = type
         self.title = title
         self.author = author
         self.content = content
-        self.createdAt = Date()
-        self.updatedAt = Date()
     }
 
     func updateWith(_ type: ExcerptType, _ excerptForEdit: ExcerptForEdit) {
+        self.updatedAt = Date()
         self.type = type
         self.title = excerptForEdit.title
         self.author = excerptForEdit.author
         self.content = excerptForEdit.content
-        self.updatedAt = Date()
+        self.sharedImage = nil // invalidate the shared image
     }
 
     func updateWith(sharedImage: UIImage) {
-        self.sharedImage = sharedImage.heicData()
         self.updatedAt = Date()
+        self.sharedImage = sharedImage.heicData()
     }
 
     var titleTrimmed: String {

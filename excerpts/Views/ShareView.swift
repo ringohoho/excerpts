@@ -48,7 +48,7 @@ struct ShareView: View {
         self.cardUiImage = renderer.uiImage!
 
         self.excerpt.updateWith(sharedImage: self.cardUiImage)
-        print("shared image updated: \(self.excerpt.persistentModelID.id)")
+        print("shared image updated: \(self.excerpt.id)")
     }
 
     var body: some View {
