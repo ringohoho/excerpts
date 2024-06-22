@@ -62,85 +62,75 @@ struct ExcerptView: View {
     }
 
     var body: some View {
-        ZStack {
-            NavigationStack {
-                Form {
-                    Section {
-                        Button("PASTE_VIEW_TITLE") {
-                            self.showPasteSheet = true
-                            self.focusedFormField = nil
-                        }
-
-                        Picker("C_EXCERPT_TYPE", selection: self.$excerptType) {
-                            ForEach(ExcerptType.allCases, id: \.rawValue) { type in
-                                Text(type.displayName).tag(type)
-                            }
-                        }
+        NavigationStack {
+            Form {
+                Section {
+                    Button("PASTE_VIEW_TITLE") {
+                        self.showPasteSheet = true
+                        self.focusedFormField = nil
                     }
 
-                    Section("C_TITLE") {
-                        TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerptForEdit.title, axis: .horizontal)
-                            .focused(self.$focusedFormField, equals: .title)
-                            .submitLabel(.next)
-                            .onSubmit {
-                                self.focusedFormField = .author
-                            }
-                    }
-                    Section("C_AUTHOR") {
-                        TextField("MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER", text: self.$excerptForEdit.author, axis: .horizontal)
-                            .focused(self.$focusedFormField, equals: .author)
-                            .submitLabel(.next)
-                            .onSubmit {
-                                self.focusedFormField = .content
-                            }
-                    }
-                    Section("C_CONTENT") {
-                        TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$excerptForEdit.content, axis: .vertical)
-                            .focused(self.$focusedFormField, equals: .content)
-                            .lineLimit(6 ... .max)
-                    }
-
-                    Section {
-                        Button("A_SHARE") {
-                            self.saveExcerpt()
-                            self.showShareView = true
+                    Picker("C_EXCERPT_TYPE", selection: self.$excerptType) {
+                        ForEach(ExcerptType.allCases, id: \.rawValue) { type in
+                            Text(type.displayName).tag(type)
                         }
-                        .disabled(self.excerptForEdit.content.isEmpty)
-
-                        // TODO: ask user to confirm
-                        Button("C_CLEAR_ALL") {
-                            self.excerptForEdit = ExcerptForEdit()
-                            self.resetExcerpt()
-                        }
-                        .disabled(self.excerptForEdit.isEmpty)
-
-                        Button("C_CLEAR_CONTENT") {
-                            self.excerptForEdit.content = ""
-                            self.resetExcerpt()
-                        }
-                        .disabled(self.excerptForEdit.content.isEmpty)
                     }
                 }
-                .scrollDismissesKeyboard(.interactively)
-                .navigationTitle("MAIN_VIEW_TITLE")
-                .sheet(isPresented: self.$showPasteSheet) {
-                    PasteSheetView(excerpt: self.$excerptForEdit)
+
+                Section("C_TITLE") {
+                    TextField("MAIN_VIEW_FORM_TITLE_PLACEHOLDER", text: self.$excerptForEdit.title, axis: .horizontal)
+                        .focused(self.$focusedFormField, equals: .title)
+                        .submitLabel(.next)
+                        .onSubmit {
+                            self.focusedFormField = .author
+                        }
+                }
+                Section("C_AUTHOR") {
+                    TextField("MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER", text: self.$excerptForEdit.author, axis: .horizontal)
+                        .focused(self.$focusedFormField, equals: .author)
+                        .submitLabel(.next)
+                        .onSubmit {
+                            self.focusedFormField = .content
+                        }
+                }
+                Section("C_CONTENT") {
+                    TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$excerptForEdit.content, axis: .vertical)
+                        .focused(self.$focusedFormField, equals: .content)
+                        .lineLimit(6 ... .max)
+                }
+
+                Section {
+                    Button("A_SHARE") {
+                        self.saveExcerpt()
+                        self.showShareView = true
+                    }
+                    .disabled(self.excerptForEdit.content.isEmpty)
+
+                    // TODO: ask user to confirm
+                    Button("C_CLEAR_ALL") {
+                        self.excerptForEdit = ExcerptForEdit()
+                        self.resetExcerpt()
+                    }
+                    .disabled(self.excerptForEdit.isEmpty)
+
+                    Button("C_CLEAR_CONTENT") {
+                        self.excerptForEdit.content = ""
+                        self.resetExcerpt()
+                    }
+                    .disabled(self.excerptForEdit.content.isEmpty)
                 }
             }
-            .allowsHitTesting(!self.showShareView) // when ShareView is shown, disable interaction
-            // another way to blur: https://stackoverflow.com/a/59111492
-            .blur(radius: self.showShareView ? 20 : 0)
-            .overlay(self.showShareView ? Color.gray.opacity(0.2) : Color.clear)
-            .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
-
-            if self.showShareView {
-                ShareView(isPresented: self.$showShareView, excerpt: self.$excerptSaved)
-                    .zIndex(1) // to fix animation: https://sarunw.com/posts/how-to-fix-zstack-transition-animation-in-swiftui/
-                    .transition(.shareViewTrans)
-                    .toolbar(.hidden, for: .tabBar) // TODO: move ShareView to top-level
+            .scrollDismissesKeyboard(.interactively)
+            .navigationTitle("MAIN_VIEW_TITLE")
+            .sheet(isPresented: self.$showPasteSheet) {
+                PasteSheetView(excerpt: self.$excerptForEdit)
             }
         }
         .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
+        .fullScreenCover(isPresented: self.$showShareView) {
+            ShareView(isPresented: self.$showShareView, excerpt: self.$excerptSaved)
+                .presentationBackground(.clear)
+        }
     }
 }
 

@@ -55,7 +55,7 @@ struct ShareView: View {
         GeometryReader { geometry in
             ZStack {
                 ScrollView(.vertical, showsIndicators: false) {
-                    // scroll view defaults to take up full height
+                    // scroll view take up full height by default
 
                     ZStack(alignment: .center) {
                         // invisible rect to dismiss the share view
