@@ -19,7 +19,7 @@ struct ExcerptView: View {
     @State private var excerptForEdit: ExcerptForEdit
     @State private var excerptSaved: Excerpt
     @State private var excerptIsSaved = false
-    @State private var showShareView: Bool
+    @Binding private var showShareView: Bool
 
     private enum ExcerptFormField {
         case title
@@ -29,18 +29,18 @@ struct ExcerptView: View {
 
     @FocusState private var focusedFormField: ExcerptFormField?
 
-    init() {
-        self.init(ExcerptForEdit(), sharing: false)
+    init(isSharing: Binding<Bool>) {
+        self.init(ExcerptForEdit(), isSharing: isSharing)
     }
 
-    init(_ initialExcerpt: Excerpt, sharing: Bool = false) {
-        self.init(ExcerptForEdit(initialExcerpt), sharing: sharing)
+    init(_ initialExcerpt: Excerpt, isSharing: Binding<Bool>) {
+        self.init(ExcerptForEdit(initialExcerpt), isSharing: isSharing)
     }
 
-    init(_ initialExcerpt: ExcerptForEdit, sharing: Bool = false) {
+    init(_ initialExcerpt: ExcerptForEdit, isSharing: Binding<Bool>) {
         self._excerptForEdit = State(initialValue: initialExcerpt)
         self._excerptSaved = State(initialValue: Excerpt(.general, initialExcerpt)) // the initial value doesn't matter
-        self._showShareView = State(initialValue: sharing)
+        self._showShareView = isSharing
     }
 
     func saveExcerpt() {
@@ -145,14 +145,18 @@ struct ExcerptView: View {
 }
 
 #Preview("Empty") {
-    ExcerptView()
+    var sharing = false
+    let binding = Binding { sharing } set: { sharing = $0 }
+    return ExcerptView(isSharing: binding)
         .environment(\.locale, .init(identifier: "zh-Hans"))
         .modelContainer(MockData.container)
 }
 
 #Preview("Non-empty English") {
-    TabView {
-        ExcerptView(demoExcerpts[0])
+    var sharing = false
+    let binding = Binding { sharing } set: { sharing = $0 }
+    return TabView {
+        ExcerptView(demoExcerpts[0], isSharing: binding)
     }
     .environment(\.locale, .init(identifier: "en"))
     .modelContainer(MockData.container)

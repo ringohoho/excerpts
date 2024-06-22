@@ -8,17 +8,21 @@
 import SwiftUI
 
 struct MainView: View {
-    var body: some View {
-        TabView {
-            ExcerptView()
-                .tabItem {
-                    Label("C_EXCERPT", systemImage: "book.pages")
-                }
+    @State private var showShareView: Bool = false
 
-            HistoryView()
-                .tabItem {
-                    Label("A_HISTORY", systemImage: "clock")
-                }
+    var body: some View {
+        ZStack {
+            TabView {
+                ExcerptView(isSharing: self.$showShareView)
+                    .tabItem {
+                        Label("C_EXCERPT", systemImage: "book.pages")
+                    }
+
+                HistoryView()
+                    .tabItem {
+                        Label("A_HISTORY", systemImage: "clock")
+                    }
+            }
         }
     }
 }
