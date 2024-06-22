@@ -47,8 +47,8 @@ struct ShareView: View {
         renderer.scale = self.envDisplayScale
         self.cardUiImage = renderer.uiImage!
 
-        print("update shared image: \(self.excerpt.persistentModelID.id)")
         self.excerpt.updateWith(sharedImage: self.cardUiImage)
+        print("shared image updated: \(self.excerpt.persistentModelID.id)")
     }
 
     var body: some View {

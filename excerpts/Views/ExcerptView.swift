@@ -17,7 +17,7 @@ struct ExcerptView: View {
     private var excerptType: ExcerptType = .general
 
     @State private var excerptForEdit: ExcerptForEdit
-    @State private var excerptSaved: Excerpt
+    @State private var excerpt: Excerpt
     @State private var excerptIsSaved = false
     @Binding private var showShareView: Bool
 
@@ -39,26 +39,8 @@ struct ExcerptView: View {
 
     init(_ initialExcerpt: ExcerptForEdit, isSharing: Binding<Bool>) {
         self._excerptForEdit = State(initialValue: initialExcerpt)
-        self._excerptSaved = State(initialValue: Excerpt(.general, initialExcerpt)) // the initial value doesn't matter
+        self._excerpt = State(initialValue: Excerpt(.general, initialExcerpt)) // the initial value doesn't matter
         self._showShareView = isSharing
-    }
-
-    func saveExcerpt() {
-        if self.excerptIsSaved {
-            // update the saved excerpt
-            self.excerptSaved.updateWith(self.excerptType, self.excerptForEdit)
-            print("update: \(self.excerptSaved.persistentModelID.id)")
-        } else {
-            // create a new excerpt record
-            self.excerptSaved = Excerpt(self.excerptType, self.excerptForEdit)
-            self.modelContext.insert(self.excerptSaved)
-            self.excerptIsSaved = true
-            print("save: \(self.excerptSaved.persistentModelID.id)")
-        }
-    }
-
-    func resetExcerpt() {
-        self.excerptIsSaved = false
     }
 
     var body: some View {
@@ -101,21 +83,37 @@ struct ExcerptView: View {
 
                 Section {
                     Button("A_SHARE") {
-                        self.saveExcerpt()
+                        if self.excerptIsSaved {
+                            // update the saved excerpt
+                            self.excerpt.updateWith(self.excerptType, self.excerptForEdit)
+                            print("updated: \(self.excerpt.persistentModelID.id)")
+                        } else {
+                            // create a new excerpt record
+                            self.excerpt = Excerpt(self.excerptType, self.excerptForEdit)
+                            // but don't save it for now, instead, save it after successfully rendering the image
+                        }
+
                         self.showShareView = true
+                    }
+                    .onChange(of: self.excerpt.sharedImage) {
+                        if !self.excerptIsSaved {
+                            self.modelContext.insert(self.excerpt)
+                            self.excerptIsSaved = true
+                            print("saved: \(self.excerpt.persistentModelID.id)")
+                        }
                     }
                     .disabled(self.excerptForEdit.content.isEmpty)
 
                     // TODO: ask user to confirm
                     Button("C_CLEAR_ALL") {
                         self.excerptForEdit = ExcerptForEdit()
-                        self.resetExcerpt()
+                        self.excerptIsSaved = false
                     }
                     .disabled(self.excerptForEdit.isEmpty)
 
                     Button("C_CLEAR_CONTENT") {
                         self.excerptForEdit.content = ""
-                        self.resetExcerpt()
+                        self.excerptIsSaved = false
                     }
                     .disabled(self.excerptForEdit.content.isEmpty)
                 }
@@ -126,9 +124,9 @@ struct ExcerptView: View {
                 PasteSheetView(excerpt: self.$excerptForEdit)
             }
         }
-        .animation(.easeInOut(duration: animationDuration), value: self.showShareView)
-        .fullScreenCover(isPresented: self.$showShareView) {
-            ShareView(isPresented: self.$showShareView, excerpt: self.$excerptSaved)
+        .animation(.easeInOut(duration: animationDuration), value: showShareView)
+        .fullScreenCover(isPresented: $showShareView) {
+            ShareView(isPresented: self.$showShareView, excerpt: self.$excerpt)
                 .presentationBackground(.clear)
         }
     }
