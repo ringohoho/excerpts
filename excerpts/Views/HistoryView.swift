@@ -50,7 +50,7 @@ struct HistoryView: View {
                     // this actually doesn't matter, because ShareView won't reassign the value
                     self.selectedExcerpt = $0
                 }
-                ShareView(isPresented: self.$showShareView, excerpt: selectedExcerpt)
+                ShareView(isPresented: self.$showShareView, excerpt: selectedExcerpt, mutable: false)
                     .presentationBackground(.clear)
             }
             .onChange(of: self.showShareView) {

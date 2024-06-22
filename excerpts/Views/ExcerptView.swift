@@ -129,7 +129,7 @@ struct ExcerptView: View {
         }
         .animation(.easeInOut(duration: animationDuration), value: showShareView)
         .fullScreenCover(isPresented: $showShareView) {
-            ShareView(isPresented: self.$showShareView, excerpt: self.$excerpt)
+            ShareView(isPresented: self.$showShareView, excerpt: self.$excerpt, mutable: true)
                 .presentationBackground(.clear)
         }
         .onChange(of: showShareView) {

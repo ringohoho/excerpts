@@ -13,6 +13,16 @@ struct ShareView: View {
 
     @Binding var isPresented: Bool
     @Binding var excerpt: Excerpt
+    let mutable: Bool
+
+    @State private var cardUiImage: UIImage
+
+    init(isPresented: Binding<Bool>, excerpt: Binding<Excerpt>, mutable: Bool) {
+        self._isPresented = isPresented
+        self._excerpt = excerpt
+        self._cardUiImage = State(initialValue: excerpt.wrappedValue.sharedUIImage ?? UIImage())
+        self.mutable = mutable
+    }
 
     private func dismiss() {
         self.isPresented = false
@@ -20,18 +30,16 @@ struct ShareView: View {
 
     private let screenEdgePadding: CGFloat = 12
 
-    @State private var cardUiImage = UIImage()
-
-    private var cardImage: Image {
-        Image(uiImage: self.cardUiImage)
-    }
-
     @State private var isMenuOpen = false
 
     @AppStorage(UserDefaultsKeys.cardStyle)
     private var cardStyle = CardStyle.defaultValue
     @AppStorage(UserDefaultsKeys.cardFont)
     private var cardFont = CardStyle.defaultValue.meta.defaultFont
+
+    private var cardImage: Image {
+        Image(uiImage: self.cardUiImage)
+    }
 
     @ViewBuilder
     private func card(width: CGFloat) -> some View {
@@ -73,24 +81,24 @@ struct ShareView: View {
                         .frame(maxHeight: .infinity)
 
                         VStack {
-                            if let uiImage = self.excerpt.sharedUIImage {
-                                Image(uiImage: uiImage)
+                            if self.mutable {
+                                // from ExcerptView, should re-render it
+                                self.card(width: geometry.size.width)
+                                    .draggable(self.cardImage)
+                            } else {
+                                // immutable, should display saved image
+                                self.cardImage
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: geometry.size.width - self.screenEdgePadding * 2)
-                                    .draggable(Image(uiImage: uiImage))
-                                // TODO: fix the card preview
-//                            } else {
-//                                self.card(width: geometry.size.width)
-//                                    .draggable(self.cardImage)
+                                    .draggable(self.cardImage)
                             }
                         }
                         .padding(self.screenEdgePadding)
                         .frame(width: geometry.size.width)
                         .onAppear {
-                            // when the card appear, render it into an Image
-                            if self.excerpt.sharedImageData == nil {
-                                // only do it when there's no saved image, otherwise we'll lose the previous one which may have a custom style
+                            if self.mutable {
+                                // it's from ExcerptView
                                 self.renderCard(width: geometry.size.width)
                             }
                         }
@@ -121,37 +129,39 @@ struct ShareView: View {
 
                         Spacer()
 
-                        Menu {
-                            Picker("C_STYLE", selection: self.$cardStyle) {
-                                ForEach(CardStyle.allCases, id: \.rawValue) { style in
-                                    Label(title: { Text(String(localized: style.meta.displayName)) }, icon: { style.meta.miniPreview }).tag(style)
+                        if self.mutable {
+                            Menu {
+                                Picker("C_STYLE", selection: self.$cardStyle) {
+                                    ForEach(CardStyle.allCases, id: \.rawValue) { style in
+                                        Label(title: { Text(String(localized: style.meta.displayName)) }, icon: { style.meta.miniPreview }).tag(style)
+                                    }
                                 }
-                            }
-                            .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
-                            .onChange(of: self.cardStyle) {
-                                self.cardFont = self.cardStyle.meta.defaultFont
-                                self.renderCard(width: geometry.size.width)
-                            }
-                            Picker("C_FONT", selection: self.$cardFont) {
-                                ForEach(CardFont.allCases, id: \.rawValue) { font in
-                                    Text(font.displayName).tag(font)
+                                .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
+                                .onChange(of: self.cardStyle) {
+                                    self.cardFont = self.cardStyle.meta.defaultFont
+                                    self.renderCard(width: geometry.size.width)
                                 }
+                                Picker("C_FONT", selection: self.$cardFont) {
+                                    ForEach(CardFont.allCases, id: \.rawValue) { font in
+                                        Text(font.displayName).tag(font)
+                                    }
+                                }
+                                .pickerStyle(.menu)
+                                .menuActionDismissBehavior(.disabled)
+                                .onChange(of: self.cardFont) {
+                                    self.renderCard(width: geometry.size.width)
+                                }
+                            } label: {
+                                Image(systemName: "square.and.pencil.circle.fill")
+                                    .symbolRenderingMode(.hierarchical)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 38, height: 38)
+                                    .padding(.bottom, 16)
                             }
-                            .pickerStyle(.menu)
-                            .menuActionDismissBehavior(.disabled)
-                            .onChange(of: self.cardFont) {
-                                self.renderCard(width: geometry.size.width)
+                            .onTapGesture {
+                                self.isMenuOpen = true
                             }
-                        } label: {
-                            Image(systemName: "square.and.pencil.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 38, height: 38)
-                                .padding(.bottom, 16)
-                        }
-                        .onTapGesture {
-                            self.isMenuOpen = true
                         }
 
                         ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
