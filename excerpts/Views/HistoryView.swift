@@ -5,23 +5,25 @@
 //  Created by Richard on 2024/6/21.
 //
 
+import SwiftData
 import SwiftUI
 
 struct HistoryView: View {
-    @State private var dummy = [
-        "西方哲学史",
-        "佛学概论",
-        "哥德尔、艾舍尔、巴赫"
-    ]
+    @Environment(\.modelContext) private var modelContext
+
+    @Query(sort: \Excerpt.updatedAt, order: .reverse)
+    private var excerpts: [Excerpt]
 
     var body: some View {
         NavigationStack {
             List {
-                ForEach(self.dummy, id: \.self) { item in
-                    Text(item)
+                ForEach(self.excerpts, id: \.id) { excerpt in
+                    HistoryRow(excerpt: excerpt)
                 }
                 .onDelete(perform: { indexSet in
-                    self.dummy.remove(atOffsets: indexSet)
+                    for index in indexSet {
+                        self.modelContext.delete(self.excerpts[index])
+                    }
                 })
             }
             .navigationTitle("A_HISTORY")
@@ -32,4 +34,5 @@ struct HistoryView: View {
 
 #Preview {
     HistoryView()
+        .modelContainer(MockData.container)
 }

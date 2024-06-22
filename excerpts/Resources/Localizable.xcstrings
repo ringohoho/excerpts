@@ -449,6 +449,22 @@
         }
       }
     },
+    "HISTORY_ROW_META_SEP" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ", "
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "，"
+          }
+        }
+      }
+    },
     "MAIN_VIEW_FORM_AUTHOR_PLACEHOLDER" : {
       "localizations" : {
         "en" : {

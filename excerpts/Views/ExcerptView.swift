@@ -51,6 +51,7 @@ struct ExcerptView: View {
         } else {
             // create a new excerpt record
             self.excerptSaved = Excerpt(self.excerptType, self.excerptForEdit)
+            self.modelContext.insert(self.excerptSaved)
             self.excerptIsSaved = true
             print("save: \(self.excerptSaved.persistentModelID.id)")
         }
