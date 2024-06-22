@@ -94,7 +94,7 @@ struct ExcerptView: View {
                     }
                 }
                 .scrollDismissesKeyboard(.interactively)
-                .navigationTitle(Bundle.main.displayName)
+                .navigationTitle("MAIN_VIEW_TITLE")
                 .sheet(isPresented: self.$showPasteSheet) {
                     PasteSheetView(excerpt: self.$excerpt)
                 }

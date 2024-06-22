@@ -123,7 +123,7 @@
         },
         "zh-Hans" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "仅清空内容"
           }
         }
@@ -493,6 +493,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "在这里输入摘录来源的标题"
+          }
+        }
+      }
+    },
+    "MAIN_VIEW_TITLE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Excerpt"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "文采"
           }
         }
       }
