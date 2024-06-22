@@ -127,7 +127,7 @@ struct ExcerptView: View {
                     PasteSheetView(excerpt: self.$excerptForEdit)
                 }
             }
-            .allowsHitTesting(!self.showShareView)
+            .allowsHitTesting(!self.showShareView) // when ShareView is shown, disable interaction
             // another way to blur: https://stackoverflow.com/a/59111492
             .blur(radius: self.showShareView ? 20 : 0)
             .overlay(self.showShareView ? Color.gray.opacity(0.2) : Color.clear)
