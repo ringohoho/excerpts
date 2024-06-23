@@ -81,6 +81,12 @@ struct ExcerptView: View {
                     TextField("MAIN_VIEW_FORM_CONTENT_PLACEHOLDER", text: self.$excerptForEdit.content, axis: .vertical)
                         .focused(self.$focusedFormField, equals: .content)
                         .lineLimit(6 ... .max)
+                        .onChange(of: self.excerptForEdit.content) { old, new in
+                            if !old.isEmpty && new.isEmpty {
+                                // the content field is cleared, we should start a new excerpt
+                                self.excerptIsSaved = false
+                            }
+                        }
                 }
 
                 Section {
