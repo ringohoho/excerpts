@@ -91,6 +91,11 @@ struct ExcerptView: View {
 
                 Section {
                     Button("A_SHARE") {
+                        if self.excerptIsSaved && !(self.excerpt.content =~ self.excerptForEdit.content) {
+                            // the saved content is very different from current one
+                            self.excerptIsSaved = false
+                        }
+
                         if self.excerptIsSaved {
                             // update the saved excerpt
                             self.excerpt.updateWith(self.excerptType, self.excerptForEdit)
