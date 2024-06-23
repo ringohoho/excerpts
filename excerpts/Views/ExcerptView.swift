@@ -124,7 +124,12 @@ struct ExcerptView: View {
             .scrollDismissesKeyboard(.interactively)
             .navigationTitle("MAIN_VIEW_TITLE")
             .sheet(isPresented: self.$showPasteSheet) {
-                PasteSheetView(excerpt: self.$excerptForEdit)
+                let isChanged = Binding { false } set: { changed in
+                    if changed {
+                        self.excerptIsSaved = false
+                    }
+                }
+                PasteSheetView(excerpt: self.$excerptForEdit, isChanged: isChanged)
             }
         }
         .animation(.easeInOut(duration: animationDuration), value: showShareView)

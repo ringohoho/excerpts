@@ -11,6 +11,7 @@ struct PasteSheetView: View {
     @Environment(\.dismiss) var dismiss
 
     @Binding var excerpt: ExcerptForEdit
+    @Binding var isChanged: Bool
 
     @AppStorage(UserDefaultsKeys.pasteSource)
     private var pasteSource: PasteSource = .defaultValue
@@ -50,6 +51,7 @@ struct PasteSheetView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     Button("A_DONE") {
                         if self.pasteSource.parser.parse(self.pasteContent, excerpt: &self.excerpt) {
+                            self.isChanged = true
                             self.dismiss()
                         } else {
                             self.showBadPasteAlert = true
