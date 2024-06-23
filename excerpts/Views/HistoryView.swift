@@ -11,7 +11,7 @@ import SwiftUI
 struct HistoryView: View {
     @Environment(\.modelContext) private var modelContext
 
-    @Query(sort: \Excerpt.createdAt, order: .reverse)
+    @Query(sort: \Excerpt.updatedAt, order: .reverse)
     private var excerpts: [Excerpt]
 
     @State private var selectedExcerpt: Excerpt? = nil
