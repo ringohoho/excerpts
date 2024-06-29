@@ -20,7 +20,7 @@ struct ExcerptView: View {
     @State private var excerpt: Excerpt
     @State private var excerptIsSaved = false
 
-    @State private var showShareView = false
+    @State private var showShareView: Bool
 
     private enum ExcerptFormField {
         case title
@@ -31,16 +31,18 @@ struct ExcerptView: View {
     @FocusState private var focusedFormField: ExcerptFormField?
 
     init() {
-        self.init(ExcerptForEdit())
+        self.init(.general, ExcerptForEdit())
     }
 
-    init(_ initialExcerpt: Excerpt) {
-        self.init(ExcerptForEdit(initialExcerpt))
+    init(_ initialExcerpt: Excerpt, sharing: Bool = false) {
+        self.init(initialExcerpt.type, ExcerptForEdit(initialExcerpt), sharing: sharing)
     }
 
-    init(_ initialExcerpt: ExcerptForEdit) {
+    init(_ initialExcerptType: ExcerptType, _ initialExcerpt: ExcerptForEdit, sharing: Bool = false) {
+        self.excerptType = initialExcerptType
         self._excerptForEdit = State(initialValue: initialExcerpt)
         self._excerpt = State(initialValue: Excerpt(.general, initialExcerpt)) // the initial value doesn't matter
+        self._showShareView = State(initialValue: sharing)
     }
 
     var body: some View {

@@ -189,18 +189,21 @@ struct ShareView: View {
     }
 }
 
-// #Preview("Dark") {
-//    MainView(demoExcerpts[0], sharing: true)
-//        .environment(\.locale, .init(identifier: "zh-Hans"))
-//        .preferredColorScheme(.dark)
-// }
-//
-// #Preview("Light Long") {
-//    MainView(demoExcerpts[2], sharing: true)
-//        .environment(\.locale, .init(identifier: "zh-Hans"))
-// }
-//
-// #Preview("Light English") {
-//    MainView(demoExcerpts[3], sharing: true)
-//        .environment(\.locale, .init(identifier: "en"))
-// }
+#Preview("Dark") {
+    ExcerptView(demoExcerpts[0], sharing: true)
+        .environment(\.locale, .init(identifier: "zh-Hans"))
+        .modelContainer(MockData.container)
+        .preferredColorScheme(.dark)
+}
+
+#Preview("Light Long") {
+    ExcerptView(demoExcerpts[2], sharing: true)
+        .environment(\.locale, .init(identifier: "zh-Hans"))
+        .modelContainer(MockData.container)
+}
+
+#Preview("Light English") {
+    ExcerptView(demoExcerpts[3], sharing: true)
+        .environment(\.locale, .init(identifier: "en"))
+        .modelContainer(MockData.container)
+}
