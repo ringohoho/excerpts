@@ -20,8 +20,7 @@ struct ExcerptView: View {
     @State private var excerpt: Excerpt
     @State private var excerptIsSaved = false
 
-    @State private var showShareView = false // this is the inner control state
-    @Binding private var isSharing: Bool // this is for notifying outside
+    @State private var showShareView = false
 
     private enum ExcerptFormField {
         case title
@@ -31,18 +30,17 @@ struct ExcerptView: View {
 
     @FocusState private var focusedFormField: ExcerptFormField?
 
-    init(isSharing: Binding<Bool>) {
-        self.init(ExcerptForEdit(), isSharing: isSharing)
+    init() {
+        self.init(ExcerptForEdit())
     }
 
-    init(_ initialExcerpt: Excerpt, isSharing: Binding<Bool>) {
-        self.init(ExcerptForEdit(initialExcerpt), isSharing: isSharing)
+    init(_ initialExcerpt: Excerpt) {
+        self.init(ExcerptForEdit(initialExcerpt))
     }
 
-    init(_ initialExcerpt: ExcerptForEdit, isSharing: Binding<Bool>) {
+    init(_ initialExcerpt: ExcerptForEdit) {
         self._excerptForEdit = State(initialValue: initialExcerpt)
         self._excerpt = State(initialValue: Excerpt(.general, initialExcerpt)) // the initial value doesn't matter
-        self._isSharing = isSharing
     }
 
     var body: some View {
@@ -145,28 +143,21 @@ struct ExcerptView: View {
         }
         .animation(.easeInOut(duration: animationDuration), value: showShareView)
         .fullScreenCover(isPresented: $showShareView) {
-            ShareView(isPresented: self.$showShareView, excerpt: self.$excerpt, mutable: true)
-                .presentationBackground(.clear)
-        }
-        .onChange(of: showShareView) {
-            self.isSharing = self.showShareView
+            ShareView(excerpt: self.$excerpt, mutable: true)
+                .presentationBackground(.ultraThinMaterial)
         }
     }
 }
 
 #Preview("Empty") {
-    var sharing = false
-    let binding = Binding { sharing } set: { sharing = $0 }
-    return ExcerptView(isSharing: binding)
+    ExcerptView()
         .environment(\.locale, .init(identifier: "zh-Hans"))
         .modelContainer(MockData.container)
 }
 
 #Preview("Non-empty English") {
-    var sharing = false
-    let binding = Binding { sharing } set: { sharing = $0 }
-    return TabView {
-        ExcerptView(demoExcerpts[0], isSharing: binding)
+    TabView {
+        ExcerptView(demoExcerpts[0])
     }
     .environment(\.locale, .init(identifier: "en"))
     .modelContainer(MockData.container)

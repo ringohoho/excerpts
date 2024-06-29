@@ -10,22 +10,17 @@ import SwiftUI
 struct ShareView: View {
     @Environment(\.displayScale) private var envDisplayScale
     @Environment(\.locale) private var envLocale
+    @Environment(\.dismiss) var dismiss
 
-    @Binding var isPresented: Bool
     @Binding var excerpt: Excerpt
     let mutable: Bool
 
     @State private var cardUiImage: UIImage
 
-    init(isPresented: Binding<Bool>, excerpt: Binding<Excerpt>, mutable: Bool) {
-        self._isPresented = isPresented
+    init(excerpt: Binding<Excerpt>, mutable: Bool) {
         self._excerpt = excerpt
         self._cardUiImage = State(initialValue: excerpt.wrappedValue.sharedUIImage ?? UIImage())
         self.mutable = mutable
-    }
-
-    private func dismiss() {
-        self.isPresented = false
     }
 
     private let screenEdgePadding: CGFloat = 12
