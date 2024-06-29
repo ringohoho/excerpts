@@ -24,3 +24,12 @@ protocol Card: View {
 
     init(_ options: CardOptions)
 }
+
+enum CardConsts {
+    static let cardContainerPadding: CGFloat = 12
+    static let maxCardContainerWidth: CGFloat = 400
+
+    static func cardWidth(_ geoWidth: CGFloat) -> CGFloat {
+        min(geoWidth, Self.maxCardContainerWidth) - Self.cardContainerPadding * 2
+    }
+}

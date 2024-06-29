@@ -139,23 +139,25 @@ struct ClassicCard: Card {
     }
 }
 
-// struct ClassicCard_Previews: PreviewProvider {
-//    static let screenEdgePadding: CGFloat = 12
-//
-//    static var previews: some View {
-//        ForEach(Array(demoExcerpts.enumerated()), id: \.offset) { i, excerpt in
-//            GeometryReader { geometry in
-//                ScrollView(.vertical, showsIndicators: false) {
-//                    VStack {
-//                        ClassicCard(CardOptions(excerpt: excerpt, width: geometry.size.width - screenEdgePadding * 2, font: ClassicCard.meta.defaultFont))
-//                    }
-//                    .padding(screenEdgePadding)
-//                    .frame(width: geometry.size.width)
-//                    .frame(minHeight: geometry.size.height)
-//                }
-//            }
-//            .environment(\.locale, .init(identifier: "zh-Hans"))
-//            .previewDisplayName("Demo \(i + 1)")
-//        }
-//    }
-// }
+struct ClassicCard_Previews: PreviewProvider {
+    static var previews: some View {
+        ForEach(Array(demoExcerpts.enumerated()), id: \.offset) { i, excerpt in
+            GeometryReader { geometry in
+                ScrollView(.vertical, showsIndicators: false) {
+                    HStack {
+                        Spacer()
+                        VStack {
+                            ClassicCard(CardOptions(excerpt: excerpt, width: CardConsts.cardWidth(geometry.size.width), font: ClassicCard.meta.defaultFont))
+                        }
+                        .frame(maxWidth: CardConsts.maxCardContainerWidth)
+                        .padding(CardConsts.cardContainerPadding)
+                        Spacer()
+                    }
+                    .frame(minHeight: geometry.size.height)
+                }
+            }
+            .environment(\.locale, .init(identifier: "zh-Hans"))
+            .previewDisplayName("Demo \(i + 1)")
+        }
+    }
+}
