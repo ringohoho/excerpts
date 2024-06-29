@@ -23,8 +23,6 @@ struct ShareView: View {
         self.mutable = mutable
     }
 
-    private let screenEdgePadding: CGFloat = 12
-
     @State private var isMenuOpen = false
 
     @AppStorage(UserDefaultsKeys.cardStyle)
@@ -38,14 +36,12 @@ struct ShareView: View {
 
     @ViewBuilder
     private func card(width: CGFloat) -> some View {
-        let width = width - self.screenEdgePadding * 2
         self.cardStyle
             .create(.init(excerpt: self.excerpt, width: width, font: self.cardFont))
     }
 
     @MainActor
     private func renderCard(width: CGFloat) {
-        let width = width - self.screenEdgePadding * 2
         let renderer = ImageRenderer(content: self.card(width: width).environment(\.locale, self.envLocale))
         renderer.proposedSize.width = width
         renderer.scale = self.envDisplayScale
@@ -78,23 +74,23 @@ struct ShareView: View {
                         VStack {
                             if self.mutable {
                                 // from ExcerptView, should re-render it
-                                self.card(width: geometry.size.width)
+                                self.card(width: CardConsts.cardWidth(geometry.size.width))
                                     .draggable(self.cardImage)
                             } else {
                                 // immutable, should display saved image
                                 self.cardImage
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: geometry.size.width - self.screenEdgePadding * 2)
+                                    .frame(width: CardConsts.cardWidth(geometry.size.width))
                                     .draggable(self.cardImage)
                             }
                         }
-                        .padding(self.screenEdgePadding)
-                        .frame(width: geometry.size.width)
+                        .padding(CardConsts.cardContainerPadding)
+                        .frame(maxWidth: CardConsts.maxCardContainerWidth)
                         .onAppear {
                             if self.mutable {
                                 // it's from ExcerptView
-                                self.renderCard(width: geometry.size.width)
+                                self.renderCard(width: CardConsts.cardWidth(geometry.size.width))
                             }
                         }
                         .onTapGesture {
@@ -134,7 +130,7 @@ struct ShareView: View {
                                 .menuActionDismissBehavior(.disabled) // force tapping overlay to dismiss menu
                                 .onChange(of: self.cardStyle) {
                                     self.cardFont = self.cardStyle.meta.defaultFont
-                                    self.renderCard(width: geometry.size.width)
+                                    self.renderCard(width: CardConsts.cardWidth(geometry.size.width))
                                 }
                                 Picker("C_FONT", selection: self.$cardFont) {
                                     ForEach(CardFont.allCases, id: \.rawValue) { font in
@@ -144,7 +140,7 @@ struct ShareView: View {
                                 .pickerStyle(.menu)
                                 .menuActionDismissBehavior(.disabled)
                                 .onChange(of: self.cardFont) {
-                                    self.renderCard(width: geometry.size.width)
+                                    self.renderCard(width: CardConsts.cardWidth(geometry.size.width))
                                 }
                             } label: {
                                 Image(systemName: "square.and.pencil.circle.fill")
