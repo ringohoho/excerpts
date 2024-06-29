@@ -5,6 +5,7 @@
 //  Created by Richard on 2023/9/13.
 //
 
+import LinkPresentation
 import SwiftUI
 
 struct ShareView: View {
@@ -23,7 +24,12 @@ struct ShareView: View {
         self.mutable = mutable
     }
 
-    @State private var isMenuOpen = false
+    @State private var isStyleMenuOpen = false
+    @State private var isShareMenuOpen = false
+
+    private var isMenuOpen: Bool {
+        self.isStyleMenuOpen || self.isShareMenuOpen
+    }
 
     @AppStorage(UserDefaultsKeys.cardStyle)
     private var cardStyle = CardStyle.defaultValue
@@ -151,19 +157,39 @@ struct ShareView: View {
                                     .padding(.bottom, 16)
                             }
                             .onTapGesture {
-                                self.isMenuOpen = true
+                                self.isStyleMenuOpen = true
                             }
                         }
 
+                        let shareButtonImage = Image(systemName: "square.and.arrow.up.circle.fill")
+                            .symbolRenderingMode(.hierarchical)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 38, height: 38)
+                            .padding([.bottom], 16)
+                        #if targetEnvironment(simulator)
+                        // ActivityViewController doesn't work properly in simulator especially in preview
                         ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
-                            Image(systemName: "square.and.arrow.up.circle.fill")
-                                .symbolRenderingMode(.hierarchical)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 38, height: 38)
-                                .padding([.bottom], 16)
+                            shareButtonImage
                         }
                         .disabled(self.cardUiImage.size == CGSize())
+                        // the problem of ShareLink is that it doesn't support custom onTapGesture action,
+                        // so that on iPad we cannot display the overlay to prevent from dismissing the ShareView
+                        // when tapping
+                        #else
+                        Button {
+                            self.isShareMenuOpen = true
+                        } label: {
+                            shareButtonImage
+                        }
+                        .sheet(isPresented: self.$isShareMenuOpen) {
+                            ActivityViewController(activityItems: [ImageForShare(image: self.cardUiImage, title: self.excerpt.titleTrimmed, subtitle: self.excerpt.authorTrimmed)])
+                                .ignoresSafeArea(edges: .bottom)
+                                .presentationDetents([.medium, .large])
+                                .presentationDragIndicator(.hidden)
+                        }
+                        .disabled(self.cardUiImage.size == CGSize())
+                        #endif
 
                         Color.clear.frame(maxWidth: 0, maxHeight: 0)
                     }
@@ -177,11 +203,57 @@ struct ShareView: View {
                         .ignoresSafeArea()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .onTapGesture {
-                            self.isMenuOpen = false
+                            self.isStyleMenuOpen = false
+                            self.isShareMenuOpen = false
                         }
                 }
             }
         }
+    }
+}
+
+// see https://stackoverflow.com/a/58341956
+struct ActivityViewController: UIViewControllerRepresentable {
+    var activityItems: [Any]
+    var applicationActivities: [UIActivity]? = nil
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ActivityViewController>) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: applicationActivities)
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: UIViewControllerRepresentableContext<ActivityViewController>) {}
+}
+
+class ImageForShare: NSObject {
+    var image: UIImage
+    var title: String
+    var subtitle: String
+
+    init(image: UIImage, title: String, subtitle: String) {
+        self.image = image
+        self.title = title
+        self.subtitle = subtitle
+    }
+}
+
+// see https://stackoverflow.com/a/58234878
+extension ImageForShare: UIActivityItemSource {
+    func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+        UIImage()
+    }
+
+    func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+        self.image
+    }
+
+    func activityViewControllerLinkMetadata(_ activityViewController: UIActivityViewController) -> LPLinkMetadata? {
+        let metadata = LPLinkMetadata()
+        metadata.title = self.title // title
+        metadata.originalURL = URL(string: self.subtitle) // subtitle
+        metadata.imageProvider = NSItemProvider(object: self.image)
+        metadata.iconProvider = NSItemProvider(object: self.image)
+        return metadata
     }
 }
 
