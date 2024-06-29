@@ -60,12 +60,12 @@ final class Excerpt {
         self.sharedImageData = nil // invalidate the shared image
     }
 
-    func updateWith(sharedImage: UIImage) {
+    func updateWith(sharedPlatImage: UIImage) {
         self.updatedAt = Date()
-        self.sharedImageData = sharedImage.heicData()
+        self.sharedImageData = sharedPlatImage.heicData()
     }
 
-    var sharedUIImage: UIImage? {
+    var sharedPlatImage: UIImage? {
         if let data = self.sharedImageData {
             UIImage(data: data)
         } else {

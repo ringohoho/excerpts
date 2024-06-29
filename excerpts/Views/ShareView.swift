@@ -16,11 +16,12 @@ struct ShareView: View {
     @Binding var excerpt: Excerpt
     let mutable: Bool
 
-    @State private var cardUiImage: UIImage
+    @State private var cardPlatImage: UIImage
 
     init(excerpt: Binding<Excerpt>, mutable: Bool) {
         self._excerpt = excerpt
-        self._cardUiImage = State(initialValue: excerpt.wrappedValue.sharedUIImage ?? UIImage())
+        let defaultPlatImage = UIImage()
+        self._cardPlatImage = State(initialValue: excerpt.wrappedValue.sharedPlatImage ?? defaultPlatImage)
         self.mutable = mutable
     }
 
@@ -37,7 +38,7 @@ struct ShareView: View {
     private var cardFont = CardStyle.defaultValue.meta.defaultFont
 
     private var cardImage: Image {
-        Image(uiImage: self.cardUiImage)
+        Image(uiImage: self.cardPlatImage)
     }
 
     @ViewBuilder
@@ -51,9 +52,9 @@ struct ShareView: View {
         let renderer = ImageRenderer(content: self.card(width: width).environment(\.locale, self.envLocale))
         renderer.proposedSize.width = width
         renderer.scale = self.envDisplayScale
-        self.cardUiImage = renderer.uiImage!
+        self.cardPlatImage = renderer.uiImage!
 
-        self.excerpt.updateWith(sharedImage: self.cardUiImage)
+        self.excerpt.updateWith(sharedPlatImage: self.cardPlatImage)
         print("shared image updated: \(self.excerpt.id)")
     }
 
@@ -172,7 +173,7 @@ struct ShareView: View {
                         ShareLink(item: self.cardImage, preview: SharePreview(self.excerpt.titleTrimmed, image: self.cardImage)) {
                             shareButtonImage
                         }
-                        .disabled(self.cardUiImage.size == CGSize())
+                        .disabled(self.cardPlatImage.size == CGSize())
                         // the problem of ShareLink is that it doesn't support custom onTapGesture action,
                         // so that on iPad we cannot display the overlay to prevent from dismissing the ShareView
                         // when tapping
@@ -183,12 +184,12 @@ struct ShareView: View {
                             shareButtonImage
                         }
                         .sheet(isPresented: self.$isShareMenuOpen) {
-                            ActivityViewController(activityItems: [ImageForShare(image: self.cardUiImage, title: self.excerpt.titleTrimmed, subtitle: self.excerpt.authorTrimmed)])
+                            ActivityViewController(activityItems: [ImageForShare(image: self.cardPlatImage, title: self.excerpt.titleTrimmed, subtitle: self.excerpt.authorTrimmed)])
                                 .ignoresSafeArea(edges: .bottom)
                                 .presentationDetents([.medium, .large])
                                 .presentationDragIndicator(.hidden)
                         }
-                        .disabled(self.cardUiImage.size == CGSize())
+                        .disabled(self.cardPlatImage.size == CGSize())
                         #endif
 
                         Color.clear.frame(maxWidth: 0, maxHeight: 0)
