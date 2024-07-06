@@ -5,6 +5,7 @@
 //  Created by Richard on 2023/9/13.
 //
 
+import Foundation
 import LinkPresentation
 import SwiftUI
 
@@ -28,6 +29,7 @@ struct ShareView: View {
     @State private var isStyleMenuOpen = false
     @State private var isShareMenuOpen = false
 
+    /// Only valid on iOS devices, because on macOS the menu will dismiss regardless of `.menuActionDismissBehavior(.disabled)`.
     private var isMenuOpen: Bool {
         self.isStyleMenuOpen || self.isShareMenuOpen
     }
@@ -198,7 +200,7 @@ struct ShareView: View {
                 }
             }
             .overlay {
-                if self.isMenuOpen {
+                if self.isMenuOpen && !ProcessInfo.processInfo.isiOSAppOnMac {
                     // mask all the controls except menu
                     Color.gray.opacity(0.001)
                         .ignoresSafeArea()
