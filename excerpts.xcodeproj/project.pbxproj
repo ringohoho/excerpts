@@ -11,6 +11,7 @@
 		7900969E2C0C7424007D2573 /* BundleExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900969D2C0C7424007D2573 /* BundleExt.swift */; };
 		79013EB62AF767FE00F85D99 /* Minimal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79013EB52AF767FE00F85D99 /* Minimal.swift */; };
 		79013EB82AF76AFE00F85D99 /* font_SourceHanSerifSC-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 79013EB72AF76AFE00F85D99 /* font_SourceHanSerifSC-Bold.otf */; };
+		79042E2A2C3ADAA600BE3C44 /* Trash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79042E292C3ADAA600BE3C44 /* Trash.swift */; };
 		792858B12C25E59B0017D102 /* ExcerptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792858B02C25E59B0017D102 /* ExcerptView.swift */; };
 		792858B32C25E5ED0017D102 /* AnimationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792858B22C25E5ED0017D102 /* AnimationExt.swift */; };
 		792858B52C26C18E0017D102 /* HistoryRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 792858B42C26C18E0017D102 /* HistoryRow.swift */; };
@@ -45,6 +46,7 @@
 		7900969D2C0C7424007D2573 /* BundleExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExt.swift; sourceTree = "<group>"; };
 		79013EB52AF767FE00F85D99 /* Minimal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Minimal.swift; sourceTree = "<group>"; };
 		79013EB72AF76AFE00F85D99 /* font_SourceHanSerifSC-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "font_SourceHanSerifSC-Bold.otf"; sourceTree = "<group>"; };
+		79042E292C3ADAA600BE3C44 /* Trash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trash.swift; sourceTree = "<group>"; };
 		79137B1E2C2487360083823E /* excerpts.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = excerpts.entitlements; sourceTree = "<group>"; };
 		792858B02C25E59B0017D102 /* ExcerptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExcerptView.swift; sourceTree = "<group>"; };
 		792858B22C25E5ED0017D102 /* AnimationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationExt.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				792858B42C26C18E0017D102 /* HistoryRow.swift */,
 				7988C2D52AB2108F00F20252 /* ColorExt.swift */,
 				792858B22C25E5ED0017D102 /* AnimationExt.swift */,
+				79042E292C3ADAA600BE3C44 /* Trash.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 				79D5AB0F2ABB20110023305B /* CardFont.swift in Sources */,
 				79D5AB092ABB1C410023305B /* PasteParser.swift in Sources */,
 				792858B72C287D630017D102 /* StringExt.swift in Sources */,
+				79042E2A2C3ADAA600BE3C44 /* Trash.swift in Sources */,
 				7900969E2C0C7424007D2573 /* BundleExt.swift in Sources */,
 				79D5AB0B2ABB1D910023305B /* AppleBooksPasteParser.swift in Sources */,
 				792858B52C26C18E0017D102 /* HistoryRow.swift in Sources */,

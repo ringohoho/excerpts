@@ -20,6 +20,7 @@ struct MainView: View {
                     Label("A_HISTORY", systemImage: "clock")
                 }
         }
+        .environmentObject(Trash())
     }
 }
 
@@ -27,4 +28,5 @@ struct MainView: View {
     MainView()
         .environment(\.locale, .init(identifier: "zh-Hans"))
         .modelContainer(MockData.container)
+        .environmentObject(Trash())
 }

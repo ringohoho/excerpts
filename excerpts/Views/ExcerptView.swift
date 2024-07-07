@@ -10,6 +10,7 @@ import SwiftUI
 
 struct ExcerptView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject private var trash: Trash
 
     @State private var showPasteSheet = false
 
@@ -116,6 +117,12 @@ struct ExcerptView: View {
                             print("saved: \(self.excerpt.id)")
                         }
                     }
+                    .onChange(of: self.trash.recentDeleted) {
+                        // detect whether the saved excerpt (but not cleared) is deleted in HistoryView
+                        if self.excerptIsSaved && self.trash.recentDeleted == self.excerpt.id {
+                            self.excerptIsSaved = false
+                        }
+                    }
                     .disabled(self.excerptForEdit.content.isEmpty)
 
                     // TODO: ask user to confirm
@@ -155,6 +162,7 @@ struct ExcerptView: View {
     ExcerptView()
         .environment(\.locale, .init(identifier: "zh-Hans"))
         .modelContainer(MockData.container)
+        .environmentObject(Trash())
 }
 
 #Preview("Non-empty English") {
@@ -163,4 +171,5 @@ struct ExcerptView: View {
     }
     .environment(\.locale, .init(identifier: "en"))
     .modelContainer(MockData.container)
+    .environmentObject(Trash())
 }

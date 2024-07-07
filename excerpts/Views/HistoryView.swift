@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HistoryView: View {
     @Environment(\.modelContext) private var modelContext
+    @EnvironmentObject private var trash: Trash
 
     @Query(sort: \Excerpt.updatedAt, order: .reverse)
     private var excerpts: [Excerpt]
@@ -31,7 +32,9 @@ struct HistoryView: View {
                 }
                 .onDelete(perform: { indexSet in
                     for index in indexSet {
-                        self.modelContext.delete(self.excerpts[index])
+                        let excerpt = self.excerpts[index]
+                        self.trash.recentDeleted = excerpt.id
+                        self.modelContext.delete(excerpt)
                     }
                 })
             }
@@ -51,4 +54,5 @@ struct HistoryView: View {
 #Preview {
     HistoryView()
         .modelContainer(MockData.container)
+        .environmentObject(Trash())
 }
